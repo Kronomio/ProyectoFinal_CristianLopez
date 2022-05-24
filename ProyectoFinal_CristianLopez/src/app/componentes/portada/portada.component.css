@@ -1,6 +1,7 @@
 .home
 {
-    background-image: url("/assets/fondoHeader.jpg");
+    background: url("/assets/fondoHeader.jpg") no-repeat center;
+    
 }
 .bg-text
 {
@@ -10,7 +11,7 @@
 .bg{
     
     
-    height: 300px;
+    min-height: 50vh;
     background-size: cover;
 }
 .text1{
@@ -18,7 +19,7 @@
     font-size: 100px;
     font-style: italic;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    padding-top: -5%;
+    padding-top: 2%;
     padding-bottom: 0;
 }
 
