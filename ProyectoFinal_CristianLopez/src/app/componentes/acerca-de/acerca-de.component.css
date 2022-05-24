@@ -1,6 +1,36 @@
 .sobremi{
-    padding-top: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 50px;
+       
+}
+#fotoPerfil{
+    box-shadow: 5px 5px 5px grey;
+  
+}
+@media (max-width: 990px) {
+    .marco_foto{
+        
+       text-align: center;
+    }
+   
+    #texto_acerca_de{
+        text-align: center;
+        
+    }
+    
+    
+}
+
+@media (max-width: 570px) {
+    .marco_foto{
+        
+       text-align: center;
+    }
+   #fotoPerfil{width: 60%;}
+
+    #texto_acerca_de{
+        text-align: center;
+        font-size:large ;
+    }
+    
     
 }
