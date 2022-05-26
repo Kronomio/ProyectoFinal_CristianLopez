@@ -9,6 +9,8 @@ import { AcercaDeComponent } from './componentes/acerca-de/acerca-de.component';
 import { LinksComponent } from './componentes/links/links.component';
 import { FormacionComponent } from './componentes/formacion/formacion.component';
 import { ItemFormacionComponent } from './componentes/item-formacion/item-formacion.component';
+import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
+import { ItemHabilidadesComponent } from './componentes/item-habilidades/item-habilidades.component';
 
 
 @NgModule({
@@ -19,13 +21,15 @@ import { ItemFormacionComponent } from './componentes/item-formacion/item-formac
     AcercaDeComponent,
     LinksComponent,
     FormacionComponent,
-    ItemFormacionComponent
+    ItemFormacionComponent,
+    HabilidadesComponent,
+    ItemHabilidadesComponent
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
-
+    
     
   ],
   providers: [],
