@@ -1,21 +1,26 @@
 <div class="container">
-    <div class="row">
-        
-        
-        <div class="col col-lg-2">
-            <div class="card">
-                <img src="/assets/icons8-javascript-48.png" class=""  alt="..." width="60px" >
-                <div class="card-body">
-                    <h5 class="card-title">JavaScript</h5>
-                </div>
-            </div>
-                
-        </div>
-        <div class="col-6">
-            <div class="progress">
-                <div class="progress-bar " role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-            </div>
-        </div>
-        
-    </div>
+    <div class="row text-center">
+                  
+<circle-progress
+  [percent]="85"
+  [radius]="80"
+  
+  [showUnits]="true"
+  [outerStrokeWidth]="9"
+  [innerStrokeWidth]="3"
+  [outerStrokeGradient]="true"
+  [outerStrokeColor]="'#1036d1'"
+  [outerStrokeGradientStopColor]="'#232145'"
+  [innerStrokeColor]="'#627bdf'"
+  [animation]="true"
+  [animationDuration]="3000"
+  [showImage]="true"
+  [imageWidth]="80"
+  [imageHeight]="80"
+  [imageSrc]="'/assets/icons8-javascript-48.png'"
+  [showBackground]="false"
+></circle-progress>
+<p class="h5">JavaScript</p>
+<p class="h7">85 %</p>
+
 </div>
