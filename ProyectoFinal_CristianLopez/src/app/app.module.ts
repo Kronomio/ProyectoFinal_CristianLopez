@@ -11,7 +11,12 @@ import { FormacionComponent } from './componentes/formacion/formacion.component'
 import { ItemFormacionComponent } from './componentes/item-formacion/item-formacion.component';
 import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
 import { ItemHabilidadesComponent } from './componentes/item-habilidades/item-habilidades.component';
-
+import { FooterComponent } from './componentes/footer/footer.component';
+import { ContactoComponent } from './componentes/contacto/contacto.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
+import { ItemProyectosComponent } from './componentes/item-proyectos/item-proyectos.component';
+import { ExperienciaLaboralComponent } from './componentes/experiencia-laboral/experiencia-laboral.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +28,27 @@ import { ItemHabilidadesComponent } from './componentes/item-habilidades/item-ha
     FormacionComponent,
     ItemFormacionComponent,
     HabilidadesComponent,
-    ItemHabilidadesComponent
+    ItemHabilidadesComponent,
+    FooterComponent,
+    ContactoComponent,
+    ProyectosComponent,
+    ItemProyectosComponent,
+    ExperienciaLaboralComponent
     
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-    
+    AppRoutingModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 30000
+      
+    })
     
   ],
   providers: [],
