@@ -2,4 +2,21 @@
     background-color: transparent !important;
     padding-left: 60px;
     padding-right: 60px;
+    
+}
+#logo_argentina_programa{
+    font-family: 'Cutive Mono', monospace;
+    font-size:medium;
+}
+@media (max-width: 753px) {
+    .navbar{
+       
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+    }
+    #logo_argentina_programa{
+        
+        font-size:small;
+    }
 }

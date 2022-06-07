@@ -7,11 +7,10 @@
 {
     color:white;
     padding-left: 10%;
+
 }
 .bg{
-    
-    
-    min-height: 50vh;
+    height: 450px;
     background-size: cover;
 }
 .text1{
@@ -25,7 +24,30 @@
 
 .text2{
     color: white;
-    font-size: 60px;
-    padding-top: 0;
+    font-family: 'Ephesis', cursive;
+    font-size: 90px;
+    
    
+}
+@media (max-width: 753px) {
+    .text2 {
+        font-size: 50px;
+    }
+
+    .text1 {
+        font-size: 60px;
+        padding-top: 1%;
+    }
+
+    .text3 {
+        font-size: 20px;
+    }
+
+    .bg-text {
+        color: white;
+        padding-left: 5%;
+    }
+    .bg{
+        height: 350px;
+    }
 }

@@ -1,0 +1,12 @@
+.h2{
+    font-family: 'Cabin', sans-serif;
+}
+.linea
+{
+    border-top: 3px solid blue;
+    height: 2px;
+    max-height: 10px;
+    width: 150px;
+    padding: 0px;
+    margin: -2px auto 0 auto;
+}
