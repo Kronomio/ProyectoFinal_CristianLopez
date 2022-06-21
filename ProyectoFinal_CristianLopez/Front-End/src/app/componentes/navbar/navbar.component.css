@@ -4,9 +4,13 @@
     padding-right: 60px;
     
 }
+
 #logo_argentina_programa{
     font-family: 'Cutive Mono', monospace;
     font-size:medium;
+}
+.li:hover{
+    color: aliceblue;
 }
 @media (max-width: 753px) {
     .navbar{
