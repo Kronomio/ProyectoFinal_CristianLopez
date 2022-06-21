@@ -11,12 +11,12 @@
 }
 .linea
 {
-    border-top: 3px solid blue;
+    border-top: 1.5px solid rgb(26, 88, 124);
     height: 2px;
-    max-height: 10px;
-    width: 150px;
-    padding: 0px;
-    margin: -2px auto 0 auto;
+    max-height: 15px;
+    width: 170px;
+    padding: -1px;
+    margin: -8px auto 0 auto;
 
 }
 @media (max-width: 990px) {
