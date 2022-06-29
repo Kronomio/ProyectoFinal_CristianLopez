@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { PortadaComponent } from './componentes/portada/portada.component';
 import { AcercaDeComponent } from './componentes/acerca-de/acerca-de.component';
-
 import { FormacionComponent } from './componentes/formacion/formacion.component';
 import { ItemFormacionComponent } from './componentes/item-formacion/item-formacion.component';
 import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
@@ -20,7 +18,7 @@ import { ExperienciaLaboralComponent } from './componentes/experiencia-laboral/e
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ItemExperienciaComponent } from './componentes/item-experiencia/item-experiencia.component';
-
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -46,6 +44,7 @@ import { ItemExperienciaComponent } from './componentes/item-experiencia/item-ex
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,
