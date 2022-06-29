@@ -33,13 +33,13 @@ public class Persona{
     private String url_foto;
     
     @Size(min = 1, max = 250, message ="La fecha de Nacimiento no cumple con la longitud")
-    private String fechaNac;
+    private String fecha_nac;
     
    @Size(min = 1, max = 250, message ="El teléfono no cumple con la longitud")
    private String telefono;
 
   @Size(min = 1, max = 250, message ="El acercaDe no cumple con la longitud")
-  private String acercaDe;
+  private String acerca_de;
     
   @Size(min = 1, max = 250, message ="El link a Facebook no cumple con la longitud")
   private String link_facebook;
