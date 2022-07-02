@@ -1,17 +1,130 @@
 <div class="container-fluid bg home">
-    <app-navbar></app-navbar>
-   <div class="container">
+  <app-navbar></app-navbar>
+  <div class="container">
     <div class="row">
-    <div class="col-8">
-    <p class="h1 bg-text text1 animate__animated animate__zoomIn ">Hola,</p>
-    <p class="h2 bg-text text2 animate__animated animate__lightSpeedInLeft ">soy Cristian López</p>
-    <p class="h3 bg-text text3 animate__animated animate__bounceInUp">Desarrollador Web Full Stack</p>
-    <p class="h4 bg-text text3 animate__animated animate__bounceInUp">Córdoba (Argentina)</p>
+      <div class="col-8">
+        <p class="h1 bg-text text1 animate__animated animate__zoomIn">Hola,</p>
+        <p class="h2 bg-text text2 animate__animated animate__lightSpeedInLeft">
+          soy {{ persona?.nombre }} {{ persona?.apellido }}
+        </p>
+        <p class="h3 bg-text text3 animate__animated animate__bounceInUp">
+          Desarrollador Web Full Stack
+        </p>
+        <p class="h4 bg-text text3 animate__animated animate__bounceInUp">
+          Córdoba (Argentina)
+        </p>
+      </div>
+      <div class="col-4 justify-content-end">
+        <img
+          id="logoCL"
+          src="/assets/LogoSinFondoBlanco.png"
+          class="img-fluid"
+          alt="Logo Personal de desarrollador"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  ">
+  <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
+    data-bs-target="#modificarDatosPersonales">
+    Modificar información personal
+  </button>
+</div>
+
+<!-- Modal de edicion de Datos Personales-->
+
+
+<div class="modal fade" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Datos Personales</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario de edicion de persona -->
+        <form class="row g-3"  (ngSubmit)="guardarPersona(formulario)" #formulario="ngForm" novalidate="">
+          
+          <div class="col-md-6">
+
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control"  name="nombre" [ngModel]="persona?.nombre" required>
+          </div>
+          <div class="col-md-6">
+            <label for="inputApellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" name="apellido"  [ngModel]="persona?.apellido" required>
+          </div>
+
+          <div class="col-md-4">
+
+            <label for="inputFecha" class="form-label">Fecha Nac.</label>
+            <input type="date" class="form-control" name="fecha_nac"  [ngModel]="persona?.fecha_nac">
+          </div>
+          <div class="col-md-4">
+            <label for="inputApellido" class="form-label">Ciudad</label>
+            <input type="text" class="form-control"   value="Córdoba">
+          </div>
+          <div class="col-md-4">
+            <label for="inputApellido" class="form-label">País</label>
+            <input type="text" class="form-control" value="Argentina">
+          </div>
+
+          <div class="col-12">
+            <label for="inputEmail" class="form-label">Email Principal</label>
+            <input type="email" class="form-control" name="mail"  [ngModel]="persona?.mail">
+          </div>
+
+
+          <div class="col-9">
+            <label for="inputFoto" class="form-label">Foto Perfil</label>
+            <input type="text" class="form-control" name="url_foto"  [ngModel]="persona?.url_foto">
+          </div>
+
+          <div class="col-3">
+            <img src={{persona?.url_foto}} class="img-thumbnail" width=100px alt="...">
+          </div>
+
+
+
+          <div class="col-12">
+            
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Ingrese su descripción"  name="acerca_de" [ngModel]="persona?.acerca_de" style="height: 200px"></textarea>
+              <label for="floatingTextarea"  >Acerca de mi</label>
+            </div>
+          </div>
+          <!-- Redes Sociales -->
+         
+          <div class="col-2">
+            <img src="assets/logoLinkedIn.png" class="float-end" width=40px alt="...">
+          </div>
+          <div class="col-md-9">
+            <input type="text" class="form-control"  placeholder="LinkedIn" name="link_linkedin" [ngModel]="persona?.link_linkedin">
+          </div> 
+           
+          <div class="col-2">
+            <img src="assets/logoInstagram.png" class="float-end" width=40px alt="...">
+          </div>
+          <div class="col-md-9">
+            <input type="text" class="form-control"   placeholder="Instagram" name="link_instagram" [ngModel]="persona?.link_instagram">
+          </div>
+
+          <div class="col-2">
+            <img src="assets/icons8-twitter-cuadrado-48.png" class="float-end"  width=40px alt="...">
+          </div>
+          <div class="col-md-9">
+           
+            <input type="text" class="form-control"   placeholder="Twitter" name="link_twitter" [ngModel]="persona?.link_twitter">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div> 
+          </form>
+      </div>
       
+    </div>
   </div>
-  <div class="col-4 justify-content-end">
-    <img id="logoCL" src="/assets/LogoSinFondoBlanco.png" class="img-fluid"  alt="Logo Personal de desarrollador"> 
-  </div>
-   </div>
-   </div>
- 
+</div>

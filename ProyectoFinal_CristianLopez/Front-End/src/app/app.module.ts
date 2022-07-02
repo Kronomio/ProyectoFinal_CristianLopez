@@ -6,7 +6,6 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { PortadaComponent } from './componentes/portada/portada.component';
 import { AcercaDeComponent } from './componentes/acerca-de/acerca-de.component';
 import { FormacionComponent } from './componentes/formacion/formacion.component';
-import { ItemFormacionComponent } from './componentes/item-formacion/item-formacion.component';
 import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
 import { ItemHabilidadesComponent } from './componentes/item-habilidades/item-habilidades.component';
 import { FooterComponent } from './componentes/footer/footer.component';
@@ -19,7 +18,8 @@ import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ItemExperienciaComponent } from './componentes/item-experiencia/item-experiencia.component';
 import {HttpClientModule} from '@angular/common/http'
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,6 @@ import {HttpClientModule} from '@angular/common/http'
     PortadaComponent,
     AcercaDeComponent,
     FormacionComponent,
-    ItemFormacionComponent,
     HabilidadesComponent,
     ItemHabilidadesComponent,
     FooterComponent,
@@ -45,6 +44,9 @@ import {HttpClientModule} from '@angular/common/http'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,

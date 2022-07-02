@@ -13,18 +13,35 @@
                   <h4 class="mt-1 mb-5 pb-1">Mi Portafolio Web</h4>
                 </div>
 
-                <form>
+                <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
                   <p>Ingrese su usuario o email</p>
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"
+                    <input type="email" formControlName="email" 
+                    [ngClass]="{'is-invalid':Email?.errors && Email?.touched, 'is-valid':!Email?.errors && Email?.touched}"
+                    id="form2Example11" class="form-control"
                       placeholder="Nombre de Usuario o Email" />
-                    <label class="form-label" for="form2Example11">Usuario</label>
+                      <div *ngIf="Email?.errors  && Email?.touched">
+                        <p *ngIf="Email?.hasError('required')" class="text-danger">El email es requerido</p>
+                        <p *ngIf="Email?.hasError('email')" class="text-danger">El formato debe ser válido</p>
+                    
+                    
+
+                      </div>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" placeholder="Contraseña"/>
+                    <input type="password" id="form2Example22" 
+                    [ngClass]="{'is-invalid':Password?.errors && Password?.touched, 'is-valid':!Password?.errors && Password?.touched}"
+
+                    
+                    formControlName="password" class="form-control" placeholder="Contraseña"/>
+                    <div *ngIf="Password?.errors && Password?.touched">
+                      <p *ngIf="Password?.hasError('required')" class="text-danger">La contraseña es requerida</p>
+                      <p *ngIf="Password?.hasError('minlength')" class="text-danger">La contraseña debe ser de 8 o más caracteres</p>
+
                     <label class="form-label" for="form2Example22">Contraseña</label>
+                    </div>
                   </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">

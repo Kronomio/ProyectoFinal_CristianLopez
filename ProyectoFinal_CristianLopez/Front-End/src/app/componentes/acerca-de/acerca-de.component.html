@@ -1,21 +1,23 @@
 <p class="h2 text-center animate__animated animate__backInLeft" >Acerca de mi</p>
 <div class="linea animate__animated animate__backInRight" ></div>
 
-<div class="sobremi container">
+<div class="container" id="sobremi">
             
-    <div class="row">
-      <div class="col-lg-8" id="acercaDe">
+    <div class="row" id="filasobremi">
+      <div class="col-lg-7" id="acercaDe">
       
-      
-
-       <p class="texto_acerca_de lead text-wrap"  id="texto_acerca_de">
-        {{persona.acerca_de}} 
-        </p>
+      <p class="lead text-wrap"  id="texto_acerca_de">
+         {{persona?.acerca_de}}
+                </p>
       </div>
-      <div class="col-lg-4 marco_foto" >
-        <img id="fotoPerfil" src="./assets/fotoPerfil.png" class="rounded-circle" alt="...">
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-4 " id="marco_foto">
+        <img id="fotoPerfil" src={{persona?.url_foto}} class="rounded-circle" height=350px width=350px alt="...">
        </div>
       
       
     </div>
   </div>
+
+  

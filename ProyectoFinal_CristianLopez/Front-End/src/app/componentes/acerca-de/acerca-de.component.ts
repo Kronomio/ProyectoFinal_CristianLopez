@@ -1,18 +1,37 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {persona} from 'src/app/model/persona.model'
-import { PersonaService } from 'src/app/service/persona.service';
+import { Persona } from 'src/app/model/persona.model'
+import { PersonaService } from 'src/app/services/persona.service';
 @Component({
   selector: 'app-acerca-de',
   templateUrl: './acerca-de.component.html',
   styleUrls: ['./acerca-de.component.css']
 })
-export class AcercaDeComponent implements OnInit {
 
-  persona:persona=new persona("","","","","","","","","","","","");
+export class AcercaDeComponent implements OnInit {
+ public persona:Persona | undefined;
+ public editPersona:Persona | undefined;
+  
   constructor(public personaService: PersonaService) { }
 
   ngOnInit(): void {
-    this.personaService.verPersona().subscribe(data => {this.persona = data})
+    
+   this.verPersonas();
+      
+    
+  }
+
+  public verPersonas():void{
+    this.personaService.verPersonas().subscribe({
+      next: (response:Persona) => {
+        this.persona=response;
+      
+      },
+      error:(error:HttpErrorResponse)=>{
+      alert(error.message);
+    }
+      
+    });
     
   }
 

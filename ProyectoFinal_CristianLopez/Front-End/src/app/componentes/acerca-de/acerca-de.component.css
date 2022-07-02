@@ -1,14 +1,22 @@
 .h2{
     font-family: 'Cabin', sans-serif;
 }
-.sobremi{
+#sobremi{
     padding: 50px;
-       
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#filasobremi{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #fotoPerfil{
     box-shadow: 5px 5px 5px grey;
-  
+    
 }
+
 .linea
 {
     border-top: 1.5px solid rgb(26, 88, 124);
@@ -20,12 +28,13 @@
 
 }
 @media (max-width: 990px) {
-    .marco_foto{
+    #marco_foto{
         
        text-align: center;
     }
    
     #texto_acerca_de{
+        
         text-align: center;
         
     }
@@ -34,7 +43,7 @@
 }
 
 @media (max-width: 570px) {
-    .marco_foto{
+    #marco_foto{
         
        text-align: center;
     }

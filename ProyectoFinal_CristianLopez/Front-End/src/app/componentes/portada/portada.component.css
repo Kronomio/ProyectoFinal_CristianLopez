@@ -10,7 +10,7 @@
 
 }
 .bg{
-    height: 950px;
+    height: 600px;
     background-size: cover;
 }
 .text1{
@@ -18,15 +18,16 @@
     font-size: 100px;
     font-style: italic;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    padding-top: 25%;
+    padding-top: 15%;
     padding-left: 15%;
     padding-bottom: 0;
 }
 #logoCL{
-    padding-top: 270px;
+    padding-top: 170px;
     width: 70%;
     opacity: 50%;
 }
+
 .text2{
     color: white;
     font-family: 'Ephesis', cursive;
