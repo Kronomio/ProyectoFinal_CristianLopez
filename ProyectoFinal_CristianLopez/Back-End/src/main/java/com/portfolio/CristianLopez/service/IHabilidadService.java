@@ -18,11 +18,14 @@ public interface IHabilidadService {
     
     public List<Habilidad> verHabilidades();
     
-    public void guardarHabilidad(Habilidad habilidad);
+    public Habilidad guardarHabilidad(Habilidad habilidad);
     
     public Habilidad buscarHabilidad(Long id);
             
     public void eliminarHabilidad(Long idHabilidad);
+   
+    public Habilidad editarHabilidad(Habilidad habilidad);
+
     
     
     

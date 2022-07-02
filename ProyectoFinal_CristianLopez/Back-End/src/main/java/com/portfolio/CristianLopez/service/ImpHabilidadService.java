@@ -19,20 +19,22 @@ public class ImpHabilidadService implements IHabilidadService {
     }
 
     @Override
-    public void guardarHabilidad(Habilidad habilidad) {
-              habRepository.save(habilidad);
-
+    public Habilidad guardarHabilidad(Habilidad habilidad) {
+        return habRepository.save(habilidad);
     }
 
     @Override
     public Habilidad buscarHabilidad(Long id) {
-         Habilidad hab= habRepository.findById(id).orElse(null);
-       return hab;
+        return  habRepository.findById(id).orElse(null);
     }
 
     @Override
     public void eliminarHabilidad(Long idHabilidad) {
-               habRepository.deleteById(idHabilidad);
+              habRepository.deleteById(idHabilidad);
+    }
+    
+    public Habilidad editarHabilidad(Habilidad habilidad){
+        return habRepository.save(habilidad);
     }
 
     
