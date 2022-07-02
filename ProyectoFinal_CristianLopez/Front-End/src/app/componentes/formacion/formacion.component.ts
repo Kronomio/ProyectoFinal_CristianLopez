@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/model/estudio.model';
 import { FormacionService } from 'src/app/services/formacion.service';
-import { faCoffee, faPencil, faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-formacion',

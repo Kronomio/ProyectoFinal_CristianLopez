@@ -7,7 +7,7 @@
   <br>
 </div>
 
-<p class="h2  animate__animated animate__backInLeft">Mi Formación</p>
+<p class="h2 text-center animate__animated animate__backInLeft">Mi Formación</p>
 <div class="linea animate__animated animate__backInRight"></div>
 <br>
 
@@ -16,8 +16,12 @@
   <div class="row" id="items_formacion">
     <div class="col-4" *ngFor="let estudio of estudios">
 
-      <!-- Agrego los botones de edición y borrar -->
-      <div class="col text-end">
+      <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let estudio of estudios"> -->
+      
+          <!--Agrego los botones de edición y borrar -->
+      
+          <div class="col text-end">
         <a type="button" class="btn btn-primary btn-sm "
         data-bs-toggle="modal"
         data-bs-target="#editFormacionModal"
@@ -33,7 +37,23 @@
       </div>
 
       <!-- Añado las card de cada Estudio -->
-      <div class="card bg-info bg-opacity-50 " data-aos="flip-left" style="width: 380px; height: 180px;">
+      
+        <!-- <div class="col">
+          <div class="card h-100">
+            <img src="{{estudio.url_imagen_estudio}}" class="card-img-top"  alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{estudio.titulo}}</h5>
+              <p class="card-text">{{estudio.descripcion}}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Año: {{estudio.fecha}}</small>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      
+      
+      <div class="card bg-info bg-opacity-50 mb-3" data-aos="flip-left" style="max-width:540px; min-height: 200px;">
         <div class="row" id="items_formacion2">
           <div class="col-md-4">
             <img src={{estudio.url_imagen_estudio}} class="img-thumbnail rounded-start" width=100px 
@@ -51,11 +71,9 @@
         </div>
       </div>
     </div>
-
-
-  </div>
-
 </div>
+
+
 
 
 <!-- Modal añadir Formacion-->
@@ -129,7 +147,7 @@
        
         <form class="row g-3 " #editForm="ngForm" (ngSubmit)="onEditFormacion(editForm.value)" novalidate="">
            <div class="form-group">
-            <input type="hidden" ngModel="{{editEstudio?.idEst}}" name="idEst" id="idEst" class="form-control">
+            <input type="hidden" ngModel={{editEstudio?.idEst}} name="idEst" id="idEst" class="form-control">
            </div>
           <div class="col-md-12 form-group ">
             <label for="titulo" class="form-label">Título </label>
