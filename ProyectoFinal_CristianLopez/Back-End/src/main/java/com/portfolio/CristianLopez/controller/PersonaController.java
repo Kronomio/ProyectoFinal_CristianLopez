@@ -3,6 +3,7 @@ package com.portfolio.CristianLopez.controller;
 
 import com.portfolio.CristianLopez.model.Persona;
 import com.portfolio.CristianLopez.service.IPersonaService;
+import java.util.Date;
 
 //import java.util.Date;
 import java.util.List;
@@ -27,10 +28,13 @@ public class PersonaController  {
     public List <Persona> verPersonas(){
         return ipersonaService.verPersonas();
     }
-    
+    @GetMapping ("/ver/persona/{id}")
+    public Persona verPersona(@PathVariable Long id){
+        return ipersonaService.buscarPersona(id);
+    }
     @PostMapping("new/persona")
-    public String crearPersona(@RequestBody Persona persona){
-        ipersonaService.guardarPersona(persona);
+    public String crearPersona(@RequestBody Persona pers){
+        ipersonaService.guardarPersona(pers);
         return "La persona fue creada correctamente";
     }
     
@@ -41,12 +45,12 @@ public class PersonaController  {
     }
     
     //URL puerto/personas/editar/(Id)/nommbre & apellido & url_img
-    @PutMapping("/edit/persona/{id}")
+    @PutMapping("/edit/personas/{id}")
     public Persona editarPersona(@PathVariable Long id,
                                @RequestParam ("nombre") String nuevoNombre,
                                @RequestParam ("apellido") String nuevoApellido,
                                @RequestParam ("url_foto") String nuevoUrlFoto,
-                               @RequestParam ("fecha_nac") String nuevaFecha_nac,
+                               @RequestParam ("fecha_nac") Date nuevaFecha_nac,
                                @RequestParam ("telefono") String nuevoTelefono,
                                @RequestParam ("acerca_de") String nuevoAcerca_de,
                                @RequestParam ("link_facebook") String nuevoLinkFacebook,
@@ -76,6 +80,26 @@ public class PersonaController  {
         ipersonaService.guardarPersona(persona);
         return persona;
     }
-                              
+         @PutMapping("/edit/persona/{id}")
+    public Persona editarPersona(@PathVariable Long id, @RequestBody Persona pers){
+        
+        Persona persona=ipersonaService.buscarPersona(id);
+        
+        persona.setNombre(pers.getNombre());
+        persona.setApellido(pers.getApellido());
+        persona.setUrl_foto(pers.getUrl_foto());
+        persona.setFecha_nac(pers.getFecha_nac());
+        persona.setTelefono(pers.getTelefono());
+        persona.setAcerca_de(pers.getAcerca_de());
+        persona.setLink_facebook(pers.getLink_facebook());
+        persona.setLink_linkedin(pers.getLink_linkedin());
+        persona.setLink_whatsaap(pers.getLink_whatsaap());
+        persona.setLink_twitter(pers.getLink_twitter());
+        persona.setLink_instagram(pers.getLink_instagram());
+        persona.setMail(pers.getMail());
+        ipersonaService.guardarPersona(persona);
+        return persona;
+        
+    }                     
             
 }

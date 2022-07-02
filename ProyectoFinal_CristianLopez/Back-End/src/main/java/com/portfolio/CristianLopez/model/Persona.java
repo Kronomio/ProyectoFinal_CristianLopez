@@ -1,12 +1,16 @@
-
 package com.portfolio.CristianLopez.model;
-
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -15,7 +19,7 @@ import lombok.Setter;
 @Getter @Setter
 @Entity
 
-public class Persona{
+public class Persona implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -32,13 +36,14 @@ public class Persona{
     @Size(min = 1, max = 250, message ="El url de imágen no cumple con la longitud")
     private String url_foto;
     
-    @Size(min = 1, max = 250, message ="La fecha de Nacimiento no cumple con la longitud")
-    private String fecha_nac;
+    
+    
+    private Date fecha_nac;
     
    @Size(min = 1, max = 250, message ="El teléfono no cumple con la longitud")
    private String telefono;
 
-  @Size(min = 1, max = 250, message ="El acercaDe no cumple con la longitud")
+  @Size(min = 1, max = 500, message ="El acercaDe no cumple con la longitud")
   private String acerca_de;
     
   @Size(min = 1, max = 250, message ="El link a Facebook no cumple con la longitud")
@@ -59,6 +64,17 @@ private String link_instagram;
 @Size(min = 1, max = 250, message ="La dirección de mail no cumple con la longitud")
 private String mail;
 
+@JsonIgnore
+    @OneToMany(mappedBy="persona")
+private List<Experiencia> experienciaList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="persona")
+private List<Estudio> EstudioList;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy="persona")
+private List<Habilidad> habilidadList;
     
     
 

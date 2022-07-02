@@ -8,8 +8,9 @@ import java.util.List;
 public interface IPersonaService {
     //traer una lista de personas
     public List <Persona> verPersonas();
+    
     //Guardat un objto del tipo Persona
-    public void guardarPersona (Persona persona);
+    public void guardarPersona (Persona pers);
     
     //Eliminar una persona por id
     
