@@ -2,6 +2,7 @@
 package com.portfolio.CristianLopez.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +24,9 @@ public class Experiencia {
     
     private Boolean esActual;
     
-    private String fecha_inicio;
+    private Date fecha_inicio;
     
-    private String fecha_fin;
+    private Date fecha_fin;
     
     private String logo_empresa;
     
