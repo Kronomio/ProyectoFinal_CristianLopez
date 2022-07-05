@@ -21,6 +21,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import {  InterceptorService } from './services/interceptor-service';
+import { SignupComponent } from './componentes/signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import {  InterceptorService } from './services/interceptor-service';
     ExperienciaLaboralComponent,
     LoginComponent,
     HomeComponent,
-    ItemExperienciaComponent
+    ItemExperienciaComponent,
+    SignupComponent
  
     
   ],
