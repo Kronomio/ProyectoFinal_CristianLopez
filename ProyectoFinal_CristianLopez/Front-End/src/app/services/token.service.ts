@@ -16,7 +16,7 @@ export class TokenService {
   public setToken(token: string ): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
-    console.log(token+" DE +"+TOKEN_KEY);
+   
   }
 
   public getToken():string{
@@ -25,9 +25,7 @@ export class TokenService {
 
   public setUserName(userName:string):void{
     window.sessionStorage.removeItem(USERNAME_KEY);
-    window.sessionStorage.setItem(USERNAME_KEY, userName);
-    console.log(userName+" DE +"+USERNAME_KEY);
-
+    window.sessionStorage.setItem(USERNAME_KEY, userName); 
   }
   public getUsername():string{
     return sessionStorage.getItem(USERNAME_KEY)!;

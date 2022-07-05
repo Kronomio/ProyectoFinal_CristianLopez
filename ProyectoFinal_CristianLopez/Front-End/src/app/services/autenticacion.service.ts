@@ -10,20 +10,25 @@ import { JwtDto } from '../model/jwt-dto';
 })
 export class AutenticacionService {
   url="http://localhost:8080/auth/";
-  // currentUserSubject: BehaviorSubject<any>
+  currentUserSubject: BehaviorSubject<any>
  
   constructor(private httpClient:HttpClient) { 
-    // console.log("El servicio de autenticación está corriendo");
-    // this.currentUserSubject =new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')|| '{}' ));
+    //console.log("El servicio de autenticación está corriendo");
+    this.currentUserSubject =new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')|| '{}' ));
   }
 
-  // iniciarSesion(credenciales:any):Observable<any>{
-  //   return this.httpClient.post(this.url, credenciales).pipe(map(data=>{
-  //     sessionStorage.setItem('currentUser', JSON.stringify(data));
+  iniciarSesion(credenciales:any):Observable<any>{
+    return this.httpClient.post(this.url+'login', credenciales).pipe(map(data=>{
+      sessionStorage.setItem('currentUser', JSON.stringify(data));
       
-  //     return data;
-  //   }))
-  // }
+      return data;
+    }))
+  }
+
+  get UsuarioAuntenticado()
+  {
+    return this.currentUserSubject.value;
+  }
 
   public nuevo (nuevoUsuario: NuevoUsuario):Observable<any>{
     return this.httpClient.post<any>(this.url+'new', nuevoUsuario)  }
