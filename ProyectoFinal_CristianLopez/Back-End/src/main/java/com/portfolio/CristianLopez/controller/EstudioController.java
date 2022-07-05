@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin (origins = "http://localhost:4200")
+@CrossOrigin (origins = {"http://localhost:4200","https://acortar.link/"})
+
+
 @RequestMapping("/estudio")
 public class EstudioController {
     
@@ -44,12 +47,14 @@ public class EstudioController {
     
     
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity <Estudio> crearEstudio(@RequestBody Estudio estudio){
         Estudio nuevoEstudio=iestudioService.guardarEstudio(estudio);
           return new ResponseEntity<>(nuevoEstudio, HttpStatus.CREATED);
     }
     
     @DeleteMapping ("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity <?> borrarEstudio (@PathVariable("id") Long id){
         iestudioService.eliminarEstudio(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -57,6 +62,7 @@ public class EstudioController {
     }
     
      @PutMapping("/update")
+     @PreAuthorize("hasRole('ADMIN')")
      public ResponseEntity <Estudio> editarEstudio(@RequestBody Estudio estudio){
          Estudio updateEstudio=iestudioService.editarEstudio(estudio);
          return new ResponseEntity <> (updateEstudio, HttpStatus.OK);

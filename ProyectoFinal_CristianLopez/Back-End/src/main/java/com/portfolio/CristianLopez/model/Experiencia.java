@@ -20,13 +20,16 @@ public class Experiencia {
     
     @NotNull 
     @Size(min = 1, max = 50, message ="El nombre no cumple con la longitud")
+    private String titulo;
+    
+     
+    @Size(min = 1, max = 250, message ="El nombre no cumple con la longitud")
     private String descripcion;
+   
     
-    private Boolean esActual;
+    private Long fecha_inicio;
     
-    private Date fecha_inicio;
-    
-    private Date fecha_fin;
+    private Long fecha_fin;
     
     private String logo_empresa;
     

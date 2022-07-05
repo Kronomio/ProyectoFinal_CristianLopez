@@ -1,4 +1,3 @@
-
 package com.portfolio.CristianLopez.controller;
 
 import com.portfolio.CristianLopez.model.Persona;
@@ -8,6 +7,7 @@ import java.util.Date;
 //import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,51 +19,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin (origins = "http://localhost:4200")
-public class PersonaController  {
-    @Autowired 
+@CrossOrigin (origins = {"http://localhost:4200","https://acortar.link/"})
+public class PersonaController {
+
+    @Autowired
     public IPersonaService ipersonaService;
 
-    @GetMapping ("/ver/personas")
-    public List <Persona> verPersonas(){
+    @GetMapping("/ver/personas")
+    public List<Persona> verPersonas() {
         return ipersonaService.verPersonas();
     }
-    @GetMapping ("/ver/persona/{id}")
-    public Persona verPersona(@PathVariable Long id){
+
+    @GetMapping("/ver/persona/{id}")
+    public Persona verPersona(@PathVariable Long id) {
         return ipersonaService.buscarPersona(id);
     }
+
+    //Le añado preauthorize para indicarle que sólo los administradores van a poder hacer esto
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("new/persona")
-    public String crearPersona(@RequestBody Persona pers){
+    public String crearPersona(@RequestBody Persona pers) {
         ipersonaService.guardarPersona(pers);
         return "La persona fue creada correctamente";
     }
-    
-    @DeleteMapping ("/delete/persona/{id}")
-    public String borrarPersona(@PathVariable Long id){
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/persona/{id}")
+    public String borrarPersona(@PathVariable Long id) {
         ipersonaService.borrarPersona(id);
         return "La persona fue eliminada correctamente";
     }
-    
+
     //URL puerto/personas/editar/(Id)/nommbre & apellido & url_img
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit/personas/{id}")
     public Persona editarPersona(@PathVariable Long id,
-                               @RequestParam ("nombre") String nuevoNombre,
-                               @RequestParam ("apellido") String nuevoApellido,
-                               @RequestParam ("url_foto") String nuevoUrlFoto,
-                               @RequestParam ("fecha_nac") Date nuevaFecha_nac,
-                               @RequestParam ("telefono") String nuevoTelefono,
-                               @RequestParam ("acerca_de") String nuevoAcerca_de,
-                               @RequestParam ("link_facebook") String nuevoLinkFacebook,
-                               @RequestParam ("link_linkedin") String nuevolinkLinkein,
-                               @RequestParam ("link_whatsaap") String nuevoLinkWhatsaap,
-                               @RequestParam ("link_twitter") String nuevoLinkTwitter,
-                               @RequestParam ("link_instagram") String nuevoLinkInstagram,
-                               @RequestParam ("mail") String nuevoMail)
+            @RequestParam("nombre") String nuevoNombre,
+            @RequestParam("apellido") String nuevoApellido,
+            @RequestParam("url_foto") String nuevoUrlFoto,
+            @RequestParam("fecha_nac") Date nuevaFecha_nac,
+            @RequestParam("telefono") String nuevoTelefono,
+            @RequestParam("acerca_de") String nuevoAcerca_de,
+            @RequestParam("link_facebook") String nuevoLinkFacebook,
+            @RequestParam("link_linkedin") String nuevolinkLinkein,
+            @RequestParam("link_whatsaap") String nuevoLinkWhatsaap,
+            @RequestParam("link_twitter") String nuevoLinkTwitter,
+            @RequestParam("link_instagram") String nuevoLinkInstagram,
+            @RequestParam("mail") String nuevoMail) {
+        Persona persona = ipersonaService.buscarPersona(id);
 
-
-                               {
-        Persona persona=ipersonaService.buscarPersona(id);
-        
         persona.setNombre(nuevoNombre);
         persona.setApellido(nuevoApellido);
         persona.setUrl_foto(nuevoUrlFoto);
@@ -80,11 +84,13 @@ public class PersonaController  {
         ipersonaService.guardarPersona(persona);
         return persona;
     }
-         @PutMapping("/edit/persona/{id}")
-    public Persona editarPersona(@PathVariable Long id, @RequestBody Persona pers){
-        
-        Persona persona=ipersonaService.buscarPersona(id);
-        
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/edit/persona/{id}")
+    public Persona editarPersona(@PathVariable Long id, @RequestBody Persona pers) {
+
+        Persona persona = ipersonaService.buscarPersona(id);
+
         persona.setNombre(pers.getNombre());
         persona.setApellido(pers.getApellido());
         persona.setUrl_foto(pers.getUrl_foto());
@@ -99,7 +105,7 @@ public class PersonaController  {
         persona.setMail(pers.getMail());
         ipersonaService.guardarPersona(persona);
         return persona;
-        
-    }                     
-            
+
+    }
+
 }
