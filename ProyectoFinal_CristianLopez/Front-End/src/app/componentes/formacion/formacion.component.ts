@@ -4,6 +4,7 @@ import { Estudio } from 'src/app/model/estudio.model';
 import { FormacionService } from 'src/app/services/formacion.service';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
+import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-formacion',
   templateUrl: './formacion.component.html',
@@ -14,13 +15,18 @@ export class FormacionComponent implements OnInit {
   public estudios:Estudio[]=[];
   public editEstudio:Estudio | undefined;
   public borrarEstudio:Estudio | undefined;
-
+  isAdmin = false;
+  authorities: string[] = [];
   faPencil = faPencilAlt;
   basuraIcono=faTrashCan;
-  constructor(private formacionService:FormacionService) { }
+  constructor(private formacionService:FormacionService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.getEstudios();
+    this.authorities = this.tokenService.getAuthorities();
+    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
+      this.isAdmin = true;
+    } else { this.isAdmin = false; }
   }
 
   public getEstudios():void{
@@ -29,7 +35,7 @@ export class FormacionComponent implements OnInit {
         this.estudios=Response;
       },
       error:(error:HttpErrorResponse)=>{
-        alert(error.message);
+        console.log(error.message);
       }
     })
   }
@@ -67,7 +73,7 @@ export class FormacionComponent implements OnInit {
         addForm.resetForm();
          },
       error:(error:HttpErrorResponse)=>{
-      alert(error.message);
+      console.log(error.message);
       addForm.resetForm();
 
       }
@@ -86,7 +92,7 @@ export class FormacionComponent implements OnInit {
         
       },
       error:(error:HttpErrorResponse)=>{
-      alert(error.message);
+      console.log(error.message);
       }
     });
   }
@@ -100,7 +106,7 @@ export class FormacionComponent implements OnInit {
         
       },
       error:(error:HttpErrorResponse)=>{
-        alert(error.message);
+       console.log(error.message);
       }
     });
   }

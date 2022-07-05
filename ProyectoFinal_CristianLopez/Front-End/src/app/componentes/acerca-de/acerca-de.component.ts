@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona.model'
 import { PersonaService } from 'src/app/services/persona.service';
+import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-acerca-de',
   templateUrl: './acerca-de.component.html',
@@ -11,14 +12,21 @@ import { PersonaService } from 'src/app/services/persona.service';
 export class AcercaDeComponent implements OnInit {
  public persona:Persona | undefined;
  public editPersona:Persona | undefined;
-  
-  constructor(public personaService: PersonaService) { }
+isAdmin=false;
+authorities:string[]=[];
+  constructor(public personaService: PersonaService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     
    this.verPersonas();
-      
-    
+
+
+    this.authorities=this.tokenService.getAuthorities();
+
+    if(this.authorities.indexOf("ROLE_ADMIN")!=-1)
+    {
+      this.isAdmin=true;
+    }else{this.isAdmin=false;}
   }
 
   public verPersonas():void{
@@ -28,7 +36,7 @@ export class AcercaDeComponent implements OnInit {
       
       },
       error:(error:HttpErrorResponse)=>{
-      alert(error.message);
+      console.log(error.message);
     }
       
     });

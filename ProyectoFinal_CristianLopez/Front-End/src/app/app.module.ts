@@ -17,9 +17,10 @@ import { ExperienciaLaboralComponent } from './componentes/experiencia-laboral/e
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ItemExperienciaComponent } from './componentes/item-experiencia/item-experiencia.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import {  InterceptorService } from './services/interceptor-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,13 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
     })
     
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

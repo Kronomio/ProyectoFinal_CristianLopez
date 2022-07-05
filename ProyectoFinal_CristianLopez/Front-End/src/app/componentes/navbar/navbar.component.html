@@ -32,7 +32,9 @@
                   </a>
                 </li> -->
                 <li class="nav-item">
-                  <a class="btn btn-outline-light" href="login">Iniciar Sesión</a>
+                  <a class="btn btn-outline-light" href="login" *ngIf="!isLogged">Iniciar Sesión</a>
+                  <a class="btn btn-outline-light" href="" (click)="onLogOut()"*ngIf="isLogged">Cerrar Sesión</a>
+
                 </li>
                 
                 </ul>

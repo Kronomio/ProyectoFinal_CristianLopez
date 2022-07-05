@@ -1,4 +1,4 @@
-<section class="h-100 gradient-form" style="background-color: #eee;">
+<!-- <section class="h-100 gradient-form" style="background-color: #eee;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-xl-10">
@@ -8,46 +8,46 @@
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center">
-                  <img src="\assets\1.png"
-                    style="width: 185px;" alt="logo">
+                  <img src="\assets\1.png" style="width: 185px;" alt="logo">
                   <h4 class="mt-1 mb-5 pb-1">Mi Portafolio Web</h4>
                 </div>
 
-                <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
-                  <p>Ingrese su usuario o email</p>
+                <form [formGroup]="form"  novalidate>
+
 
                   <div class="form-outline mb-4">
-                    <input type="email" formControlName="email" 
-                    [ngClass]="{'is-invalid':Email?.errors && Email?.touched, 'is-valid':!Email?.errors && Email?.touched}"
-                    id="form2Example11" class="form-control"
-                      placeholder="Nombre de Usuario o Email" />
-                      <div *ngIf="Email?.errors  && Email?.touched">
-                        <p *ngIf="Email?.hasError('required')" class="text-danger">El email es requerido</p>
-                        <p *ngIf="Email?.hasError('email')" class="text-danger">El formato debe ser válido</p>
-                    
-                    
+                    <input type="text" id="username" name="username" class="form-control"
+                      placeholder="Nombre de Usuario" formControlName="username" required />
+                    <label class="form-label" for="username">Usuario</label>
+                    <div *ngIf="username?.errors  && username?.touched">
+                      <p *ngIf="username?.hasError('required')" class="text-danger">El usuario es requerido</p>
+                      <label class="form-label" for="password">Ingrese su usuario</label>
+                     </div>
 
+                  </div>
+
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" formControlName="password"
+                    [ngClass]="{'is-invalid':Password?.errors && Password?.touched, 'is-valid':!Password?.errors && Password?.touched}"
+                      [(ngModel)]="password" />
+                      
+                      
+                      <div *ngIf="Password?.errors && Password?.touched">
+                        <p *ngIf="Password?.hasError('required')" class="text-danger">La contraseña es requerida</p>
+                       
+                        
+                        <label class="form-label" for="password">Contraseña</label>
                       </div>
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" 
-                    [ngClass]="{'is-invalid':Password?.errors && Password?.touched, 'is-valid':!Password?.errors && Password?.touched}"
 
-                    
-                    formControlName="password" class="form-control" placeholder="Contraseña"/>
-                    <div *ngIf="Password?.errors && Password?.touched">
-                      <p *ngIf="Password?.hasError('required')" class="text-danger">La contraseña es requerida</p>
-                      <p *ngIf="Password?.hasError('minlength')" class="text-danger">La contraseña debe ser de 8 o más caracteres</p>
 
-                    <label class="form-label" for="form2Example22">Contraseña</label>
-                    </div>
-                  </div>
 
                   <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">
                       Iniciar Sesión </button>
-                    <a class="text-muted" href="#!">  Olvidó su contraseña?</a>
+                    <a class="text-muted" href="#!"> Olvidó su contraseña?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">
@@ -62,8 +62,9 @@
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                 <h4 class="mb-4">Acceso Administrador</h4>
-                <p class="small mb-0">Para loguearte como administrador utiliza la siguiente credencial: 
-                  <br>    Usuario: admin <br>    Contraseña: admin</p>
+                <p class="small mb-0">Para loguearte como administrador utiliza la siguiente credencial:
+                  <br> Usuario: admin <br> Contraseña: admin
+                </p>
               </div>
             </div>
           </div>
@@ -71,4 +72,144 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- 
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="\assets\1.png" style="width: 185px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">Mi Portafolio Web</h4>
+                </div>
+
+                <form #formulario="ngForm" (ngSubmit)="onLogin()" novalidate>
+                  <p>Ingrese su usuario o email</p>
+
+                  <div class="form-outline mb-4">
+                    <input type="text" formControlName="username"                     
+                      id="username" class="form-control" placeholder="Nombre de Usuario" [(ngModel)]="username" required/>
+                    <div *ngIf="Email?.errors  && Email?.touched">
+                      <p *ngIf="Email?.hasError('required')" class="text-danger">El email es requerido</p>
+                      <label class="form-label" for="password">Ingrese su usuario</label>
+                     </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password"
+                      [ngClass]="{'is-invalid':Password?.errors && Password?.touched, 'is-valid':!Password?.errors && Password?.touched}"
+                      formControlName="password" class="form-control" placeholder="Contraseña" [(ngModel)]="password"/>
+                    <div *ngIf="Password?.errors && Password?.touched">
+                      <p *ngIf="Password?.hasError('required')" class="text-danger">La contraseña es requerida</p>
+                      <p *ngIf="Password?.hasError('minlength')" class="text-danger">La contraseña debe ser de 4 caracteres o más
+                        caracteres</p>
+
+                      <label class="form-label" for="password">Contraseña</label>
+                    </div>
+                  </div>
+
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">
+                      Iniciar Sesión </button>
+                    <a class="text-muted" href="#!"> Olvidó su contraseña?</a>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">No tiene una cuenta?</p>
+                    <button type="button" class="btn btn-outline-danger">Crear Cuenta</button>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">Acceso Administrador</h4>
+                <p class="small mb-0">Para loguearte como administrador utiliza la siguiente credencial:
+                  <br> Usuario: admin <br> Contraseña: admin
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+
+
+<!--Este es el formulario que estaba andando -->
+
+ <section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="\assets\1.png" style="width: 185px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">Mi Portafolio Web</h4>
+                </div>
+
+                <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+
+
+                  <div class="form-outline mb-4">
+                    <input type="text" id="username" name="username" class="form-control"
+                      placeholder="Nombre de Usuario" [(ngModel)]="username" required />
+                    <label class="form-label" for="username">Usuario</label>
+
+
+                  </div>
+
+
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña"
+                      [(ngModel)]="password" />
+
+
+                    <label class="form-label" for="password">Contraseña</label>
+                  </div>
+
+
+                  <div class="text-center pt-1 mb-5 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">
+                      Iniciar Sesión </button>
+                    <a class="text-muted" href="#!"> Olvidó su contraseña?</a>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">No tiene una cuenta?</p>
+                    <button type="button" class="btn btn-outline-danger">Crear Cuenta</button>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">Acceso Administrador</h4>
+                <p class="small mb-0">Para loguearte como administrador utiliza la siguiente credencial:
+                  <br> Usuario: admin <br> Contraseña: admin
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

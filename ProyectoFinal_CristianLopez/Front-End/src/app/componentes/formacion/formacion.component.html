@@ -1,5 +1,5 @@
 <!--Añado el btn de añadir formacion y que abra el modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  ">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  "*ngIf="isAdmin">
   <button type="button" class="btn btn-outline-primary btn-sm " data-bs-toggle="modal"
     data-bs-target="#addFormacionModal">
     Registrar formación
@@ -21,7 +21,7 @@
       
           <!--Agrego los botones de edición y borrar -->
       
-          <div class="col text-end">
+          <div class="col text-end" *ngIf="isAdmin">
         <a type="button" class="btn btn-primary btn-sm "
         data-bs-toggle="modal"
         data-bs-target="#editFormacionModal"

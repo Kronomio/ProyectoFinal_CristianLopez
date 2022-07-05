@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Habilidad } from 'src/app/model/habilidad.model';
 import { HabilidadesService } from 'src/app/services/habilidades.service';
-import { CircleProgressComponent } from 'ng-circle-progress';
-import { FontAwesomeModule, FaIconLibrary  } from '@fortawesome/angular-fontawesome';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-habilidades',
@@ -15,38 +14,44 @@ import { NgForm } from '@angular/forms';
 })
 export class HabilidadesComponent implements OnInit {
 
-  public habilidades:Habilidad[]=[];
-  public editHabilidad:Habilidad | undefined;
-  public borrarHabilidad:Habilidad | undefined;
+  public habilidades: Habilidad[] = [];
+  public editHabilidad: Habilidad | undefined;
+  public borrarHabilidad: Habilidad | undefined;
   faPencil = faPencilAlt;
-  basuraIcono=faTrashCan;
-  constructor(private habilidadService:HabilidadesService) { }
+  basuraIcono = faTrashCan;
+  isAdmin = false;
+  authorities: string[] = [];
+  constructor(private habilidadService: HabilidadesService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.getHabilidades();
+    this.authorities = this.tokenService.getAuthorities();
+    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
+      this.isAdmin = true;
+    } else { this.isAdmin = false; }
   }
-  public getHabilidades():void{
+  public getHabilidades(): void {
     this.habilidadService.obtenerHabilidad().subscribe({
-      next:(Response:Habilidad[]) => {
-        this.habilidades=Response;
+      next: (Response: Habilidad[]) => {
+        this.habilidades = Response;
       },
-      error:(error:HttpErrorResponse)=>{
-        alert(error.message);
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
       }
     })
   }
-  public abrirModal(modo:String, habilidad?:Habilidad):void{
-    const container=document.getElementById('main-container');
-    const button=document.createElement('button');
-    button.style.display='none';
+  public abrirModal(modo: String, habilidad?: Habilidad): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    if(modo==='add'){
+    if (modo === 'add') {
       button.setAttribute('data-target', '#addHabilidadModal');
-    } else if(modo==='delete'){
-      this.borrarHabilidad=habilidad;
-       button.setAttribute('data-toggle', '#deleteHabilidadModal');
-    } else if(modo==='edit'){
-      this.editHabilidad=habilidad;
+    } else if (modo === 'delete') {
+      this.borrarHabilidad = habilidad;
+      button.setAttribute('data-toggle', '#deleteHabilidadModal');
+    } else if (modo === 'edit') {
+      this.editHabilidad = habilidad;
       button.setAttribute('data-toggle', '#editHabilidadModal');
 
     }
@@ -54,52 +59,52 @@ export class HabilidadesComponent implements OnInit {
     button.click();
   }
 
-  public onAddHabilidad(addForm:NgForm){
-    
+  public onAddHabilidad(addForm: NgForm) {
+
     document.getElementById('add-habilidad-form')?.click();
 
-    if(addForm.valid){
-    this.habilidadService.addHabilidad(addForm.value).subscribe({
-      next: (response:Habilidad) => {
-        console.log(response);
-        this.getHabilidades();
-        addForm.resetForm();
-         },
-      error:(error:HttpErrorResponse)=>{
-      alert(error.message);
-      addForm.resetForm();
+    if (addForm.valid) {
+      this.habilidadService.addHabilidad(addForm.value).subscribe({
+        next: (response: Habilidad) => {
+          console.log(response);
+          this.getHabilidades();
+          addForm.resetForm();
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.message);
+          addForm.resetForm();
 
-      }
+        }
 
-    });
+      });
+    }
+
   }
-
-  }
-  public onEditHabilidad(habilidad:Habilidad): void{
-    this.editHabilidad=habilidad;
+  public onEditHabilidad(habilidad: Habilidad): void {
+    this.editHabilidad = habilidad;
     document.getElementById('edit-formacion-form');
     this.habilidadService.updateHabilidad(habilidad).subscribe({
-      next: (response:Habilidad) => {
+      next: (response: Habilidad) => {
         console.log(response);
         this.getHabilidades();
-        
+
       },
-      error:(error:HttpErrorResponse)=>{
-      alert(error.message);
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
       }
     });
   }
-  public onDeleteHabilidad(idHab:number):void{
-  
-    
+  public onDeleteHabilidad(idHab: number): void {
+
+
     this.habilidadService.deleteHabilidad(idHab).subscribe({
-      next: (response:void) => {
+      next: (response: void) => {
         console.log(response);
         this.getHabilidades();
-        
+
       },
-      error:(error:HttpErrorResponse)=>{
-        alert(error.message);
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
       }
     });
   }

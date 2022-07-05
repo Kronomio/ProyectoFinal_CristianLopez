@@ -3,82 +3,71 @@ import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
 import { NgForm } from '@angular/forms';
+import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-portada',
   templateUrl: './portada.component.html',
   styleUrls: ['./portada.component.css']
 })
 export class PortadaComponent implements OnInit {
- 
-  public persona:Persona | undefined;
-  public editPersona:Persona | undefined;
- 
-  
-  constructor(public personaService: PersonaService) { }
-  
-  // personaForm=new FormGroup({
-  //   nombre: new FormControl(''),
-  //   apellido: new FormControl(''),
-  //   acerca_de: new FormControl(''),
-  //   url_foto: new FormControl(''),
-  //   link_linkedin: new FormControl(''),
-  //   link_instagram: new FormControl(''),
-  //   link_twitter: new FormControl(''),
-  //   link_facebook: new FormControl(''),
-  //   fecha_nac: new FormControl(''),
-  //   telefono: new FormControl(''),
-  //   mail: new FormControl('')
 
-    
+  public persona: Persona | undefined;
+  public editPersona: Persona | undefined;
 
-  // }
+  isAdmin = false;
+  authorities: string[] = [];
+  constructor(public personaService: PersonaService, private tokenService: TokenService) { }
 
-  // )
+
   ngOnInit(): void {
     this.verPersonas();
+
+    this.authorities = this.tokenService.getAuthorities();
+    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
+      this.isAdmin = true;
+    } else { this.isAdmin = false; }
   }
 
-  public verPersonas():void{
+  public verPersonas(): void {
     this.personaService.verPersonas().subscribe({
-      next: (response:Persona) => {
-        this.persona=response;
-        
+      next: (response: Persona) => {
+        this.persona = response;
+
       },
-      error:(error:HttpErrorResponse)=>{
-      alert(error.message);
-    }
-      
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+
     });
-    
+
   }
 
+  public guardarPersona(formulario: NgForm) {
 
-  public guardarPersona(formulario:NgForm){
-    
     console.log("¿Válido?", formulario.valid);
     console.log("Valores", formulario.value);
 
-    if(formulario.valid){
-      
+    if (formulario.valid) {
+
       this.personaService.actualizarPersona(formulario.value).subscribe({
-        next: (response:Persona) =>{
+        next: (response: Persona) => {
           console.log(response);
           this.verPersonas();
           window.location.reload();
 
 
         },
-        error:(error:HttpErrorResponse)=>{
-          alert(error.message);
+        error: (error: HttpErrorResponse) => {
+          console.log(error.message);
         }
       })
-      
+
     }
 
-     
-      
-      
-     
+
+
+
+
 
   }
 }

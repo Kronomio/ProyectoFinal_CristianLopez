@@ -1,18 +1,25 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Habilidad } from '../model/habilidad.model';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HabilidadesService {
   url=environment.apiBaseUrl;
-  constructor(private http: HttpClient) { }
+  // headers=new HttpHeaders;
+ 
+  constructor(private http: HttpClient, private tokenService:TokenService) {
+    // this.headers.set('Authorization', 'Bearer' + this.tokenService.getToken())
+
+   }
 
   public obtenerHabilidad():Observable<Habilidad[]>{
-    return this.http.get<Habilidad[]>(this.url +"habilidad/all")
+
+    return this.http.get<Habilidad[]>(this.url +"habilidad/all");
     }
 
   public addHabilidad(habilidad:Habilidad):Observable<Habilidad>{

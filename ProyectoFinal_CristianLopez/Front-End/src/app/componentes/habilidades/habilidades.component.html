@@ -1,5 +1,5 @@
 <!--Añado el btn de añadir habilidad y que abra el modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  ">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="isAdmin">
   <button type="button" class="btn btn-outline-primary btn-sm " data-bs-toggle="modal"
     data-bs-target="#addHabilidadModal">
     Registrar Habilidad
@@ -16,8 +16,8 @@
     <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let habilidad of habilidades">
       <div class="container  animate__animated animate__zoomIn">
         <div class="row text-center">
-          <!-- Agrego los botones de edición y borrar -->
-          <div class="col text-end">
+          <!-- Agrego los botones de edición y borrar sólo para usuarios admin-->
+          <div class="col text-end" *ngIf="isAdmin">
             <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#editHabilidadModal"
               (click)="abrirModal('edit',habilidad)">
               <fa-icon [icon]="faPencil"></fa-icon>
