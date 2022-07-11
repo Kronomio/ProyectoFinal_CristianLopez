@@ -6,13 +6,26 @@
 }
 .h2{
     font-family: 'Cabin', sans-serif;
+    color:dodgerblue
+
+   
+
+}
+#items_experiencia{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .linea
 {
-    border-top: 1.5px solid rgb(26, 88, 124);
+    border-top: 1.5px solid rgb(51, 169, 236);
     height: 2px;
     max-height: 15px;
     width: 255px;
     padding: -1px;
     margin: -8px auto 0 auto;
+}
+.textoLabel{
+    color: rgb(124, 123, 123);
 }

@@ -14,8 +14,8 @@
 <div class="container-fluid" id="experiencias">
    
 <div class="container" >
-    <div class="row">
-      <div class="col-4" *ngFor="let experiencia of experiencias">
+    <div class="row" id="items_experiencia">
+      <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let experiencia of experiencias">
         <div class="col" data-aos="flip-down">
 
           <!-- Añado los botones de edicion y borrado-->
@@ -35,7 +35,7 @@
           </div>
           <div class="card" style="width: 22rem;">
             <div class="card-body">
-              <div class="row">
+              <div class="row ">
                 <div class="col-8">
                   <h5 class="card-title">{{experiencia?.titulo}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{experiencia?.nombre_empresa}}</h6>
@@ -79,7 +79,7 @@
         <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddExperiencia(addForm)" novalidate="">
         
           <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label">Título</label>
+            <label for="titulo" class="form-label textoLabel">Título</label>
             <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
@@ -91,23 +91,23 @@
           </div>
         
           <div class="col-md-4 form-group">
-            <label for="fecha_inicio" class="form-label">Año Inicio</label>
+            <label for="fecha_inicio" class="form-label textoLabel" >Año Inicio</label>
             <input type="text" class="form-control" ngModel name="fecha_inicio" id="fecha_inicio" placeholder="Año Inicio">
           </div>
           <div class="col-md-4 form-group">
-            <label for="fecha_fin" class="form-label">Año Fin </label>
+            <label for="fecha_fin" class="form-label textoLabel">Año Fin </label>
             <input type="text" class="form-control" ngModel name="fecha_fin" id="fecha_fin" placeholder="Año Fin">
                         
           </div>
           <p class="fs-7">En caso de ser actual, dejar año fin vacio.</p>
                        
           <div class="col-9 form-group">
-            <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
+            <label for="nombre_empresa" class="form-label textoLabel">Nombre de la empresa</label>
             <input type="text" class="form-control" placeholder="Nombre de la empresa" ngModel name="nombre_empresa" id="nombre_empresa">
           </div>
         
           <div class="col-9 form-group">
-            <label for="logo_empresa" class="form-label">Logo de la empresa</label>
+            <label for="logo_empresa" class="form-label textoLabel">Logo de la empresa</label>
             <input type="text" class="form-control" ngModel placeholder="Logo de la empresa" name="logo_empresa" id="logo_empresa">
           </div>
         
@@ -142,7 +142,7 @@
             <input type="hidden" ngModel={{editExperiencia?.idExp}} name="idExp" id="idExp" class="form-control">
            </div>
           <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label">Título </label>
+            <label for="titulo" class="form-label textoLabel">Título </label>
             <input type="text" class="form-control" ngModel="{{editExperiencia?.titulo}}" id="titulo" name="titulo" placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
@@ -154,22 +154,22 @@
           </div>
         
           <div class="col-md-4 form-group">
-            <label for="fecha_inicio" class="form-label">Año Inicio</label>
+            <label for="fecha_inicio" class="form-label textoLabel">Año Inicio</label>
             <input type="text" class="form-control" ngModel="{{editExperiencia?.fecha_inicio}}" name="fecha_inicio" id="fecha_inicio">
           </div>
           <div class="col-md-4 form-group">
-            <label for="fecha_fin" class="form-label">Año Fin</label>
+            <label for="fecha_fin" class="form-label textoLabel">Año Fin</label>
             <input type="text" class="form-control" ngModel="{{editExperiencia?.fecha_fin}}" name="fecha_fin" id="fecha_fin">
           </div>
                    
                        
           <div class="col-9 form-group">
-            <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
+            <label for="nombre_empresa" class="form-label textoLabel">Nombre de la empresa</label>
             <input type="text" class="form-control" ngModel="{{editExperiencia?.nombre_empresa}}" name="nombre_empresa" id="nombre_empresa">
           </div>
         
           <div class="col-9 form-group">
-            <label for="logo_empresa" class="form-label">Logo de la empresa</label>
+            <label for="logo_empresa" class="form-label textoLabel">Logo de la empresa</label>
             <input type="text" class="form-control" ngModel="{{editExperiencia?.logo_empresa}}" name="logo_empresa" id="logo_empresa">
           </div>
         

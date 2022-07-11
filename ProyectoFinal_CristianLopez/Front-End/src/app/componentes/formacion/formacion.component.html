@@ -93,7 +93,7 @@
         <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddFormacion(addForm)" novalidate="">
         
           <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label">Título </label>
+            <label for="titulo" class="form-label textoLabel">Título </label>
             <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
@@ -105,17 +105,17 @@
           </div>
         
           <div class="col-md-4 form-group">
-            <label for="fecha" class="form-label">Año</label>
+            <label for="fecha" class="form-label textoLabel">Año</label>
             <input type="text" class="form-control" ngModel name="fecha" id="fecha" placeholder="Año">
           </div>
                        
           <div class="col-9 form-group">
-            <label for="url_imagen_estudio" class="form-label">Imágen de formacion</label>
+            <label for="url_imagen_estudio" class="form-label textoLabel">Imágen de formacion</label>
             <input type="text" class="form-control" placeholder="URL de imágen" ngModel name="url_imagen_estudio" id="url_imagen_estudio">
           </div>
         
           <div class="col-9 form-group">
-            <label for="url_certificado" class="form-label">Imágen del certificado</label>
+            <label for="url_certificado" class="form-label textoLabel">Imágen del certificado</label>
             <input type="text" class="form-control" ngModel placeholder="URL del certificado" name="url_certificado" id="url_imagen_certificado">
           </div>
         
@@ -137,7 +137,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Editar Formación</h5>
+        <h5 class="modal-title " id="staticBackdropLabel">Editar Formación</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
@@ -150,7 +150,7 @@
             <input type="hidden" ngModel={{editEstudio?.idEst}} name="idEst" id="idEst" class="form-control">
            </div>
           <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label">Título </label>
+            <label for="titulo" class="form-label textoLabel">Título </label>
             <input type="text" class="form-control" ngModel="{{editEstudio?.titulo}}" id="titulo" name="titulo" placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
@@ -162,17 +162,17 @@
           </div>
         
           <div class="col-md-4 form-group">
-            <label for="fecha" class="form-label">Año</label>
+            <label for="fecha" class="form-label textoLabel">Año</label>
             <input type="text" class="form-control" ngModel="{{editEstudio?.fecha}}" name="fecha" id="fecha">
           </div>
                        
           <div class="col-9 form-group">
-            <label for="url_imagen_estudio" class="form-label">Imágen de formacion</label>
+            <label for="url_imagen_estudio" class="form-label textoLabel">Imágen de formacion</label>
             <input type="text" class="form-control" ngModel="{{editEstudio?.url_imagen_estudio}}" name="url_imagen_estudio" id="url_imagen_estudio">
           </div>
         
           <div class="col-9 form-group">
-            <label for="url_certificado" class="form-label">Imágen del certificado</label>
+            <label for="url_certificado" class="form-label textoLabel">Imágen del certificado</label>
             <input type="text" class="form-control" ngModel="{{editEstudio?.url_certificado}}" name="url_certificado" id="url_imagen_certificado">
           </div>
         

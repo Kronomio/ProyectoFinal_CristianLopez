@@ -7,13 +7,13 @@
   <br>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid ">
   <p class="h2 text-center animate__animated animate__backInLeft">Mis Habilidades</p>
   <div class="linea animate__animated animate__backInRight"></div>
   
 
-  <div class="row">
-    <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let habilidad of habilidades">
+  <div class="row rowHabilidad">
+    <div class="col-sm-5 col-md-5 col-lg-3" *ngFor="let habilidad of habilidades">
       <div class="container  animate__animated animate__zoomIn">
         <div class="row text-center">
           <!-- Agrego los botones de edición y borrar sólo para usuarios admin-->
@@ -32,8 +32,8 @@
             [outerStrokeGradientStopColor]="'#232145'" [innerStrokeColor]="'#627bdf'" [animation]="true"
             [animationDuration]="3000" [showImage]="true" [imageWidth]="80" [imageHeight]="80"
             [imageSrc]="habilidad!.url_imagen.toString()" [showBackground]="false"></circle-progress>
-          <p class="h5">{{habilidad?.nombre}}</p>
-          <p class="h7">{{habilidad?.porcentaje}} %</p>
+          <p class="h5 texto">{{habilidad?.nombre}}</p>
+          <p class="h7 texto">{{habilidad?.porcentaje}} %</p>
         
         </div>
       </div>
@@ -58,17 +58,17 @@
         <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddHabilidad(addForm)" novalidate="">
         
           <div class="col-md-12 form-group ">
-            <label for="nombre" class="form-label">Nombre </label>
+            <label for="nombre" class="form-label textoLabel">Nombre </label>
             <input type="text" class="form-control" ngModel id="nombre" name="nombre" placeholder="Nombre de la habilidad" required>
           </div>
                   
           <div class="col-md-4 form-group">
-            <label for="porcentaje" class="form-label">Porcentaje</label>
+            <label for="porcentaje" class="form-label textoLabel">Porcentaje</label>
             <input type="number" class="form-control" ngModel name="porcentaje" id="porcentaje" placeholder="Porcentaje en número">
           </div>
                        
           <div class="col-9 form-group">
-            <label for="url_imagen" class="form-label">Logo de Habilidad</label>
+            <label for="url_imagen" class="form-label textoLabel">Logo de Habilidad</label>
             <input type="text" class="form-control" placeholder="URL de imágen" ngModel name="url_imagen" id="url_imagen">
           </div>
         
@@ -104,17 +104,17 @@
            </div>
           
            <div class="col-md-12 form-group ">
-            <label for="nombre" class="form-label">Nombre </label>
+            <label for="nombre" class="form-label textoLabel">Nombre </label>
             <input type="text" class="form-control" ngModel="{{editHabilidad?.nombre}}" id="nombre" name="nombre" placeholder="Nombre de la habilidad" required>
           </div>
                   
           <div class="col-md-4 form-group">
-            <label for="porcentaje" class="form-label">Porcentaje</label>
+            <label for="porcentaje" class="form-label textoLabel">Porcentaje</label>
             <input type="number" class="form-control" ngModel="{{editHabilidad?.porcentaje}}" name="porcentaje" id="porcentaje" placeholder="Porcentaje en número" required>
           </div>
                        
           <div class="col-9 form-group">
-            <label for="url_imagen" class="form-label">Logo de Habilidad</label>
+            <label for="url_imagen" class="form-label textoLabel">Logo de Habilidad</label>
             <input type="text" class="form-control" placeholder="URL de imágen" ngModel="{{editHabilidad?.url_imagen}}" name="url_imagen" id="url_imagen" required>
           </div>
           
