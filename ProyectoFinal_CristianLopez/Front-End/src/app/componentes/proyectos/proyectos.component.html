@@ -1,28 +1,210 @@
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  "*ngIf="isAdmin">
+  <button type="button" class="btn btn-outline-primary btn-sm " data-bs-toggle="modal"
+    data-bs-target="#addProyectoModal">
+    Registrar proyecto
+  </button>
+  <br>
+</div>
+
+
 <div class="container-fluid">
 <br>
 <p class="h2 text-center animate__animated animate__backInLeft">Mis Proyectos</p>
 <div class="linea animate__animated animate__backInRight"></div>
 <br>
-<div class="row">
-    <div class="col-sm-4 col-md-4 col-lg-4">
-      <app-item-proyectos></app-item-proyectos>
+<div class="row p-5">
+    <div class="col-sm-6 col-md-4 col-lg-4 " *ngFor="let proyecto of proyectos">
+      <!-- Agrego los botones de edición-->
+      <div class="col text-end" *ngIf="isAdmin">
+        <a type="button" class="btn btn-primary btn-sm "
+        data-bs-toggle="modal"
+        data-bs-target="#editProyectoModal"
+        (click)="abrirModal('edit',proyecto)">
+          <fa-icon [icon]="faPencil"></fa-icon>
+        </a>
+        <a type="button" class="btn btn-secondary btn-sm "
+        data-bs-toggle="modal"
+        data-bs-target="#deleteProyectoModal"
+        (click)="abrirModal('delete',proyecto)">
+          <fa-icon [icon]="basuraIcono"></fa-icon>
+        </a>
+      </div>
+      <!--Añado cada uno de las tarjetas -->
+      <div class="col text-center text-opacity-75" id="item">
+        <p class="h5">{{proyecto.titulo}}</p>
+        <div class="p-3 border bg-light">
+          <div id="item{{proyecto.id}}" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src={{proyecto.url_image1}} width="200px" height="200px" class="" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src={{proyecto.url_image2}} width="200px" height="200px" class="" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src={{proyecto.url_image3}} width="200px" height="200px" class="" alt="...">
+              </div>
+            </div>
+            
+          </div>
+          <p>{{proyecto.descripcion}}
+          </p>
+          <div class="card-body">
+            <a href="{{proyecto.link}}" class="card-link">Enlace a proyecto</a>
+            
+          </div>
+            
+        </div>
+        
+      </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-        <app-item-proyectos></app-item-proyectos>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <app-item-proyectos></app-item-proyectos>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <app-item-proyectos></app-item-proyectos>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <app-item-proyectos></app-item-proyectos>
-      </div>
-      <div class="col-sm-4 col-md-4 col-lg-4">
-        <app-item-proyectos></app-item-proyectos>
-      </div>
-    </div>
+    
+   
 
 <br>
+</div>
+
+<!-- Modal añadir Formacion-->
+
+<div class="modal fade" id="addProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Registrar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+       
+        <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddProyecto(addForm)" novalidate="">
+        
+          <div class="col-md-12 form-group ">
+            <label for="titulo" class="form-label textoLabel">Título </label>
+            <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
+          </div>
+          <div class="col-12 form-group">
+            <div class="form-floating ">
+              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel id="descripcion" name="descripcion"
+                style="height: 200px"></textarea>
+              <label for="descripcion">Descripción</label>
+            </div>
+          </div>
+        
+          <div class="col-md-4 form-group">
+            <label for="fecha_realizacion" class="form-label textoLabel">Año</label>
+            <input type="text" class="form-control" ngModel name="fecha_realizacion" id="fecha_realizacion" placeholder="Año">
+          </div>
+          <div class="col-9 form-group">
+            <label for="link" class="form-label textoLabel">ILink del Proyecto</label>
+            <input type="text" class="form-control" placeholder="Link del proyecto" ngModel name="link" id="link">
+          </div>
+                       
+          <div class="col-9 form-group">
+            <label for="url_image1" class="form-label textoLabel">Imágen 1 de Proyecto</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 1" ngModel name="url_image1" id="url_image1">
+          </div>
+          <div class="col-9 form-group">
+            <label for="url_image2" class="form-label textoLabel">Imágen 2 de Proyecto</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 2" ngModel name="url_image2" id="url_image2">
+          </div>
+          <div class="col-9 form-group">
+            <label for="url_image3" class="form-label textoLabel">Imágen 3 de Proyecto</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 3" ngModel name="url_image3" id="url_image3">
+          </div>
+        
+          
+        
+        
+          <div class="modal-footer form-group">
+            <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Modal edit Formacion-->
+
+<div class="modal fade" id="editProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+       
+        <form class="row g-3 " #editForm="ngForm" (ngSubmit)="onEditProyecto(editForm.value)" novalidate="">
+           <div class="form-group">
+            <input type="hidden" ngModel={{editProyecto?.id}} name="id" id="id" class="form-control">
+           </div>
+          <div class="col-md-12 form-group ">
+            <label for="titulo" class="form-label textoLabel">Título </label>
+            <input type="text" class="form-control" ngModel="{{editProyecto?.titulo}}" id="titulo" name="titulo" placeholder="Título" required>
+          </div>
+          <div class="col-12 form-group">
+            <div class="form-floating ">
+              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel="{{editProyecto?.descripcion}}" id="descripcion" name="descripcion"
+                style="height: 200px"></textarea>
+              <label class="textoLabel"  for="descripcion">Descripción</label>
+            </div>
+          </div>
+        
+          <div class="col-md-4 form-group">
+            <label for="fecha" class="form-label textoLabel">Año</label>
+            <input type="text" class="form-control" ngModel="{{editProyecto?.fecha_realizacion}}" name="fecha_realizacion" id="fecha_realizacion">
+          </div>
+                       
+        
+          <div class="col-9 form-group">
+            <label for="url_image1" class="form-label textoLabel">Imágen 1 de Proyecto</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 1" ngModel="{{editProyecto?.url_image1}}" name="url_image1"  id="url_image1">
+          </div>
+          <div class="col-9 form-group">
+            <label for="url_image2" class="form-label textoLabel">Imágen 2 de Proyecto</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 2" ngModel="{{editProyecto?.url_image2}}" name="url_image2" id="url_image2">
+          </div>
+          <div class="col-9 form-group">
+            <label for="url_image3" class="form-label textoLabel">Imágen 3 de Proyecto</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 3" ngModel="{{editProyecto?.url_image3}}" name="url_image3" id="url_image3">
+          </div>
+          
+        
+        
+          <div class="modal-footer form-group">
+            <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Modal de borrar-->
+<div class="modal" id="deleteProyectoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Está seguro de eliminar el  proyecto "{{borrarProyecto?.titulo}}"?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onDeleteProyecto(borrarProyecto!.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
 </div>

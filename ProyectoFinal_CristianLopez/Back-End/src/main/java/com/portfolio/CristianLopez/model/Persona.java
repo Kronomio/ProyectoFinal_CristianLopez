@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -75,6 +74,10 @@ private List<Estudio> EstudioList;
     @JsonIgnore
     @OneToMany(mappedBy="persona")
 private List<Habilidad> habilidadList;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy="persona")
+    private List<Proyecto> proyectoList;
     
     
 
