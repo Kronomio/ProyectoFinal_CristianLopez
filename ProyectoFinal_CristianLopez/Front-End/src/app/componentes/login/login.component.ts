@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.isUsuarioNoEncontrado = false;
       this.roles = this.tokenService.getAuthorities();
 
-      console.log(this.tokenService.getToken());
+      //console.log(this.tokenService.getToken());
     }
   }
 

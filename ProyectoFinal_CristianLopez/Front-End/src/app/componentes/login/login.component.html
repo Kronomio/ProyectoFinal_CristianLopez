@@ -18,7 +18,9 @@
 
                   <div class="form-outline mb-4">
                     <input type="text" id="usernameControl" name="usernameControl" class="form-control"
-                      placeholder="Nombre de Usuario" formControlName="username" required />
+                      placeholder="Nombre de Usuario" formControlName="username" 
+                      [ngClass]="{'is-invalid':Username?.errors && Username?.touched, 'is-valid':!Username?.errors && Username?.touched}"
+                      required />
                     <label class="form-label" for="usernameControl">Usuario</label>
                     <div *ngIf="Username?.errors  && Username?.touched">
                       <p *ngIf="Username?.hasError('required')" class="text-danger">El usuario es requerido</p>
@@ -32,8 +34,6 @@
                     <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña"
                       formControlName="password"
                       [ngClass]="{'is-invalid':Password?.errors && Password?.touched, 'is-valid':!Password?.errors && Password?.touched}" />
-
-
                     <div *ngIf="Password?.errors && Password?.touched">
                       <p *ngIf="Password?.hasError('required')" class="text-danger">La contraseña es requerida</p>
                     </div>
