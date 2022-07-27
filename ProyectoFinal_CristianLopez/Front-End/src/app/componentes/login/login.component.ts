@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   isLoginFail = false;
   isUsuarioNoEncontrado = false;
   loginUsuario!: LoginUsuario;
+  loginInvitado: LoginUsuario=new  LoginUsuario("user", "user");
   username!: string;
   password!: string;
   roles: string[] = [];
@@ -42,6 +43,9 @@ export class LoginComponent implements OnInit {
 
       //console.log(this.tokenService.getToken());
     }
+    else
+    {
+    }
   }
 
   get Username() { return this.form.get("username"); }
@@ -51,7 +55,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault;
     this.autenticacionService.login(this.form.value).subscribe({
       next: (data: any) => {
-        console.log("DATA: " + JSON.stringify(data));
+        //console.log("DATA: " + JSON.stringify(data));
         this.tokenService.setToken(data.token);
         this.tokenService.setUserName(data.username);
         this.tokenService.setAuthorities(data.authorities);
@@ -74,8 +78,33 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+  // loguearComoInvitado(){
+  //   this.autenticacionService.login(this.loginInvitado).subscribe({
+  //     next: (data: any) => {
+  //      // console.log("DATA: " + JSON.stringify(data));
+  //       this.tokenService.setToken(data.token);
+  //       this.tokenService.setUserName(data.username);
+  //       this.tokenService.setAuthorities(data.authorities);
+  //       this.roles = data.authorities;
+  //       this.isLogged = true;
+  //       this.isLoginFail = false;
+  //       this.isUsuarioNoEncontrado = false;
+  //       this.router.navigate(['home']);
+  //     }, error: (err: HttpErrorResponse) => {
+  //       this.isLogged = false;
+  //       this.isLoginFail = true;
+  //       this.errMsj = err.error;
+  //       console.log(err.error);
+  //       if (err.error == null) {
+  //         this.isUsuarioNoEncontrado = true;
+  //         this.form.reset();
+  //       }
+  //   }
+  // });
+
+  // }
   onSignup(){
-    this.router.navigate(['signup'])
+    this.router.navigate(['signup']);
   }
 
 

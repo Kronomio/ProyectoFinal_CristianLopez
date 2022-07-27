@@ -33,7 +33,7 @@ export class ProyectosComponent implements OnInit {
     this.proyectoService.obtenerProyectos().subscribe({
       next:(Response:Proyecto[]) => {
         this.proyectos=Response;
-        console.log(this.proyectos);
+        //console.log(this.proyectos);
       },
       error:(error:HttpErrorResponse)=>{
         console.log(error.message);

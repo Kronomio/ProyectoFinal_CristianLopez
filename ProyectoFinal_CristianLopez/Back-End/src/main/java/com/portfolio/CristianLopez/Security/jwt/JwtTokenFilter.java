@@ -1,5 +1,4 @@
 package com.portfolio.CristianLopez.Security.jwt;
-
 import com.portfolio.CristianLopez.Security.Service.UserDetailsImpl;
 import java.io.IOException;
 import javax.servlet.FilterChain;

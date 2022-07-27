@@ -1,6 +1,6 @@
 <!--Añado el btn de añadir formacion y que abra el modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  "*ngIf="isAdmin">
-  <button type="button" class="btn btn-outline-primary btn-sm " data-bs-toggle="modal"
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="isAdmin">
+  <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
     data-bs-target="#addFormacionModal">
     Registrar formación
   </button>
@@ -18,27 +18,23 @@
 
       <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" *ngFor="let estudio of estudios"> -->
-      
-          <!--Agrego los botones de edición y borrar -->
-      
-          <div class="col text-end" *ngIf="isAdmin">
-        <a type="button" class="btn btn-primary btn-sm "
-        data-bs-toggle="modal"
-        data-bs-target="#editFormacionModal"
-        (click)="abrirModal('edit',estudio)">
+
+      <!--Agrego los botones de edición y borrar -->
+
+      <div class="col text-end" *ngIf="isAdmin">
+        <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#editFormacionModal"
+          (click)="abrirModal('edit',estudio)">
           <fa-icon [icon]="faPencil"></fa-icon>
         </a>
-        <a type="button" class="btn btn-secondary btn-sm "
-        data-bs-toggle="modal"
-        data-bs-target="#deleteFormacionModal"
-        (click)="abrirModal('delete',estudio)">
+        <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal" data-bs-target="#deleteFormacionModal"
+          (click)="abrirModal('delete',estudio)">
           <fa-icon [icon]="basuraIcono"></fa-icon>
         </a>
       </div>
 
       <!-- Añado las card de cada Estudio -->
-      
-        <!-- <div class="col">
+
+      <!-- <div class="col">
           <div class="card h-100">
             <img src="{{estudio.url_imagen_estudio}}" class="card-img-top"  alt="...">
             <div class="card-body">
@@ -51,12 +47,12 @@
           </div>
         </div>
       </div> -->
-      
-      
+
+
       <div class="card bg-info bg-opacity-50 mb-3" data-aos="flip-left" style="max-width:540px; min-height: 200px;">
         <div class="row" id="items_formacion2">
           <div class="col-md-4">
-            <img src={{estudio.url_imagen_estudio}} class="img-thumbnail rounded-start" width=100px 
+            <img src={{estudio.url_imagen_estudio}} class="img-thumbnail rounded-start" width=100px
               alt={{estudio.url_imagen_estudio}}>
           </div>
           <div class="col-md-8">
@@ -71,69 +67,74 @@
         </div>
       </div>
     </div>
+  </div>
 </div>
-
 
 
 
 <!-- Modal añadir Formacion-->
 
-<div class="modal fade" id="addFormacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
+<div class="modal fade" id="addFormacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Registrar Formación</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
+          <!-- <span aria-hidden="true"></span> -->
         </button>
       </div>
 
       <div class="modal-body">
-       
+
         <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddFormacion(addForm)" novalidate="">
-        
+
           <div class="col-md-12 form-group ">
             <label for="titulo" class="form-label textoLabel">Título </label>
             <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel id="descripcion" name="descripcion"
-                style="height: 200px"></textarea>
+              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel id="descripcion"
+                name="descripcion" style="height: 200px"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
           </div>
-        
+
           <div class="col-md-4 form-group">
             <label for="fecha" class="form-label textoLabel">Año</label>
             <input type="text" class="form-control" ngModel name="fecha" id="fecha" placeholder="Año">
           </div>
-                       
+
           <div class="col-9 form-group">
             <label for="url_imagen_estudio" class="form-label textoLabel">Imágen de formacion</label>
-            <input type="text" class="form-control" placeholder="URL de imágen" ngModel name="url_imagen_estudio" id="url_imagen_estudio">
+            <input type="text" class="form-control" placeholder="URL de imágen" ngModel name="url_imagen_estudio"
+              id="url_imagen_estudio">
           </div>
-        
+
           <div class="col-9 form-group">
             <label for="url_certificado" class="form-label textoLabel">Imágen del certificado</label>
-            <input type="text" class="form-control" ngModel placeholder="URL del certificado" name="url_certificado" id="url_imagen_certificado">
+            <input type="text" class="form-control" ngModel placeholder="URL del certificado" name="url_certificado"
+              id="url_imagen_certificado">
           </div>
-        
-        
+
+
           <div class="modal-footer form-group">
-            <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="add-estudio-form" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
           </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 </div>
 
 <!-- Modal edit Formacion-->
 
-<div class="modal fade" id="editFormacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
+<div class="modal fade" id="editFormacionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -144,46 +145,50 @@
       </div>
 
       <div class="modal-body">
-       
+
         <form class="row g-3 " #editForm="ngForm" (ngSubmit)="onEditFormacion(editForm.value)" novalidate="">
-           <div class="form-group">
+          <div class="form-group">
             <input type="hidden" ngModel={{editEstudio?.idEst}} name="idEst" id="idEst" class="form-control">
-           </div>
+          </div>
           <div class="col-md-12 form-group ">
             <label for="titulo" class="form-label textoLabel">Título </label>
-            <input type="text" class="form-control" ngModel="{{editEstudio?.titulo}}" id="titulo" name="titulo" placeholder="Título" required>
+            <input type="text" class="form-control" ngModel="{{editEstudio?.titulo}}" id="titulo" name="titulo"
+              placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel="{{editEstudio?.descripcion}}" id="descripcion" name="descripcion"
-                style="height: 200px"></textarea>
+              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel="{{editEstudio?.descripcion}}"
+                id="descripcion" name="descripcion" style="height: 200px"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
           </div>
-        
+
           <div class="col-md-4 form-group">
             <label for="fecha" class="form-label textoLabel">Año</label>
             <input type="text" class="form-control" ngModel="{{editEstudio?.fecha}}" name="fecha" id="fecha">
           </div>
-                       
+
           <div class="col-9 form-group">
             <label for="url_imagen_estudio" class="form-label textoLabel">Imágen de formacion</label>
-            <input type="text" class="form-control" ngModel="{{editEstudio?.url_imagen_estudio}}" name="url_imagen_estudio" id="url_imagen_estudio">
+            <input type="text" class="form-control" ngModel="{{editEstudio?.url_imagen_estudio}}"
+              name="url_imagen_estudio" id="url_imagen_estudio">
           </div>
-        
+
           <div class="col-9 form-group">
             <label for="url_certificado" class="form-label textoLabel">Imágen del certificado</label>
-            <input type="text" class="form-control" ngModel="{{editEstudio?.url_certificado}}" name="url_certificado" id="url_imagen_certificado">
+            <input type="text" class="form-control" ngModel="{{editEstudio?.url_certificado}}" name="url_certificado"
+              id="url_imagen_certificado">
           </div>
-        
-        
+
+
           <div class="modal-footer form-group">
-            <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="add-estudio-form" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
           </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -201,7 +206,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onDeleteFormacion(borrarEstudio!.idEst)">Eliminar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="onDeleteFormacion(borrarEstudio!.idEst)">Eliminar</button>
       </div>
     </div>
   </div>

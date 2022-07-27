@@ -2,7 +2,7 @@
 package com.portfolio.CristianLopez.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +20,10 @@ public class Habilidad {
     private Long idHab;
     private String nombre;
     private Long porcentaje;
+    private String color1;
+    private String color2;
     
+
     private String url_imagen;
    
     @JsonIgnore

@@ -83,7 +83,7 @@ export class HabilidadesComponent implements OnInit {
   public onEditHabilidad(habilidad: Habilidad): void {
     this.editHabilidad = habilidad;
     document.getElementById('edit-formacion-form');
-    this.habilidadService.updateHabilidad(habilidad).subscribe({
+    this.habilidadService.updateHabilidad(this.editHabilidad).subscribe({
       next: (response: Habilidad) => {
         console.log(response);
         this.getHabilidades();
