@@ -1,5 +1,8 @@
 .rowHabilidad{
-    padding: 40px;
+    padding-left:15%;
+    padding-right:15%;
+    text-align: center;
+    align-items: center;
     background-color:steelblue
 }
 .h2{

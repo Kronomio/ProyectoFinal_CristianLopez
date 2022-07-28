@@ -49,7 +49,7 @@
       </div> -->
 
 
-      <div class="card bg-info bg-opacity-50 mb-3" data-aos="flip-left" style="max-width:540px; min-height: 200px;">
+      <div class="card bg-info bg-opacity-50 mb-3" id="tarjetaFormacion" data-aos="flip-left" style="max-width:540px; min-height: 200px;">
         <div class="row" id="items_formacion2">
           <div class="col-md-4">
             <img src={{estudio.url_imagen_estudio}} class="img-thumbnail rounded-start" width=100px
@@ -87,15 +87,18 @@
 
       <div class="modal-body">
 
-        <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddFormacion(addForm)" novalidate="">
+        <form class="row g-3 " [formGroup]="form" (ngSubmit)="onAddFormacion($event)" novalidate="">
 
           <div class="col-md-12 form-group ">
             <label for="titulo" class="form-label textoLabel">Título </label>
-            <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
+            <input type="text" class="form-control" formControlName="titulo" id="titulo" name="titulo" placeholder="Título" required>
+            <div *ngIf="Titulo?.errors && Titulo?.touched">
+              <p *ngIf="Titulo?.hasError('required')" class="text-danger">El título de la formación es requerido</p>
+            </div>
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel id="descripcion"
+              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion" id="descripcion"
                 name="descripcion" style="height: 200px"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
@@ -103,18 +106,18 @@
 
           <div class="col-md-4 form-group">
             <label for="fecha" class="form-label textoLabel">Año</label>
-            <input type="text" class="form-control" ngModel name="fecha" id="fecha" placeholder="Año">
+            <input type="text" class="form-control" formControlName="fecha" name="fecha" id="fecha" placeholder="Año">
           </div>
 
           <div class="col-9 form-group">
             <label for="url_imagen_estudio" class="form-label textoLabel">Imágen de formacion</label>
-            <input type="text" class="form-control" placeholder="URL de imágen" ngModel name="url_imagen_estudio"
+            <input type="text" class="form-control" placeholder="URL de imágen" formControlName="url_imagen_estudio" name="url_imagen_estudio"
               id="url_imagen_estudio">
           </div>
 
           <div class="col-9 form-group">
             <label for="url_certificado" class="form-label textoLabel">Imágen del certificado</label>
-            <input type="text" class="form-control" ngModel placeholder="URL del certificado" name="url_certificado"
+            <input type="text" class="form-control" formControlName="url_certificado" placeholder="URL del certificado" name="url_certificado"
               id="url_imagen_certificado">
           </div>
 

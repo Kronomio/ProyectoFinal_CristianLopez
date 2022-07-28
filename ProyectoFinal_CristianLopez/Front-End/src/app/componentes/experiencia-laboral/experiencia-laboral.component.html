@@ -14,8 +14,8 @@
 <div class="container-fluid" id="experiencias">
    
 <div class="container" >
-    <div class="row" id="items_experiencia">
-      <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let experiencia of experiencias">
+    <div class="row" >
+      <div class="col-sm-6 col-md-4 col-lg-4"  *ngFor="let experiencia of experiencias">
         <div class="col" data-aos="flip-down">
 
           <!-- Añado los botones de edicion y borrado-->
@@ -33,7 +33,7 @@
               <fa-icon [icon]="basuraIcono"></fa-icon>
             </a>
           </div>
-          <div class="card" style="width: 22rem;">
+          <div class="card" id="items_experiencia" >
             <div class="card-body">
               <div class="row ">
                 <div class="col-8">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-4">
                   <img src="{{experiencia?.logo_empresa}}" class="rounded mx-auto d-block"
-                    alt="Logo de {{experiencia?.nombre_empresa}}" width="60px">
+                    alt="Logo de {{experiencia?.nombre_empresa}}" width="100%">
                 </div>
               </div>
               <p class="card-text">{{experiencia?.descripcion}}</p>

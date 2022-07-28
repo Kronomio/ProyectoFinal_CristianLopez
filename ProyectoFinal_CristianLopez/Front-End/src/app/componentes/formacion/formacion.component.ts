@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/model/estudio.model';
 import { FormacionService } from 'src/app/services/formacion.service';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, NgForm, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/services/token.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 @Component({
   selector: 'app-formacion',
   templateUrl: './formacion.component.html',
@@ -19,7 +20,29 @@ export class FormacionComponent implements OnInit {
   authorities: string[] = [];
   faPencil = faPencilAlt;
   basuraIcono=faTrashCan;
-  constructor(private formacionService:FormacionService, private tokenService: TokenService) { }
+  form:FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private formacionService:FormacionService, 
+    private tokenService: TokenService, 
+    private mensajeService:NotificacionesService) { 
+      this.form = this.formBuilder.group(
+        {
+          titulo: ['', [Validators.required]],
+          descripcion: [],
+          fecha: [],
+          url_certificado: [],
+          url_imagen_estudio: ['']
+  
+        }
+      )
+    }
+    get Titulo() { return this.form.get("titulo"); }
+    get Descripcion() { return this.form.get("descripcion"); }
+    get Fecha() { return this.form.get("fecha"); }
+    get Url_certificado() { return this.form.get("url_certificado"); }
+    get Url_imagen() { return this.form.get("url_imagen_estudio"); }
 
   ngOnInit(): void {
     this.getEstudios();
@@ -61,20 +84,22 @@ export class FormacionComponent implements OnInit {
     button.click();
   }
 
-  public onAddFormacion(addForm:NgForm){
+  public onAddFormacion(event:Event){
     
     document.getElementById('add-formacion-form')?.click();
 
-    if(addForm.valid){
-    this.formacionService.addEstudio(addForm.value).subscribe({
+    if(this.form.valid){
+    this.formacionService.addEstudio(this.form.value).subscribe({
       next: (response:Estudio) => {
-        console.log(response);
+       // console.log(response);
+       this.mensajeService.showSuccess(`Se guardó correctamente la formación ${this.form.value["titulo"]}`);
         this.getEstudios();
-        addForm.resetForm();
+        this.form.reset();
          },
       error:(error:HttpErrorResponse)=>{
-      console.log(error.message);
-      addForm.resetForm();
+      //console.log(error.message);
+      this.mensajeService.showError(`No fué posible registrar la formación ${this.form.value["titulo"]}`);
+      this.form.reset();
 
       }
 
@@ -87,12 +112,14 @@ export class FormacionComponent implements OnInit {
     document.getElementById('edit-formacion-form');
     this.formacionService.updateEstudio(estudio).subscribe({
       next: (response:Estudio) => {
-        console.log(response);
+        this.mensajeService.showSuccess("Se modificó la formación correctamente");
         this.getEstudios();
         
       },
       error:(error:HttpErrorResponse)=>{
-      console.log(error.message);
+        this.mensajeService.showError("No fue posible modificar la formación");
+      
+        console.log(error.message);
       }
     });
   }

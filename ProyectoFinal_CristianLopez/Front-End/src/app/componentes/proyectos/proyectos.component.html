@@ -12,8 +12,8 @@
 <p class="h2 text-center animate__animated animate__backInLeft">Mis Proyectos</p>
 <div class="linea animate__animated animate__backInRight"></div>
 <br>
-<div class="row p-5">
-    <div class="col-sm-6 col-md-4 col-lg-4 " *ngFor="let proyecto of proyectos">
+<div class="row p-6" id="fila-proyectos">
+    <div class="col-sm-6 col-md-4 col-lg-4"  *ngFor="let proyecto of proyectos">
       <!-- Agrego los botones de edición-->
       <div class="col text-end" *ngIf="isAdmin">
         <a type="button" class="btn btn-primary btn-sm "

@@ -19,6 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { InterceptorService } from './services/interceptor-service';
 import { SignupComponent } from './componentes/signup/signup.component';
+import { MHabilidadComponent } from './componentes/modals/m-habilidad/m-habilidad.component';
+import { NgToastModule } from 'ng-angular-popup'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,10 @@ import { SignupComponent } from './componentes/signup/signup.component';
     ExperienciaLaboralComponent,
     LoginComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    MHabilidadComponent
+   
+    
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,10 @@ import { SignupComponent } from './componentes/signup/signup.component';
       innerStrokeColor: "#C7E596",
       animationDuration: 30000
 
-    })
+    }),
+    NgToastModule
+
+
 
   ],
   providers: [

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Proyecto } from 'src/app/model/proyecto.model';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -19,7 +20,7 @@ export class ProyectosComponent implements OnInit {
   authorities: string[] = [];
   faPencil = faPencilAlt;
   basuraIcono=faTrashCan;
-  constructor(private proyectoService:ProyectoService, private tokenService: TokenService) { }
+  constructor(private proyectoService:ProyectoService, private tokenService: TokenService, private mensajeService:NotificacionesService) { }
 
   ngOnInit(): void {
     this.getProyectos();
@@ -67,11 +68,15 @@ export class ProyectosComponent implements OnInit {
       this.proyectoService.addProyecto(addForm.value).subscribe({
         next: (response: Proyecto) => {
           //console.log(response);
+          this.mensajeService.showSuccess(`Se guardó correctamente el proyecto ${addForm.value["nombre"]}`);
+          
           this.getProyectos();
           addForm.resetForm();
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error.message);
+          //console.log(error.message);
+          this.mensajeService.showError(`No fué posible registrar el proyecto.  ${error}`);
+          
           addForm.resetForm();
 
         }

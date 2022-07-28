@@ -11,12 +11,7 @@
    
 
 }
-#items_experiencia{
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 .linea
 {
     border-top: 1.5px solid rgb(51, 169, 236);

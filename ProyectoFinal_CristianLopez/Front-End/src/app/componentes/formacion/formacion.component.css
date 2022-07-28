@@ -1,6 +1,5 @@
 #items_formacion{
     
-    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -9,7 +8,6 @@
 #items_formacion2{
     text-align: center;
     align-content: center;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
