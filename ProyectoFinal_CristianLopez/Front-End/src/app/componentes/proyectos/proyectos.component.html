@@ -1,6 +1,6 @@
 <div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  "*ngIf="isAdmin">
   <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal"
-    data-bs-target="#addProyectoModal">
+    data-bs-target="#addProyectoModal" (click)="abrirModal('add')">
     Registrar proyecto
   </button>
  
@@ -12,13 +12,13 @@
 <p class="h2 text-center animate__animated animate__backInLeft">Mis Proyectos</p>
 <div class="linea animate__animated animate__backInRight"></div>
 <br>
-<div class="row p-5">
-    <div class="col-sm-6 col-md-4 col-lg-4 " *ngFor="let proyecto of proyectos">
+<div class="row p-6" id="fila-proyectos">
+    <div class="col-sm-6 col-md-4 col-lg-4"  *ngFor="let proyecto of proyectos">
       <!-- Agrego los botones de edición-->
       <div class="col text-end" *ngIf="isAdmin">
         <a type="button" class="btn btn-primary btn-sm "
         data-bs-toggle="modal"
-        data-bs-target="#editProyectoModal"
+        data-bs-target="#addProyectoModal"
         (click)="abrirModal('edit',proyecto)">
           <fa-icon [icon]="faPencil"></fa-icon>
         </a>
@@ -50,7 +50,7 @@
           <p>{{proyecto.descripcion}}
           </p>
           <div class="card-body">
-            <a href="{{proyecto.link}}" class="card-link">Enlace a proyecto</a>
+            <a href="{{proyecto.link}}" class="card-link" *ngIf="proyecto.link!=null || proyecto.link!=''">Enlace a proyecto</a>
             
           </div>
             
@@ -64,13 +64,13 @@
 <br>
 </div>
 
-<!-- Modal añadir Formacion-->
+<!-- Modal añadir y editar Formacion-->
 
 <div class="modal fade" id="addProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Registrar Proyecto</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">{{tituloModal}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
@@ -78,48 +78,54 @@
 
       <div class="modal-body">
        
-        <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddProyecto(addForm)" novalidate="">
-        
-          <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label textoLabel">Título </label>
-            <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
+        <form class="row g-3 " [formGroup]="formProyecto" (ngSubmit)="saveProyecto($event)" novalidate="">
+          <div class="form-group">
+            <input type="hidden" formControlName="id" name="id" id="id" class="form-control">
+           </div>
+       
+          <div class="input-group form-group ">
+            <label class="input-group-text textoLabel" for="titulo" >Título </label>
+            <input type="text" class="form-control" formControlName="titulo" id="titulo" name="titulo" placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel id="descripcion" name="descripcion"
+              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion" id="descripcion" name="descripcion"
                 style="height: 200px"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
           </div>
         
-          <div class="col-md-4 form-group">
-            <label for="fecha_realizacion" class="form-label textoLabel">Año</label>
-            <input type="text" class="form-control" ngModel name="fecha_realizacion" id="fecha_realizacion" placeholder="Año">
+          <div class="input-group form-group">
+            <label for="fecha_realizacion" class="input-group-text textoLabel">Año</label>
+            <input type="text" class="form-control" formControlName="fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" placeholder="Año">
           </div>
-          <div class="col-9 form-group">
-            <label for="link" class="form-label textoLabel">ILink del Proyecto</label>
-            <input type="text" class="form-control" placeholder="Link del proyecto" ngModel name="link" id="link">
+
+          <div class="input-group form-group">
+            <label for="link" class="input-group-text textoLabel">Link del Proyecto</label>
+            <input type="text" class="form-control" placeholder="Link del proyecto" formControlName="link" name="link" id="link">
           </div>
                        
-          <div class="col-9 form-group">
-            <label for="url_image1" class="form-label textoLabel">Imágen 1 de Proyecto</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 1" ngModel name="url_image1" id="url_image1">
+          <div class="input-group form-group">
+            <label for="url_image1" class="input-group-text textoLabel">Imágen 1</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 1" formControlName="url_image1" name="url_image1" id="url_image1">
           </div>
-          <div class="col-9 form-group">
-            <label for="url_image2" class="form-label textoLabel">Imágen 2 de Proyecto</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 2" ngModel name="url_image2" id="url_image2">
+          <div class="input-group form-group">
+            <label for="url_image2" class="input-group-text textoLabel">Imágen 2</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 2" formControlName="url_image2" name="url_image2" id="url_image2">
           </div>
-          <div class="col-9 form-group">
-            <label for="url_image3" class="form-label textoLabel">Imágen 3 de Proyecto</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 3" ngModel name="url_image3" id="url_image3">
+          <div class="input-group form-group">
+            <label for="url_image3" class="input-group-text textoLabel">Imágen 3</label>
+            <input type="text" class="form-control" placeholder="URL de imágen 3" formControlName="url_image3" name="url_image3" id="url_image3">
           </div>
-        
+    
           
         
         
           <div class="modal-footer form-group">
             <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="formProyecto.invalid" disabled>Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"*ngIf="formProyecto.valid ">Guardar</button>
+
           </div>
         </form>
       </div>
@@ -128,67 +134,7 @@
   </div>
 </div>
 
-<!-- Modal edit Formacion-->
 
-<div class="modal fade" id="editProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Editar Proyecto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-       
-        <form class="row g-3 " #editForm="ngForm" (ngSubmit)="onEditProyecto(editForm.value)" novalidate="">
-           <div class="form-group">
-            <input type="hidden" ngModel={{editProyecto?.id}} name="id" id="id" class="form-control">
-           </div>
-          <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label textoLabel">Título </label>
-            <input type="text" class="form-control" ngModel="{{editProyecto?.titulo}}" id="titulo" name="titulo" placeholder="Título" required>
-          </div>
-          <div class="col-12 form-group">
-            <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel="{{editProyecto?.descripcion}}" id="descripcion" name="descripcion"
-                style="height: 200px"></textarea>
-              <label class="textoLabel"  for="descripcion">Descripción</label>
-            </div>
-          </div>
-        
-          <div class="col-md-4 form-group">
-            <label for="fecha" class="form-label textoLabel">Año</label>
-            <input type="text" class="form-control" ngModel="{{editProyecto?.fecha_realizacion}}" name="fecha_realizacion" id="fecha_realizacion">
-          </div>
-                       
-        
-          <div class="col-9 form-group">
-            <label for="url_image1" class="form-label textoLabel">Imágen 1 de Proyecto</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 1" ngModel="{{editProyecto?.url_image1}}" name="url_image1"  id="url_image1">
-          </div>
-          <div class="col-9 form-group">
-            <label for="url_image2" class="form-label textoLabel">Imágen 2 de Proyecto</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 2" ngModel="{{editProyecto?.url_image2}}" name="url_image2" id="url_image2">
-          </div>
-          <div class="col-9 form-group">
-            <label for="url_image3" class="form-label textoLabel">Imágen 3 de Proyecto</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 3" ngModel="{{editProyecto?.url_image3}}" name="url_image3" id="url_image3">
-          </div>
-          
-        
-        
-          <div class="modal-footer form-group">
-            <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-          </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
 <!-- Modal de borrar-->
 <div class="modal" id="deleteProyectoModal" tabindex="-1">

@@ -1,6 +1,7 @@
 <!--Añado el btn de añadir habilidad y que abra el modal -->
 <div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="isAdmin">
-  <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#addHabilidadModal">
+  <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#addHabilidadModal"
+    (click)="abrirModal('add')">
     Registrar Habilidad
   </button>
 
@@ -17,7 +18,7 @@
       <div class="row text-center">
         <!-- Agrego los botones de edición y borrar sólo para usuarios admin-->
         <div class="col text-end" *ngIf="isAdmin">
-          <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#editHabilidadModal"
+          <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addHabilidadModal"
             (click)="abrirModal('edit',habilidad)">
             <fa-icon [icon]="faPencil"></fa-icon>
           </a>
@@ -40,14 +41,14 @@
   </div>
 
 
-  <!-- Modal añadir Habilidad-->
+  <!-- Modal  Habilidad-->
 
   <div class="modal fade" id="addHabilidadModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Registrar Habilidad</h5>
+          <h5 class="modal-title" id="tituloModal">{{tituloModal}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
@@ -55,50 +56,68 @@
 
         <div class="modal-body">
 
-          <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddHabilidad(addForm)" novalidate="">
+          <form [formGroup]="form" class="row g-3 " (ngSubmit)="guardarHabilidad($event)" novalidate>
 
-            <div class="col-md-12 form-group ">
-              <label for="nombre" class="form-label textoLabel">Nombre </label>
-              <input type="text" class="form-control" ngModel id="nombre" name="nombre"
-                placeholder="Nombre de la habilidad" required>
-            </div>
-
-            <div class="col-md-4 form-group">
-              <label for="porcentaje" class="form-label textoLabel">Porcentaje</label>
-              <input type="number" class="form-control" ngModel name="porcentaje" id="porcentaje"
-                placeholder="Porcentaje en número" required>
-            </div>
-
-            <div class="col-md-4 form-group">
-              <label for="color1" class="form-label textoLabel">Color 1 </label>
-              <input type="color" class="form-control" ngModel name="color1" id="color1" placeholder="Color 1 de barra">
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="color2" class="form-label textoLabel">Color 2 </label>
-              <input type="color" class="form-control" ngModel name="color2" id="color2" placeholder="Color 2 de barra">
-            </div>
            
-
-
-            <div class="col-9 form-group">
-              <label for="url_imagen" class="form-label textoLabel">Logo de Habilidad</label>
-              <input type="text" class="form-control" placeholder="URL de imágen" ngModel name="url_imagen"
-                id="url_imagen" required>
+            <div class="input-group form-group">
+              <input type="hidden" formControlName="idHab" name="idHab" id="idHab" class="form-control">
+              <label for="nombre" class="input-group-text textoLabel">Nombre </label>
+              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la habilidad"
+                formControlName="nombre" required>
+              <div *ngIf="Nombre?.errors && Nombre?.touched">
+                <p *ngIf="Nombre?.hasError('required')" class="text-danger">El nombre de habilidad es requerida</p>
+              </div>
             </div>
 
-            <div class="col-12">
-              <label>Vista Previa</label>
+            <div class="col-md-4 input-group form-group">
+              <label for="porcentaje" class="input-group-text textoLabel">Porcentaje</label>
+              <input type="number" class="form-control" formControlName="porcentaje" name="porcentaje" id="porcentaje"
+                placeholder="Porcentaje en número" required>
+              <div *ngIf="Porcentaje?.errors && Porcentaje?.touched">
+                <p *ngIf="Porcentaje?.hasError('required')" class="text-danger">El porcentaje es requerido</p>
+                <p *ngIf="Porcentaje?.hasError('max')" class="text-danger">El porcentaje no debe ser mayor a 100% </p>
+
+              </div>
+            </div>
+
+            <div class="col-md-4 input-group input-group-sm form-group">
+              <label for="color1" class="input-group-text textoLabel">Color 1 </label>
+              <input type="color" class="form-control" formControlName="color1" name="color1" id="color1"
+                placeholder="Color 1 de barra">
+            
+              <label for="color2" class="input-group-text textoLabel">Color 2 </label>
+              <input type="color" class="form-control" formControlName="color2" name="color2" id="color2"
+                placeholder="Color 2 de barra">
+            </div>
+
+            <div class="col-9 input-group form-group">
+              <label for="url_imagen" class="input-group-text textoLabel">Logo de Habilidad</label>
+              <input type="text" class="form-control" placeholder="URL de imágen" formControlName="url_imagen"
+                name="url_imagen" id="url_imagen" required>
+            </div>
+
+            <div class="row" style="padding-top:15%">
               
+              <label>Vista Previa</label>
 
+              <circle-progress [percent]="form.value['porcentaje']" [radius]="80" [showUnits]="true"
+                [outerStrokeWidth]="9" [innerStrokeWidth]="3" [outerStrokeGradient]="true"
+                [outerStrokeColor]="form.value['color1']" [outerStrokeGradientStopColor]="form.value['color2']"
+                [innerStrokeColor]="'#627bdf'" [animation]="true" [animationDuration]="3000" [showImage]="true"
+                [imageWidth]="80" [imageHeight]="80" [imageSrc]="form.value['url_imagen']" [showBackground]="true">
+              </circle-progress>
+              <p class="h5">{{form.value['nombre']}}</p>
+              <p class="h7">{{form.value['porcentaje']}} %</p>
 
             </div>
-
-
 
             <div class="modal-footer form-group">
               <button type="button" id="add-estudio-form" class="btn btn-secondary"
                 data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="form.invalid"
+                disabled>Guardar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="form.valid">Guardar</button>
+
             </div>
           </form>
         </div>
@@ -107,58 +126,7 @@
     </div>
   </div>
 
-  <!-- Modal edit Formacion-->
 
-  <div class="modal fade" id="editHabilidadModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Editar Habilidad</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-
-          <form class="row g-3 " #editForm="ngForm" (ngSubmit)="onEditHabilidad(editForm.value)" novalidate="">
-            <div class="form-group">
-              <input type="hidden" ngModel="{{editHabilidad?.idHab}}" name="idHab" id="idHab" class="form-control">
-            </div>
-
-            <div class="col-md-12 form-group ">
-              <label for="nombre" class="form-label textoLabel">Nombre </label>
-              <input type="text" class="form-control" ngModel="{{editHabilidad?.nombre}}" id="nombre" name="nombre"
-                placeholder="Nombre de la habilidad" required>
-            </div>
-
-            <div class="col-md-4 form-group">
-              <label for="porcentaje" class="form-label textoLabel">Porcentaje</label>
-              <input type="number" class="form-control" ngModel="{{editHabilidad?.porcentaje}}" name="porcentaje"
-                id="porcentaje" placeholder="Porcentaje en número" required>
-            </div>
-
-            <div class="col-9 form-group">
-              <label for="url_imagen" class="form-label textoLabel">Logo de Habilidad</label>
-              <input type="text" class="form-control" placeholder="URL de imágen"
-                ngModel="{{editHabilidad?.url_imagen}}" name="url_imagen" id="url_imagen" required>
-            </div>
-
-
-
-
-            <div class="modal-footer form-group">
-              <button type="button" id="add-habilidad-form" class="btn btn-secondary"
-                data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-            </div>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
 
   <!-- Modal de borrar-->
   <div class="modal" id="deleteHabilidadModal" tabindex="-1">
@@ -179,4 +147,3 @@
       </div>
     </div>
   </div>
-

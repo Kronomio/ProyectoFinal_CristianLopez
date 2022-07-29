@@ -1,13 +1,13 @@
 .h2{
     font-family: 'Cabin', sans-serif;
-    color:dodgerblue
+    color:var(--lineaColor)
 
 
 }
 
 .linea
 {
-    border-top: 1.5px solid rgb(51, 169, 236);
+    border-top: 1.5px solid var(--lineaColor);
     height: 2px;
     max-height: 15px;
     width: 170px;
@@ -17,4 +17,8 @@
 
 .textoLabel{
     color: rgb(124, 123, 123);
+}
+#fila-proyectos{
+    padding-left: 15%;
+    padding-right: 15%;
 }

@@ -6,6 +6,7 @@ import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { TokenService } from 'src/app/services/token.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ExperienciaLaboralComponent implements OnInit {
   basuraIcono=faTrashCan;
   isAdmin = false;
   authorities: string[] = [];
-  constructor(private experienciaService:ExperienciaService, private tokenService: TokenService) { }
+  constructor(private experienciaService:ExperienciaService, private tokenService: TokenService, private mensajeService:NotificacionesService ) { }
 
   ngOnInit(): void {
     AOS.init({
@@ -45,7 +46,9 @@ export class ExperienciaLaboralComponent implements OnInit {
         this.experiencias=Response;
       },
       error:(error:HttpErrorResponse)=>{
-        console.log(error.message);
+        this.mensajeService.showError(`${error.message}`);
+
+        // console.log(error.message);
       }
     })
   }
@@ -75,13 +78,17 @@ export class ExperienciaLaboralComponent implements OnInit {
     if(addForm.valid){
     this.experienciaService.addExperiencia(addForm.value).subscribe({
       next: (response:Experiencia) => {
-        console.log(response);
+        //console.log(response);
+        this.mensajeService.showSuccess(`Se guardó correctamente la habilidad ${addForm.value["titulo"]}`);
+        
         this.getExperiencias();
         addForm.resetForm();
          },
       error:(error:HttpErrorResponse)=>{
-      console.log(error.message);
-      addForm.resetForm();
+     // console.log(error.message);
+     this.mensajeService.showError(`No fué posible registrar la habilidad. ${error}`);
+      
+     addForm.resetForm();
 
       }
 

@@ -10,10 +10,9 @@ export class AppComponent {
   ngOnInit(): void {
     AOS.init({
      once: true,
-    //offset: 500,
-    //duration:50,
-    anchorPlacement: 'bottom-bottom'
-      
+    // offset: 500,
+    // duration:500,
+    // anchorPlacement: 'bottom-bottom'
     });
   }
 }

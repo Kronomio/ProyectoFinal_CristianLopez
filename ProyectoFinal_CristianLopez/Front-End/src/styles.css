@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~animate.css\animate.min.css';
+
+:root{
+    --lineaColor: dodgerblue;
+    --colorPrimary:steelblue;
+    --defaultTextSize: 30px;
+    --animate-duration: 800ms;
+    --animate-delay: 10.9s;
+      
+}

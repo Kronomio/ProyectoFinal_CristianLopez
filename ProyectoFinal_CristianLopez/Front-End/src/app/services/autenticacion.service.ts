@@ -38,7 +38,7 @@ export class AutenticacionService {
 
 
   public login(loginUsuario:LoginUsuario): Observable <JwtDto>{
-    console.log(loginUsuario);
+   // console.log(loginUsuario);
     return this.httpClient.post<JwtDto>(this.url+'login', loginUsuario);
   }
   

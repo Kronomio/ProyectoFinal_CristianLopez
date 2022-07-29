@@ -1,6 +1,6 @@
 .h2{
     font-family: 'Cabin', sans-serif;
-    color:dodgerblue
+    color:var(--lineaColor);
 }
 #sobremi{
     padding: 50px;
@@ -20,7 +20,7 @@
 
 .linea
 {
-    border-top: 1.5px solid rgb(51, 169, 236);
+    border-top: 1.5px solid var(--lineaColor);
     height: 2px;
     max-height: 15px;
     width: 170px;

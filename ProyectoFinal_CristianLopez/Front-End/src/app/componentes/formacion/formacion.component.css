@@ -1,6 +1,5 @@
 #items_formacion{
     
-    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -9,19 +8,25 @@
 #items_formacion2{
     text-align: center;
     align-content: center;
-    display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 .h2{
     font-family: 'Cabin', sans-serif;
-    color:dodgerblue
+    color:var(--lineaColor);
     
 
 }
+
+.card{
+    box-shadow: 2px 2px 5px #999;
+}
+
+
 .linea
 {
-    border-top: 1.5px solid rgb(51, 169, 236);
+    border-top: 1.5px solid var(--lineaColor);
     height: 2px;
     max-height: 15px;
     width: 150px;

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUsuario } from 'src/app/model/login-usuario';
 import { AutenticacionService } from 'src/app/services/autenticacion.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-login',
@@ -25,7 +26,13 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private autenticacionService: AutenticacionService, private router: Router, private tokenService: TokenService) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private autenticacionService: AutenticacionService, 
+    private router: Router, 
+    private tokenService: TokenService, 
+    private mensajeService:NotificacionesService
+    ) {
     this.form = this.formBuilder.group(
       {
         username: ['', [Validators.required]],
@@ -63,14 +70,18 @@ export class LoginComponent implements OnInit {
         this.isLogged = true;
         this.isLoginFail = false;
         this.isUsuarioNoEncontrado = false;
+        this.mensajeService.showSuccess("Sesión iniciada correctamente");
         this.router.navigate(['home']);
       }, error: (err: HttpErrorResponse) => {
         this.isLogged = false;
         this.isLoginFail = true;
         this.errMsj = err.error;
-        console.log(err.error);
+        this.mensajeService.showError("Usuario o contraseña inválido");
+        //console.log(err.error);
         if (err.error == null) {
           this.isUsuarioNoEncontrado = true;
+        this.mensajeService.showError("Usuario no existente");
+
           this.form.reset();
         }
 
@@ -78,31 +89,7 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-  // loguearComoInvitado(){
-  //   this.autenticacionService.login(this.loginInvitado).subscribe({
-  //     next: (data: any) => {
-  //      // console.log("DATA: " + JSON.stringify(data));
-  //       this.tokenService.setToken(data.token);
-  //       this.tokenService.setUserName(data.username);
-  //       this.tokenService.setAuthorities(data.authorities);
-  //       this.roles = data.authorities;
-  //       this.isLogged = true;
-  //       this.isLoginFail = false;
-  //       this.isUsuarioNoEncontrado = false;
-  //       this.router.navigate(['home']);
-  //     }, error: (err: HttpErrorResponse) => {
-  //       this.isLogged = false;
-  //       this.isLoginFail = true;
-  //       this.errMsj = err.error;
-  //       console.log(err.error);
-  //       if (err.error == null) {
-  //         this.isUsuarioNoEncontrado = true;
-  //         this.form.reset();
-  //       }
-  //   }
-  // });
-
-  // }
+ 
   onSignup(){
     this.router.navigate(['signup']);
   }
