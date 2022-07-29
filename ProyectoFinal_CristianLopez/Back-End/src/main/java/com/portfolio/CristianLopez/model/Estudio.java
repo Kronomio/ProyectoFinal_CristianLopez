@@ -29,7 +29,7 @@ public class Estudio {
     
     private String url_certificado;
     
-    
+    private String color_fondo;
     private int fecha;
     
     @JsonIgnore

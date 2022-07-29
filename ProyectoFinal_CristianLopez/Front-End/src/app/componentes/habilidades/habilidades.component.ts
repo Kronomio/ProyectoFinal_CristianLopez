@@ -57,7 +57,9 @@ export class HabilidadesComponent implements OnInit {
         this.habilidades = Response;
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.mensajeService.showError(`${error.message}`);
+
+        // console.log(error.message);
       }
     })
   }
@@ -190,7 +192,7 @@ export class HabilidadesComponent implements OnInit {
 
       },
       error: (error: HttpErrorResponse) => {
-        this.mensajeService.showError(`No se pudo eliminar la habilidad. ${error}`);
+        this.mensajeService.showError(`No se pudo eliminar la habilidad. ${error.message}`);
 
 
       }
@@ -198,15 +200,7 @@ export class HabilidadesComponent implements OnInit {
   }
 
   public cargarForm(habilidad: Habilidad) {
-    this.form.patchValue(
-      {
-        idHab: habilidad.idHab,
-        nombre: habilidad.nombre,
-        porcentaje: habilidad.porcentaje,
-        color1: habilidad.color1,
-        color2: habilidad.color2,
-        url_imagen: habilidad.url_imagen
-      })
+    this.form.patchValue(habilidad)
   }
 }
 

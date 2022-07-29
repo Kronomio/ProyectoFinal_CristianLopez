@@ -46,7 +46,9 @@ export class ExperienciaLaboralComponent implements OnInit {
         this.experiencias=Response;
       },
       error:(error:HttpErrorResponse)=>{
-        console.log(error.message);
+        this.mensajeService.showError(`${error.message}`);
+
+        // console.log(error.message);
       }
     })
   }

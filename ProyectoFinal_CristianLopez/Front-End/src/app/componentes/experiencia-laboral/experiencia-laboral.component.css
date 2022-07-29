@@ -1,20 +1,22 @@
 #experiencias{
-    background-color:lightblue
+    background-color:var(--colorPrimary);
 }
 .col{
     padding: 20px;
 }
 .h2{
     font-family: 'Cabin', sans-serif;
-    color:dodgerblue
+    color:var(--lineaColor);
 
    
 
 }
-
+.card{
+    box-shadow: 2px 2px 5px #999;
+}
 .linea
 {
-    border-top: 1.5px solid rgb(51, 169, 236);
+    border-top: 1.5px solid var(--lineaColor);
     height: 2px;
     max-height: 15px;
     width: 255px;

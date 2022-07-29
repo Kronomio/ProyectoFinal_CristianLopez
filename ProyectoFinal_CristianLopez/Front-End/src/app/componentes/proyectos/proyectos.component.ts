@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Proyecto } from 'src/app/model/proyecto.model';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
@@ -13,14 +13,36 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./proyectos.component.css']
 })
 export class ProyectosComponent implements OnInit {
-  public proyectos:Proyecto[]=[];
-  public editProyecto:Proyecto | undefined;
-  public borrarProyecto:Proyecto | undefined;
+  public proyectos: Proyecto[] = [];
+ 
+  public borrarProyecto: Proyecto | undefined;
+  modo: string = '';
+  tituloModal: string = '';
+  formProyecto: FormGroup;
+
+
   isAdmin = false;
   authorities: string[] = [];
   faPencil = faPencilAlt;
-  basuraIcono=faTrashCan;
-  constructor(private proyectoService:ProyectoService, private tokenService: TokenService, private mensajeService:NotificacionesService) { }
+  basuraIcono = faTrashCan;
+  constructor(
+    private formBuilder: FormBuilder,
+    private proyectoService: ProyectoService,
+    private tokenService: TokenService,
+    private mensajeService: NotificacionesService) {
+    this.formProyecto = formBuilder.group({
+      id: [],
+      titulo: ['', [Validators.required]],
+      descripcion: [],
+      link: [],
+      url_image1: [],
+      url_image2: [],
+      url_image3: [],
+      fecha_realizacion: []
+
+    });
+ 
+  }
 
   ngOnInit(): void {
     this.getProyectos();
@@ -29,68 +51,97 @@ export class ProyectosComponent implements OnInit {
       this.isAdmin = true;
     } else { this.isAdmin = false; }
   }
- 
-  public getProyectos():void{
+
+  public getProyectos(): void {
     this.proyectoService.obtenerProyectos().subscribe({
-      next:(Response:Proyecto[]) => {
-        this.proyectos=Response;
-        //console.log(this.proyectos);
+      next: (Response: Proyecto[]) => {
+        this.proyectos = Response;
+       
       },
-      error:(error:HttpErrorResponse)=>{
-        console.log(error.message);
+      error: (error: HttpErrorResponse) => {
+        this.mensajeService.showError(`${error.message}`);
+      
       }
     })
   }
-  public abrirModal(modo: String, proyecto?: Proyecto): void {
+    
+
+
+  public abrirModal(modo: string, proyecto?: Proyecto): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
+    
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
+    this.modo = modo;
     if (modo === 'add') {
-      button.setAttribute('data-target', '#addProyectoModal');
+      this.tituloModal = "Registrar nuevo proyecto";
     } else if (modo === 'delete') {
       this.borrarProyecto = proyecto;
       button.setAttribute('data-toggle', '#deleteProyectoModal');
     } else if (modo === 'edit') {
-      this.editProyecto = proyecto;
-      button.setAttribute('data-toggle', '#editProyectoModal');
-
+    
+      this.tituloModal = "Editar proyecto";
+      this.cargarFormularioProyecto(proyecto!);      
     }
+    
     container?.appendChild(button);
     button.click();
   }
 
-  public onAddProyecto(addForm: NgForm) {
+  public saveProyecto(event: Event) {
 
-    document.getElementById('add-proyecto-form')?.click();
+    if (this.formProyecto.valid) {
 
-    if (addForm.valid) {
-      this.proyectoService.addProyecto(addForm.value).subscribe({
+      if (this.modo === 'add') {
+        this.proyectoService.addProyecto(this.formProyecto.value).subscribe({
+          next: (response: Proyecto) => {
+
+            this.mensajeService.showSuccess(`Se guardó correctamente el proyecto ${this.formProyecto.value["nombre"]}`);
+
+            this.getProyectos();
+            this.formProyecto.reset();
+          },
+          error: (error: HttpErrorResponse) => {
+
+            this.mensajeService.showError(`No fué posible registrar el proyecto.  ${error.message}`);
+
+            this.formProyecto.reset();
+
+          }
+
+        });
+      }
+    
+    else if (this.modo === 'edit') {
+
+
+      this.proyectoService.updateProyecto(this.formProyecto.value).subscribe({
         next: (response: Proyecto) => {
-          //console.log(response);
-          this.mensajeService.showSuccess(`Se guardó correctamente el proyecto ${addForm.value["nombre"]}`);
-          
+
+          this.mensajeService.showSuccess(`Se editó correctamente el proyecto ${this.formProyecto.value["nombre"]}`);
+
           this.getProyectos();
-          addForm.resetForm();
+
         },
         error: (error: HttpErrorResponse) => {
-          //console.log(error.message);
-          this.mensajeService.showError(`No fué posible registrar el proyecto.  ${error}`);
-          
-          addForm.resetForm();
+
+          this.mensajeService.showError(`No fué posible editar el proyecto.  ${error.message}`);
 
         }
-
       });
-    }
 
+
+
+    }
   }
-  public onEditProyecto(proyecto: Proyecto): void {
-    this.editProyecto = proyecto;
-    document.getElementById('edit-proyecto-form');
-    this.proyectoService.updateProyecto(proyecto).subscribe({
-      next: (response: Proyecto) => {
-        //console.log(response);
+  }
+ 
+  public onDeleteProyecto(id: number): void {
+
+    this.proyectoService.deleteProyecto(id).subscribe({
+      next: (response: void) => {
+        // console.log(response);
         this.getProyectos();
 
       },
@@ -99,19 +150,9 @@ export class ProyectosComponent implements OnInit {
       }
     });
   }
-  public onDeleteProyecto(id: number): void {
 
-
-    this.proyectoService.deleteProyecto(id).subscribe({
-      next: (response: void) => {
-       // console.log(response);
-        this.getProyectos();
-
-      },
-      error: (error: HttpErrorResponse) => {
-       console.log(error.message);
-      }
-    });
+  cargarFormularioProyecto(proyecto: Proyecto) {
+    this.formProyecto.patchValue(proyecto);
   }
 
 }

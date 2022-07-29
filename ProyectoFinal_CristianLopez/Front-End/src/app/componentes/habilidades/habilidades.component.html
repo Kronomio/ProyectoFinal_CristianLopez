@@ -58,10 +58,10 @@
 
           <form [formGroup]="form" class="row g-3 " (ngSubmit)="guardarHabilidad($event)" novalidate>
 
-
-            <div class="col-md-12 form-group ">
+           
+            <div class="input-group form-group">
               <input type="hidden" formControlName="idHab" name="idHab" id="idHab" class="form-control">
-              <label for="nombre" class="form-label textoLabel">Nombre </label>
+              <label for="nombre" class="input-group-text textoLabel">Nombre </label>
               <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la habilidad"
                 formControlName="nombre" required>
               <div *ngIf="Nombre?.errors && Nombre?.touched">
@@ -69,8 +69,8 @@
               </div>
             </div>
 
-            <div class="col-md-4 form-group">
-              <label for="porcentaje" class="form-label textoLabel">Porcentaje</label>
+            <div class="col-md-4 input-group form-group">
+              <label for="porcentaje" class="input-group-text textoLabel">Porcentaje</label>
               <input type="number" class="form-control" formControlName="porcentaje" name="porcentaje" id="porcentaje"
                 placeholder="Porcentaje en número" required>
               <div *ngIf="Porcentaje?.errors && Porcentaje?.touched">
@@ -80,19 +80,18 @@
               </div>
             </div>
 
-            <div class="col-md-4 form-group">
-              <label for="color1" class="form-label textoLabel">Color 1 </label>
+            <div class="col-md-4 input-group input-group-sm form-group">
+              <label for="color1" class="input-group-text textoLabel">Color 1 </label>
               <input type="color" class="form-control" formControlName="color1" name="color1" id="color1"
                 placeholder="Color 1 de barra">
-            </div>
-            <div class="col-md-4 form-group">
-              <label for="color2" class="form-label textoLabel">Color 2 </label>
+            
+              <label for="color2" class="input-group-text textoLabel">Color 2 </label>
               <input type="color" class="form-control" formControlName="color2" name="color2" id="color2"
                 placeholder="Color 2 de barra">
             </div>
 
-            <div class="col-9 form-group">
-              <label for="url_imagen" class="form-label textoLabel">Logo de Habilidad</label>
+            <div class="col-9 input-group form-group">
+              <label for="url_imagen" class="input-group-text textoLabel">Logo de Habilidad</label>
               <input type="text" class="form-control" placeholder="URL de imágen" formControlName="url_imagen"
                 name="url_imagen" id="url_imagen" required>
             </div>
@@ -110,11 +109,7 @@
               <p class="h5">{{form.value['nombre']}}</p>
               <p class="h7">{{form.value['porcentaje']}} %</p>
 
-             
-
             </div>
-
-
 
             <div class="modal-footer form-group">
               <button type="button" id="add-estudio-form" class="btn btn-secondary"
