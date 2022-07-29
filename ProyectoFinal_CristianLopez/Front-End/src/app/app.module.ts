@@ -19,9 +19,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { InterceptorService } from './services/interceptor-service';
 import { SignupComponent } from './componentes/signup/signup.component';
+<<<<<<< Updated upstream
 import { MHabilidadComponent } from './componentes/modals/m-habilidad/m-habilidad.component';
 import { NgToastModule } from 'ng-angular-popup'
 
+=======
+import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
+>>>>>>> Stashed changes
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,9 +41,13 @@ import { NgToastModule } from 'ng-angular-popup'
     LoginComponent,
     HomeComponent,
     SignupComponent,
+<<<<<<< Updated upstream
     MHabilidadComponent
    
     
+=======
+    UsuariosComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,
