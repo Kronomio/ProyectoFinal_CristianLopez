@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-opacity-25">
   <div class="container-fluid">
     <a class="navbar-brand align-text-top" href="#" id="logo_argentina_programa">
@@ -36,30 +37,27 @@
 
 
         </li>
-        <div class="dropdown" *ngIf="isLogged">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-            data-bs-toggle="dropdown" aria-expanded="false">
+
+        <div class="nav-item dropdown" *ngIf="isLogged">
+          <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
             {{nameUser}}
           </button>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2" *ngIf="isAdmin">
-            <li><a class="dropdown-item active" href="#addFormacionModal">Registrar Educación</a></li>
-            <li><a class="dropdown-item" href="#addExperienciaModal">Registrar Experiencia Laboral</a></li>
-            <li><a class="dropdown-item" href="#addHabilidadModal">Añadir Habilidad</a></li>
-            <li><a class="dropdown-item" href="#addProyectoModal">Registrar Proyecto</a></li>
-            <li><button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-              data-bs-target="#administrarUsusarios" *ngIf="isAdmin">
-              Administrar usuarios
-            </button></li>
-            
-
-
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#administrarUsusarios" *ngIf="isAdmin">Administrar Usuarios</button></li>
+            <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalChangePassword">Cambiar Contraseña</button></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#modalChangePassword">Cambiar contraseña</a></li>
-            <li><a class="btn btn-outline-light" href="" (click)="onLogOut()" *ngIf="isLogged">Cerrar Sesión</a></li>
+            
+            <li><a class="dropdown-item" href="" (click)="onLogOut()" *ngIf="isLogged">Cerrar Sesión</a></li>
           </ul>
+            
+            
+  
+         
         </div>
+
+      
       </ul>
     </div>
   </div>

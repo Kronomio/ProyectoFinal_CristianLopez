@@ -5,8 +5,7 @@ import { map } from 'rxjs';
 import{NuevoUsuario} from '../model/nuevo-usuario';
 import { LoginUsuario } from '../model/login-usuario';
 import { JwtDto } from '../model/jwt-dto';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { Usuario } from '../model/usuario.model';
+
 import { ChangePasswordUsuario } from '../model/change-password';
 @Injectable({
   providedIn: 'root'

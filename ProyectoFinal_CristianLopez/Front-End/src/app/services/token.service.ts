@@ -47,9 +47,10 @@ export class TokenService {
     }
     public isAdmin():boolean{
       this.authorities=this.getAuthorities();
+      
       for(let i=0; i<this.authorities.length; i++)
       {
-        if(this.authorities[i]==='ROLE ADMIN')
+        if(this.authorities[i]==='ROLE_ADMIN')
         return true;
       }
       return false;
