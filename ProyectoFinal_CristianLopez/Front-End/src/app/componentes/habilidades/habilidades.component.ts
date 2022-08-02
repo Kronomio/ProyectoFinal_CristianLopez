@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Habilidad } from 'src/app/model/habilidad.model';
 import { HabilidadesService } from 'src/app/services/habilidades.service';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/services/token.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
@@ -46,10 +46,19 @@ export class HabilidadesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHabilidades();
-    this.authorities = this.tokenService.getAuthorities();
-    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
-      this.isAdmin = true;
-    } else { this.isAdmin = false; }
+    // this.authorities = this.tokenService.getAuthorities();
+    // if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
+    //   this.isAdmin = true;
+    // } else { this.isAdmin = false; }
+    if(window.sessionStorage.getItem('isAdmin')==='true' )
+    {
+    this.isAdmin=true;
+    }
+    else
+    {
+    this.isAdmin=false;
+    }
+   console.log(this.isAdmin);
   }
   public getHabilidades(): void {
     this.habilidadService.obtenerHabilidad().subscribe({
@@ -58,8 +67,6 @@ export class HabilidadesComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.mensajeService.showError(`${error.message}`);
-
-        // console.log(error.message);
       }
     })
   }
@@ -73,7 +80,6 @@ export class HabilidadesComponent implements OnInit {
     this.modo = modo;
     if (modo === 'add') {
       this.tituloModal = "Registrar Habilidad";
-      
       button.setAttribute('data-target', '#addHabilidadModal');
     } else if (modo === 'delete') {
       this.borrarHabilidad = habilidad;
@@ -83,57 +89,26 @@ export class HabilidadesComponent implements OnInit {
       this.tituloModal = "Editar Habilidad"
       this.cargarForm(habilidad!);
       button.setAttribute('data-toggle', '#addHabilidadModal');
-
     }
     container?.appendChild(button);
     button.click();
   }
 
-  // public onAddHabilidad(event: Event) {
-  //   event.preventDefault;
-  //   document.getElementById('add-habilidad-form')?.click();
-
-  //   if (this.form.valid) {
-  //     this.habilidadService.addHabilidad(this.form.value).subscribe({
-  //       next: (response: Habilidad) => {
-  //         //console.log(response);
-  //         this.mensajeService.showSuccess(`Se guardó correctamente la habilidad ${this.form.value["nombre"]}`);
-  //         this.getHabilidades();
-  //         this.form.reset();
-  //       },
-  //       error: (error: HttpErrorResponse) => {
-  //         console.log(error.message);
-  //         this.mensajeService.showError(`No fué posible registrar la habilidad.  ${error}`);
-  //         this.form.reset();
-
-  //       }
-
-  //     });
-  //   }
-
-  // }
-
   public guardarHabilidad(event: Event) {
     event.preventDefault;
     if (this.form.valid) {
       if (this.modo === 'add') {
-        // document.getElementById('add-habilidad-form')?.click();
-
-
-        this.habilidadService.addHabilidad(this.form.value).subscribe({
+       this.habilidadService.addHabilidad(this.form.value).subscribe({
           next: (response: Habilidad) => {
 
             this.mensajeService.showSuccess(`Se guardó correctamente la habilidad ${this.form.value["nombre"]}`);
             this.getHabilidades();
-           
+
           },
           error: (error: HttpErrorResponse) => {
-            //console.log(error.message);
+           
             this.mensajeService.showError(`No fue posible registrar la habilidad.  ${error.error}`);
-            
-
           }
-
         });
 
 
@@ -144,17 +119,12 @@ export class HabilidadesComponent implements OnInit {
           next: (response: Habilidad) => {
             this.mensajeService.showSuccess(`Se modificó con éxito la habilidad ${this.form.value["nombre"]}`);
             this.getHabilidades();
-            
           },
           error: (error: HttpErrorResponse) => {
             this.mensajeService.showError(`No fue posible editar la habilidad. ${error.error}`);
-
-
           }
         });
-
       }
-
     }
   }
 
@@ -163,40 +133,26 @@ export class HabilidadesComponent implements OnInit {
   get Url_imagen() { return this.form.get("url_imagen"); }
 
 
-  // public onEditHabilidad(habilidad: Habilidad): void {
-  //   this.editHabilidad = habilidad;
-  //   document.getElementById('edit-formacion-form');
-  //   this.habilidadService.updateHabilidad(this.editHabilidad).subscribe({
-  //     next: (response: Habilidad) => {
-  //       //console.log(response);
-  //       this.mensajeService.showSuccess(`Se modificó con éxito la habilidad ${this.editHabilidad?.nombre}`);
 
-  //       this.getHabilidades();
-
-  //     },
-  //     error: (error: HttpErrorResponse) => {
-  //       this.mensajeService.showError(`No se pudo registrar la habilidad. ${error}`);
-
-  //       //console.log(error.message);
-  //     }
-  //   });
-  // }
   public onDeleteHabilidad(idHab: number): void {
+    try {
+      this.habilidadService.deleteHabilidad(idHab).subscribe({
+        next: (response: void) => {
+          //console.log(response);
+          this.mensajeService.showWarn(`Se eliminó la habilidad`)
+          this.getHabilidades();
 
+        },
+        error: (error: HttpErrorResponse) => {
+          this.mensajeService.showError(`No se pudo eliminar la habilidad. ${error.message}`);
 
-    this.habilidadService.deleteHabilidad(idHab).subscribe({
-      next: (response: void) => {
-        //console.log(response);
-        this.mensajeService.showWarn(`Se eliminó la habilidad`)
-        this.getHabilidades();
+        }
+      });
+    }
+    catch {
+      this.mensajeService.showError(`No se pudo eliminar la habilidad.`);
 
-      },
-      error: (error: HttpErrorResponse) => {
-        this.mensajeService.showError(`No se pudo eliminar la habilidad. ${error.message}`);
-
-
-      }
-    });
+    }
   }
 
   public cargarForm(habilidad: Habilidad) {

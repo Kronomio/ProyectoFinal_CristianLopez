@@ -43,6 +43,9 @@ export class ProyectosComponent implements OnInit {
     });
  
   }
+  get Titulo() { return this.formProyecto.get("titulo"); }
+  get Descripcion() { return this.formProyecto.get("descripcion"); }
+  
 
   ngOnInit(): void {
     this.getProyectos();
@@ -80,7 +83,6 @@ export class ProyectosComponent implements OnInit {
       this.borrarProyecto = proyecto;
       button.setAttribute('data-toggle', '#deleteProyectoModal');
     } else if (modo === 'edit') {
-    
       this.tituloModal = "Editar proyecto";
       this.cargarFormularioProyecto(proyecto!);      
     }
@@ -142,11 +144,15 @@ export class ProyectosComponent implements OnInit {
     this.proyectoService.deleteProyecto(id).subscribe({
       next: (response: void) => {
         // console.log(response);
+        this.mensajeService.showWarn(`Se eliminó el proyecto`)
+
         this.getProyectos();
 
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.mensajeService.showError(`No se pudo eliminar la habilidad. ${error.message}`);
+
+        
       }
     });
   }

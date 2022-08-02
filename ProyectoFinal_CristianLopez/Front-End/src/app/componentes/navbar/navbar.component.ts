@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   public persona:Persona | undefined;
  public editPersona:Persona | undefined;  
  isLogged=false;
+ nameUser:string='';
+ isAdmin:boolean=false;
   constructor(public personaService: PersonaService, private router:Router, private tokenService:TokenService) { 
 
 
@@ -25,8 +27,11 @@ export class NavbarComponent implements OnInit {
     
    if(this.tokenService.getToken()){
     this.isLogged=true;
+    this.nameUser=this.tokenService.getUsername();
+    this.isAdmin=this.tokenService.isAdmin();
    }else{
     this.isLogged=false;
+    this.nameUser='';
    }
     this.verPersonas();
 

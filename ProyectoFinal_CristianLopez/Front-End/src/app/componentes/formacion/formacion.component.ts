@@ -49,10 +49,10 @@ export class FormacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEstudios();
-    this.authorities = this.tokenService.getAuthorities();
-    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
-      this.isAdmin = true;
-    } else { this.isAdmin = false; }
+    if(window.sessionStorage.getItem('isAdmin')==='true' )
+    this.isAdmin=true;
+    else
+    this.isAdmin=false;
   }
 
   public getEstudios(): void {
@@ -81,7 +81,7 @@ export class FormacionComponent implements OnInit {
       this.titleForm = 'Registrar nueva formación'
       button.setAttribute('data-target', '#addFormacionModal');
     } else if (modo === 'delete') {
-      // this.borrarEstudio = estudio;
+      this.borrarEstudio = estudio;
       button.setAttribute('data-toggle', '#deleteFormacionModal');
     } else if (modo === 'edit') {
       this.titleForm = 'Editar formación'

@@ -10,7 +10,7 @@ const TOKEN_KEY='AuthToken';
 export class TokenService {
 
   roles: Array<string>=[];
-
+  authorities:string[]=[];
   constructor() { }
 
   public setToken(token: string ): void {
@@ -44,6 +44,16 @@ export class TokenService {
 
       }
       return this.roles;
+    }
+    public isAdmin():boolean{
+      this.authorities=this.getAuthorities();
+      for(let i=0; i<this.authorities.length; i++)
+      {
+        if(this.authorities[i]==='ROLE ADMIN')
+        return true;
+      }
+      return false;
+      
     }
 
     public logOut():void{

@@ -46,13 +46,11 @@ export class SignupComponent implements OnInit {
 
           this.formSignup.reset();
           this.router.navigate(['login']);
-
         },
         error: (error: HttpErrorResponse) => {
-
-          
+         
           console.log(error);
-          
+         
 
           this.formSignup.get("estado")?.setValue("Error en la registración. Verifique los campos marcados");
         }

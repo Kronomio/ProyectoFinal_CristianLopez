@@ -20,9 +20,9 @@ public interface IHabilidadService {
     
     public Habilidad guardarHabilidad(Habilidad habilidad);
     
-    public Habilidad buscarHabilidad(Long id);
+    public Habilidad buscarHabilidad(Integer id);
             
-    public void eliminarHabilidad(Long idHabilidad);
+    public void eliminarHabilidad(Integer idHabilidad);
    
     public Habilidad editarHabilidad(Habilidad habilidad);
 

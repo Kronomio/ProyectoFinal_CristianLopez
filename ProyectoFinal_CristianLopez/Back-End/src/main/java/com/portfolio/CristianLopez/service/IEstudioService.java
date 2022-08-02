@@ -15,7 +15,7 @@ public interface IEstudioService {
     
     
             
-    public void eliminarEstudio(Long id);
+    public void eliminarEstudio(Integer id);
     
     public Estudio editarEstudio(Estudio estudio);
 }

@@ -46,7 +46,7 @@ public class HabilidadController {
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> borrarHabilidad(@PathVariable("id") Long id) {
+    public ResponseEntity<?> borrarHabilidad(@PathVariable("id") Integer id) {
         ihabilidadService.eliminarHabilidad(id);
         return new ResponseEntity<>(HttpStatus.OK);
 

@@ -52,7 +52,7 @@ public class ProyectoController {
     
     @DeleteMapping ("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity <?> borrarProyecto (@PathVariable("id") Long id){
+    public ResponseEntity <?> borrarProyecto (@PathVariable("id") Integer id){
         iproyectoService.eliminarProyecto(id);
         return new ResponseEntity<>(HttpStatus.OK);
 

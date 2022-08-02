@@ -12,9 +12,9 @@ public interface IExperienciaService {
     
     public Experiencia guardarExperiencia(Experiencia experiencia);
     
-    public Experiencia buscarExperiencia(Long id);
+    public Experiencia buscarExperiencia(Integer id);
             
-    public void eliminarExperiencia(Long idExperiencia);
+    public void eliminarExperiencia(Integer idExperiencia);
     
     public Experiencia updateExperiencia(Experiencia experiencia);
 

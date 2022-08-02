@@ -9,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
  
 
-  constructor() { }
-
+  constructor() { this.isAdmin=false; }
+  isAdmin:boolean;
   ngOnInit(): void {
-    
+   
+    if(window.sessionStorage.getItem('isAdmin')==='true' )
+    this.isAdmin=true;
+    else
+    this.isAdmin=false;
   }
 
 }

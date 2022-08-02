@@ -3,11 +3,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 import javax.validation.constraints.NotNull;
@@ -21,7 +25,7 @@ import lombok.Setter;
 public class Persona implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     
     @NotNull 
     @Size(min = 1, max = 50, message ="El nombre no cumple con la longitud")
@@ -63,15 +67,15 @@ private String link_instagram;
 @Size(min = 1, max = 250, message ="La dirección de mail no cumple con la longitud")
 private String mail;
 
-@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy="persona")
-private List<Experiencia> experienciaList;
+   private List<Experiencia> experienciaList;
 
     @JsonIgnore
     @OneToMany(mappedBy="persona")
 private List<Estudio> EstudioList;
     
-    @JsonIgnore
+   @JsonIgnore
     @OneToMany(mappedBy="persona")
 private List<Habilidad> habilidadList;
     

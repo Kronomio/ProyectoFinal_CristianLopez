@@ -25,18 +25,17 @@
     </div>
   </div>
 </div>
+
 <!-- Button trigger modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" *ngIf="isAdmin">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" *ngIf="isLogged">
   <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-    data-bs-target="#modificarDatosPersonales">
+    data-bs-target="#modificarDatosPersonales" *ngIf="isAdmin">
     Modificar información personal
   </button>
 
-  <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-    data-bs-target="#administrarUsusarios">
-    Administrar usuarios
-  </button>
+  
 </div>
+
 
 <!-- Modal de edicion de Datos Personales-->
 
@@ -133,3 +132,4 @@
     </div>
   </div>
 </div>
+

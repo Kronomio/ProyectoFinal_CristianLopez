@@ -7,6 +7,7 @@ import * as AOS from 'aos';
 })
 export class AppComponent {
   title = 'ProyectoFinal_CristianLopez';
+  isAdmin:boolean=false;
   ngOnInit(): void {
     AOS.init({
      once: true,

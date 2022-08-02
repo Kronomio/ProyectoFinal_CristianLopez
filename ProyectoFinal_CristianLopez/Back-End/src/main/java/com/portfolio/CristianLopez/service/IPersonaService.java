@@ -14,9 +14,9 @@ public interface IPersonaService {
     
     //Eliminar una persona por id
     
-    public void borrarPersona (Long id);
+    public void borrarPersona (Integer id);
     
     //Buscar Persona por id
     
-    public Persona buscarPersona(Long id);
+    public Persona buscarPersona(Integer id);
 }

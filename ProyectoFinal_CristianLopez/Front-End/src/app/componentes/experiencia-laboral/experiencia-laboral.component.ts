@@ -33,11 +33,10 @@ export class ExperienciaLaboralComponent implements OnInit {
     });
     this.getExperiencias();
     
-    this.authorities = this.tokenService.getAuthorities();
-    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
-      this.isAdmin = true;
-    } else { this.isAdmin = false; }
-
+    if(window.sessionStorage.getItem('isAdmin')==='true')
+    this.isAdmin=true;
+    else
+    this.isAdmin=false;
   }
 
   public getExperiencias():void{

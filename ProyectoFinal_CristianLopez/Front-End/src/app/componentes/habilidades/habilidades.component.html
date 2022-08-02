@@ -56,35 +56,41 @@
 
         <div class="modal-body">
 
-          <form [formGroup]="form" class="row g-3 " (ngSubmit)="guardarHabilidad($event)" novalidate>
+          <form [formGroup]="form" class="row g-3" (ngSubmit)="guardarHabilidad($event)" novalidate>
 
-           
+
             <div class="input-group form-group">
               <input type="hidden" formControlName="idHab" name="idHab" id="idHab" class="form-control">
               <label for="nombre" class="input-group-text textoLabel">Nombre </label>
-              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la habilidad"
-                formControlName="nombre" required>
-              <div *ngIf="Nombre?.errors && Nombre?.touched">
-                <p *ngIf="Nombre?.hasError('required')" class="text-danger">El nombre de habilidad es requerida</p>
+              <input type="text" class="form-control"  name="nombre" placeholder="Nombre de la habilidad"
+                formControlName="nombre" 
+                [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched , 'is-valid':!Nombre?.errors && Nombre?.touched }"
+                required>
+
+              <div *ngIf="Nombre?.hasError('required')" class="invalid-feedback">El nombre de habilidad es requerido
               </div>
+
             </div>
 
             <div class="col-md-4 input-group form-group">
               <label for="porcentaje" class="input-group-text textoLabel">Porcentaje</label>
               <input type="number" class="form-control" formControlName="porcentaje" name="porcentaje" id="porcentaje"
-                placeholder="Porcentaje en número" required>
-              <div *ngIf="Porcentaje?.errors && Porcentaje?.touched">
-                <p *ngIf="Porcentaje?.hasError('required')" class="text-danger">El porcentaje es requerido</p>
-                <p *ngIf="Porcentaje?.hasError('max')" class="text-danger">El porcentaje no debe ser mayor a 100% </p>
+                placeholder="Porcentaje en número"
+                [ngClass]="{'is-invalid':Porcentaje?.errors && Porcentaje?.touched , 'is-valid':!Porcentaje?.errors && Porcentaje?.touched }"
+                required>
 
+              <div *ngIf="Porcentaje?.hasError('required')" class="invalid-feedback">El porcentaje es requerido</div>
+              <div *ngIf="Porcentaje?.hasError('max')" class="invalid-feedback">El porcentaje no debe ser mayor a 100%
               </div>
+
+
             </div>
 
             <div class="col-md-4 input-group input-group-sm form-group">
               <label for="color1" class="input-group-text textoLabel">Color 1 </label>
               <input type="color" class="form-control" formControlName="color1" name="color1" id="color1"
                 placeholder="Color 1 de barra">
-            
+
               <label for="color2" class="input-group-text textoLabel">Color 2 </label>
               <input type="color" class="form-control" formControlName="color2" name="color2" id="color2"
                 placeholder="Color 2 de barra">
@@ -97,7 +103,7 @@
             </div>
 
             <div class="row" style="padding-top:15%">
-              
+
               <label>Vista Previa</label>
 
               <circle-progress [percent]="form.value['porcentaje']" [radius]="80" [showUnits]="true"
@@ -112,7 +118,7 @@
             </div>
 
             <div class="modal-footer form-group">
-              <button type="button" id="add-estudio-form" class="btn btn-secondary"
+              <button type="button" class="btn btn-secondary"
                 data-bs-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="form.invalid"
                 disabled>Guardar</button>

@@ -4,9 +4,12 @@
  */
 package com.portfolio.CristianLopez.service;
 
+import com.portfolio.CristianLopez.model.Persona;
 import com.portfolio.CristianLopez.model.Proyecto;
+import com.portfolio.CristianLopez.repository.PersonaRepository;
 import com.portfolio.CristianLopez.repository.ProyectoRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 public class ImpProyectoService implements IProyectoService{
     
     @Autowired  ProyectoRepository proyectoRepository;
+    @Autowired PersonaRepository personaRepository;
     @Override
     public List<Proyecto> verProyectos() {
       return proyectoRepository.findAll();
@@ -27,16 +31,28 @@ public class ImpProyectoService implements IProyectoService{
 
     @Override
     public Proyecto guardarProyecto(Proyecto proyecto) {
+         Optional <Persona> persona = personaRepository.findById(1);
+       if(  !persona.isPresent())
+       {
+       } else {
+          proyecto.setPersona(persona.get());
+            }
         return proyectoRepository.save(proyecto);
      }
 
     @Override
-    public void eliminarProyecto(Long id) {
+    public void eliminarProyecto(Integer id) {
         proyectoRepository.deleteById(id);
     }
 
     @Override
     public Proyecto editarProyecto(Proyecto proyecto) {
+         Optional <Persona> persona = personaRepository.findById(1);
+       if(  !persona.isPresent())
+       {
+       } else {
+          proyecto.setPersona(persona.get());
+            }
        return proyectoRepository.save(proyecto);
     }
     

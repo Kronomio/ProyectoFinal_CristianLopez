@@ -4,6 +4,7 @@ import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
 import { NgForm } from '@angular/forms';
 import { TokenService } from 'src/app/services/token.service';
+import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-portada',
   templateUrl: './portada.component.html',
@@ -13,8 +14,10 @@ export class PortadaComponent implements OnInit {
 
   public persona: Persona | undefined;
   public editPersona: Persona | undefined;
-
+  faPencil = faPencilAlt;
+  basuraIcono = faTrashCan;
   isAdmin = false;
+  isLogged=false;
   authorities: string[] = [];
   constructor(public personaService: PersonaService, private tokenService: TokenService) { }
 
@@ -25,6 +28,7 @@ export class PortadaComponent implements OnInit {
     this.authorities = this.tokenService.getAuthorities();
     if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
       this.isAdmin = true;
+      this
     } else { this.isAdmin = false; }
   }
 
@@ -44,8 +48,8 @@ export class PortadaComponent implements OnInit {
 
   public guardarPersona(formulario: NgForm) {
 
-    console.log("¿Válido?", formulario.valid);
-    console.log("Valores", formulario.value);
+    // console.log("¿Válido?", formulario.valid);
+    // console.log("Valores", formulario.value);
 
     if (formulario.valid) {
 
