@@ -65,3 +65,7 @@
         visibility: hidden;
     }
 }
+#imagenPerfilModal{
+    align-items: center;
+    text-align: center;
+}
