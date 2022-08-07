@@ -17,12 +17,9 @@ export class ProyectosComponent implements OnInit {
  
   public borrarProyecto: Proyecto | undefined;
   modo: string = '';
-  tituloModal: string = '';
   formProyecto: FormGroup;
-
-
   isAdmin = false;
-  authorities: string[] = [];
+  
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
   constructor(
@@ -49,10 +46,7 @@ export class ProyectosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProyectos();
-    this.authorities = this.tokenService.getAuthorities();
-    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
-      this.isAdmin = true;
-    } else { this.isAdmin = false; }
+    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
   }
 
   public getProyectos(): void {
@@ -78,12 +72,14 @@ export class ProyectosComponent implements OnInit {
     button.setAttribute('data-toggle', 'modal');
     this.modo = modo;
     if (modo === 'add') {
-      this.tituloModal = "Registrar nuevo proyecto";
+      $("#tituloModalProyectos").html("Registrar Nuevo Proyecto");
+      
     } else if (modo === 'delete') {
       this.borrarProyecto = proyecto;
       button.setAttribute('data-toggle', '#deleteProyectoModal');
     } else if (modo === 'edit') {
-      this.tituloModal = "Editar proyecto";
+      $("#tituloModalProyectos").html("Editar Proyecto");
+
       this.cargarFormularioProyecto(proyecto!);      
     }
     

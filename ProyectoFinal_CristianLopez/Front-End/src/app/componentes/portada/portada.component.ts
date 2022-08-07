@@ -19,11 +19,9 @@ export class PortadaComponent implements OnInit {
   basuraIcono = faTrashCan;
   isAdmin = false;
   isLogged=false;
-  authorities: string[] = [];
   formDatosPersonales: FormGroup;
   constructor(private formBuilder:FormBuilder,
     public personaService: PersonaService, 
-    private tokenService: TokenService,
     private mensajeService:NotificacionesService) { 
       this.formDatosPersonales=this.formBuilder.group(
         {
@@ -47,11 +45,7 @@ export class PortadaComponent implements OnInit {
   ngOnInit(): void {
     this.verPersonas();
     
-    this.authorities = this.tokenService.getAuthorities();
-    if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
-      this.isAdmin = true;
-      this
-    } else { this.isAdmin = false; }
+    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
   }
 
   public verPersonas(): void {

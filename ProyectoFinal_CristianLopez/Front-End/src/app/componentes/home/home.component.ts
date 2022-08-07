@@ -13,10 +13,7 @@ export class HomeComponent implements OnInit {
   isAdmin:boolean;
   ngOnInit(): void {
    
-    if(window.sessionStorage.getItem('isAdmin')==='true' )
-    this.isAdmin=true;
-    else
-    this.isAdmin=false;
+    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
   }
 
 }

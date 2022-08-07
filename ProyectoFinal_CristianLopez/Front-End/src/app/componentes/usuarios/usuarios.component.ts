@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Rol } from 'src/app/model/rol.model';
 import { Usuario } from 'src/app/model/usuario.model';
@@ -13,7 +14,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor(private usuarioService:UsuariosService, private mensajeService: NotificacionesService) { }
+  constructor(private usuarioService:UsuariosService, 
+    private mensajeService: NotificacionesService,
+    private router:Router) { }
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
   usuarios:Usuario[]=[];
@@ -23,7 +26,7 @@ export class UsuariosComponent implements OnInit {
   rol?:Rol;
   ngOnInit(): void {
     this.getUsuarios();
-    console.log("Ejecutando USuarios");
+   
   }
 
   public getUsuarios(): void {
@@ -94,4 +97,15 @@ export class UsuariosComponent implements OnInit {
 
 
   public cargarFormularioUsuario(usuario:Usuario){}
+
+  public onNuevoUsuario(){
+    $("#cerrarUsuarios").click();
+    this.router.navigate(['signup']);
+  }
+
+  public onEditUsuario(usuario:Usuario){
+
+    
+
+  }
 }

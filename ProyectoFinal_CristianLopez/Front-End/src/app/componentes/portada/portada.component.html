@@ -41,7 +41,7 @@
 
 
 <div class="modal fade modal-lg" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Datos Personales</h5>
@@ -64,9 +64,7 @@
 
             <label for="inputFecha" class="input-group-text">Fecha Nac.</label>
             <input type="date" class="form-control" name="fecha_nac"  formControlName="fecha_nac">
-          </div>
-          <div class="col-md-4 input-group">
-            <label for="inputApellido" class="input-group-text">Ciudad</label>
+                      <label for="inputApellido" class="input-group-text">Ciudad</label>
             <input type="text" class="form-control"   value="Córdoba">
             <label for="inputApellido" class="input-group-text">País</label>
             <input type="text" class="form-control" value="Argentina">
@@ -126,4 +124,9 @@
   </div>
 </div>
 
+<app-change-password *ngIf="isAdmin"></app-change-password>
+<app-usuarios *ngIf="isAdmin">
+  <app-signup ></app-signup>
+
+</app-usuarios>
 

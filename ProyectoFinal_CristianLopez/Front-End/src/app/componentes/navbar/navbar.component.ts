@@ -12,51 +12,47 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  modalSwitch:boolean | undefined;
-  public persona:Persona | undefined;
- public editPersona:Persona | undefined;  
- isLogged=false;
- nameUser:string='';
- isAdmin:boolean=false;
-  constructor(public personaService: PersonaService, private router:Router, private tokenService:TokenService) { 
+  modalSwitch: boolean | undefined;
+  public persona: Persona | undefined;
+  public editPersona: Persona | undefined;
+  isLogged = false;
+  nameUser: string = '';
+  isAdmin: boolean = false;
+  constructor(public personaService: PersonaService, private router: Router, private tokenService: TokenService) {
 
 
-    }
-    
+  }
+
   ngOnInit(): void {
-    
-   if(this.tokenService.getToken()){
-    this.isLogged=true;
-    this.nameUser=this.tokenService.getUsername();
-    this.isAdmin=this.tokenService.isAdmin();
-   }else{
-    this.isLogged=false;
-    this.nameUser='';
-   }
+
+    if (this.tokenService.getToken()) {
+      this.isLogged = true;
+      this.nameUser = this.tokenService.getUsername();
+      this.isAdmin = this.tokenService.isAdmin();
+    } else {
+      this.isLogged = false;
+      this.nameUser = '';
+    }
     this.verPersonas();
 
   }
-    
-  public verPersonas():void{
+
+  public verPersonas(): void {
     this.personaService.verPersonas().subscribe({
-      next: (response:Persona) => {
-        this.persona=response;
-       
+      next: (response: Persona) => {
+        this.persona = response;
       },
-      error:(error:HttpErrorResponse)=>{
-      alert(error.message);
-    }
-      
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+
     });
-    
-  }
-    
-  abrirLogin(){
-  
-    this.modalSwitch=true;
+
   }
 
-  onLogOut():void{
+  abrirLogin() { this.modalSwitch = true; }
+
+  onLogOut(): void {
     this.tokenService.logOut();
     window.location.reload();
   }

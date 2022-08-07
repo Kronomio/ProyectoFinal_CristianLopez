@@ -39,11 +39,13 @@
                 </td>
                 
                 <td> 
-                  <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modalSignup">
+                  
+                  <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modalSignup" (click)="onEditUsuario(usuario)">
                   <fa-icon [icon]="faPencil"></fa-icon>
                 </a>
               </td>
                 <td>
+                  
                   <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal" (click)="deleteUsuario(usuario.id)">
                   <fa-icon [icon]="basuraIcono" ></fa-icon>
                 </a>
@@ -52,11 +54,11 @@
              
             </tbody>
           </table>
-  
+          <button type="button" class="btn btn-primary" (click)="onNuevoUsuario()">Nuevo Usuario</button>
                  
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" id="cerrarUsuarios" data-bs-dismiss="modal">Cerrar</button>
           <button type="button" class="btn btn-primary">Guardar cambios</button>
         </div>
       </div>

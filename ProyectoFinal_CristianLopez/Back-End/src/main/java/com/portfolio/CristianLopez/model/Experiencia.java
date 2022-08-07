@@ -18,7 +18,7 @@ import lombok.Setter;
 @Entity @Getter @Setter
 public class Experiencia {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idExp;
+    private Integer idExp;
     
     @NotNull 
     @Size(min = 1, max = 50, message ="El nombre no cumple con la longitud")

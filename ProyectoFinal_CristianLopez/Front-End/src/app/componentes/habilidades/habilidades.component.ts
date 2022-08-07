@@ -16,20 +16,16 @@ import { NotificacionesService } from 'src/app/services/notificaciones.service';
 export class HabilidadesComponent implements OnInit {
 
   public habilidades: Habilidad[] = [];
-  public editHabilidad: Habilidad | undefined;
   public borrarHabilidad: Habilidad | undefined;
 
   form: FormGroup;
   modo: string = '';
-  tituloModal: string = '';
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
   isAdmin = false;
-  authorities: string[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private habilidadService: HabilidadesService,
-    private tokenService: TokenService,
     private mensajeService: NotificacionesService) {
     this.form = this.formBuilder.group(
       {
@@ -39,26 +35,17 @@ export class HabilidadesComponent implements OnInit {
         color1: [],
         color2: [],
         url_imagen: ['', [Validators.required]]
-
       }
     )
   }
 
   ngOnInit(): void {
     this.getHabilidades();
-    // this.authorities = this.tokenService.getAuthorities();
-    // if (this.authorities.indexOf("ROLE_ADMIN") != -1) {
-    //   this.isAdmin = true;
-    // } else { this.isAdmin = false; }
-    if(window.sessionStorage.getItem('isAdmin')==='true' )
-    {
-    this.isAdmin=true;
-    }
-    else
-    {
-    this.isAdmin=false;
-    }
-   console.log(this.isAdmin);
+
+    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
+    
+
+
   }
   public getHabilidades(): void {
     this.habilidadService.obtenerHabilidad().subscribe({
@@ -79,14 +66,16 @@ export class HabilidadesComponent implements OnInit {
     button.setAttribute('data-toggle', 'modal');
     this.modo = modo;
     if (modo === 'add') {
-      this.tituloModal = "Registrar Habilidad";
+      $("#tituloModalHabilidad").html("Registrar Nueva Habilidad");
+
       button.setAttribute('data-target', '#addHabilidadModal');
     } else if (modo === 'delete') {
       this.borrarHabilidad = habilidad;
       button.setAttribute('data-toggle', '#deleteHabilidadModal');
     } else if (modo === 'edit') {
-      //this.editHabilidad = habilidad;
-      this.tituloModal = "Editar Habilidad"
+      
+      $("#tituloModalHabilidad").html("Editar Habilidad");
+
       this.cargarForm(habilidad!);
       button.setAttribute('data-toggle', '#addHabilidadModal');
     }
@@ -98,7 +87,7 @@ export class HabilidadesComponent implements OnInit {
     event.preventDefault;
     if (this.form.valid) {
       if (this.modo === 'add') {
-       this.habilidadService.addHabilidad(this.form.value).subscribe({
+        this.habilidadService.addHabilidad(this.form.value).subscribe({
           next: (response: Habilidad) => {
 
             this.mensajeService.showSuccess(`Se guardó correctamente la habilidad ${this.form.value["nombre"]}`);
@@ -106,7 +95,7 @@ export class HabilidadesComponent implements OnInit {
 
           },
           error: (error: HttpErrorResponse) => {
-           
+
             this.mensajeService.showError(`No fue posible registrar la habilidad.  ${error.error}`);
           }
         });
