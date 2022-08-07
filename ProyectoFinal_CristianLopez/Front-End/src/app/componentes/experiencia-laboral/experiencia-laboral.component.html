@@ -65,7 +65,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Registrar Experiencia</h5>
+        <h5 class="modal-title" id="tituloModalExperiencia"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
@@ -73,7 +73,7 @@
 
       <div class="modal-body">
 
-        <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddExperiencia(addForm)" novalidate="">
+        <form class="row g-3 " [formGroup]="formExperienciaLaboral" (ngSubmit)="saveExperiencia($event)" novalidate="">
           <!-- <div class="input-group form-group">
               <label for="fecha_realizacion" class="input-group-text textoLabel">Año</label>
               <input type="text" class="form-control" formControlName="fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" placeholder="Año">

@@ -21,7 +21,8 @@ import { InterceptorService } from './services/interceptor-service';
 import { SignupComponent } from './componentes/signup/signup.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
-import { ChangePasswordComponent } from './componentes/change-password/change-password.component'
+import { ChangePasswordComponent } from './componentes/change-password/change-password.component';
+import { ConfiguracionesComponent } from './componentes/configuraciones/configuraciones.component'
 
 
 
@@ -41,7 +42,8 @@ import { ChangePasswordComponent } from './componentes/change-password/change-pa
     HomeComponent,
     SignupComponent,
     UsuariosComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ConfiguracionesComponent
   
 
   ],

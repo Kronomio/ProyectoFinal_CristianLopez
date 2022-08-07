@@ -135,7 +135,7 @@ export class FormacionComponent implements OnInit {
   }
 
   cargarFormularioFormacion(formacion: Estudio) {
-    this.formFormacion.patchValue(formacion)
+    this.formFormacion.patchValue(formacion);
   }
 
 
