@@ -25,24 +25,23 @@
     </div>
   </div>
 </div>
+
 <!-- Button trigger modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" *ngIf="isAdmin">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" >
   <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-    data-bs-target="#modificarDatosPersonales">
+    data-bs-target="#modificarDatosPersonales" *ngIf="isAdmin">
     Modificar información personal
   </button>
 
-  <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-    data-bs-target="#administrarUsusarios">
-    Administrar usuarios
-  </button>
+  
 </div>
+
 
 <!-- Modal de edicion de Datos Personales-->
 
 
-<div class="modal fade" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade modal-lg" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Datos Personales</h5>
@@ -50,54 +49,45 @@
       </div>
       <div class="modal-body">
         <!-- Formulario de edicion de persona -->
-        <form class="row g-3"  (ngSubmit)="guardarPersona(formulario)" #formulario="ngForm" novalidate="">
+        <form class="row g-3" [formGroup]="formDatosPersonales" (ngSubmit)="guardarPersona($event)" #formulario="ngForm" novalidate="">
           
-          <div class="col-md-6">
+          <div class=" col-md-6 input-group">
 
-            <label for="inputNombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control"  name="nombre" [ngModel]="persona?.nombre" required>
-          </div>
-          <div class="col-md-6">
-            <label for="inputApellido" class="form-label">Apellido</label>
-            <input type="text" class="form-control" name="apellido"  [ngModel]="persona?.apellido" required>
+            <label for="inputNombre" class="input-group-text">Nombre</label>
+            <input type="text" class="form-control"  name="nombre" formControlName="nombre"  required>
+         
+            <label for="inputApellido" class="input-group-text">Apellido</label>
+            <input type="text" class="form-control" name="apellido"  formControlName="apellido" required>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 input-group">
 
-            <label for="inputFecha" class="form-label">Fecha Nac.</label>
-            <input type="date" class="form-control" name="fecha_nac"  [ngModel]="persona?.fecha_nac">
-          </div>
-          <div class="col-md-4">
-            <label for="inputApellido" class="form-label">Ciudad</label>
+            <label for="inputFecha" class="input-group-text">Fecha Nac.</label>
+            <input type="date" class="form-control" name="fecha_nac"  formControlName="fecha_nac">
+                      <label for="inputApellido" class="input-group-text">Ciudad</label>
             <input type="text" class="form-control"   value="Córdoba">
-          </div>
-          <div class="col-md-4">
-            <label for="inputApellido" class="form-label">País</label>
+            <label for="inputApellido" class="input-group-text">País</label>
             <input type="text" class="form-control" value="Argentina">
           </div>
 
-          <div class="col-12">
-            <label for="inputEmail" class="form-label">Email Principal</label>
-            <input type="email" class="form-control" name="mail"  [ngModel]="persona?.mail">
+          <div class="col-12 input-group">
+            <label for="inputEmail" class="input-group-text">Email Principal</label>
+            <input type="email" class="form-control" name="mail"  formControlName="mail">
           </div>
 
 
-          <div class="col-9">
-            <label for="inputFoto" class="form-label">Foto Perfil</label>
-            <input type="text" class="form-control" name="url_foto"  [ngModel]="persona?.url_foto">
-          </div>
-
-          <div class="col-3">
-            <img src={{persona?.url_foto}} class="img-thumbnail" width=100px alt="...">
+          <div class="col-5 input-group">
+            <label for="inputFoto" class="input-group-text">Foto Perfil</label>
+            <input type="text" class="form-control" name="url_foto"  formControlName="url_foto">
+            <img src="{{formDatosPersonales.value['url_foto']}}" class="img-thumbnail" width=300px alt="...">
           </div>
 
 
 
-          <div class="col-12">
-            
+          <div class="col-12 input-group"> 
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Ingrese su descripción"  name="acerca_de" [ngModel]="persona?.acerca_de" style="height: 200px"></textarea>
-              <label for="floatingTextarea"  >Acerca de mi</label>
+              <textarea class="form-control " placeholder="Ingrese su descripción"  name="acerca_de" formControlName="acerca_de" style="height: 200px"></textarea>
+              <label for="floatingTextarea input-group-text"  >Acerca de mi</label>
             </div>
           </div>
           <!-- Redes Sociales -->
@@ -106,14 +96,14 @@
             <img src="assets/logoLinkedIn.png" class="float-end" width=40px alt="...">
           </div>
           <div class="col-md-9">
-            <input type="text" class="form-control"  placeholder="LinkedIn" name="link_linkedin" [ngModel]="persona?.link_linkedin">
+            <input type="text" class="form-control"  placeholder="LinkedIn" name="link_linkedin" formControlName="link_linkedin">
           </div> 
            
           <div class="col-2">
             <img src="assets/logoInstagram.png" class="float-end" width=40px alt="...">
           </div>
           <div class="col-md-9">
-            <input type="text" class="form-control"   placeholder="Instagram" name="link_instagram" [ngModel]="persona?.link_instagram">
+            <input type="text" class="form-control"   placeholder="Instagram" name="link_instagram" formControlName="link_instagram">
           </div>
 
           <div class="col-2">
@@ -121,7 +111,7 @@
           </div>
           <div class="col-md-9">
            
-            <input type="text" class="form-control"   placeholder="Twitter" name="link_twitter" [ngModel]="persona?.link_twitter">
+            <input type="text" class="form-control"   placeholder="Twitter" name="link_twitter" formControlName="link_twitter">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -133,3 +123,10 @@
     </div>
   </div>
 </div>
+
+<app-change-password *ngIf="isAdmin"></app-change-password>
+<app-usuarios *ngIf="isAdmin">
+  <app-signup ></app-signup>
+
+</app-usuarios>
+

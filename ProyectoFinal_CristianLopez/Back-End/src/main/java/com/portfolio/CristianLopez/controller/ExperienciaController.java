@@ -35,7 +35,7 @@ public class ExperienciaController {
         return new ResponseEntity<>(nuevoExperiencia, HttpStatus.CREATED);    }
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> borrarExperiencia(@PathVariable("id") Long id) {
+    public ResponseEntity<?> borrarExperiencia(@PathVariable("id") Integer id) {
         iexperienciaService.eliminarExperiencia(id); return new ResponseEntity<>(HttpStatus.OK);    }
     @PutMapping("/update")
     @PreAuthorize("hasRole('ADMIN')")

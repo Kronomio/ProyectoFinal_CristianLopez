@@ -70,18 +70,27 @@ export class LoginComponent implements OnInit {
         this.isLogged = true;
         this.isLoginFail = false;
         this.isUsuarioNoEncontrado = false;
+        this.tokenService.getAuthorities()
+    if (this.tokenService.getAuthorities().indexOf("ROLE_ADMIN") != -1) {
+      window.sessionStorage.setItem('isAdmin', 'true');
+    } 
+    else 
+    { window.sessionStorage.setItem('isAdmin', 'false');
+  }
         this.mensajeService.showSuccess("Sesión iniciada correctamente");
         this.router.navigate(['home']);
       }, error: (err: HttpErrorResponse) => {
         this.isLogged = false;
         this.isLoginFail = true;
         this.errMsj = err.error;
+        window.sessionStorage.setItem('isAdmin', 'false');
+
         this.mensajeService.showError("Usuario o contraseña inválido");
         //console.log(err.error);
         if (err.error == null) {
           this.isUsuarioNoEncontrado = true;
         this.mensajeService.showError("Usuario no existente");
-
+        window.sessionStorage.setItem('isAdmin', 'false');
           this.form.reset();
         }
 

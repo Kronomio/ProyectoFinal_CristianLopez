@@ -17,16 +17,12 @@ authorities:string[]=[];
   constructor(public personaService: PersonaService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
-    
+   
    this.verPersonas();
-
-
-    this.authorities=this.tokenService.getAuthorities();
-
-    if(this.authorities.indexOf("ROLE_ADMIN")!=-1)
-    {
-      this.isAdmin=true;
-    }else{this.isAdmin=false;}
+   if(window.sessionStorage.getItem('isAdmin')==='true')
+    this.isAdmin=true;
+    else
+    this.isAdmin=false;
   }
 
   public verPersonas():void{

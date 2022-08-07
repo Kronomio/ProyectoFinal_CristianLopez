@@ -1,9 +1,10 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NuevoUsuario } from 'src/app/model/nuevo-usuario';
 import { AutenticacionService } from 'src/app/services/autenticacion.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { ValidadorPersonalizado } from '../../utils/validador-personalizado'
 @Component({
   selector: 'app-signup',
@@ -12,10 +13,13 @@ import { ValidadorPersonalizado } from '../../utils/validador-personalizado'
 })
 export class SignupComponent implements OnInit {
   formSignup: FormGroup;
-  nuevoUsuario: NuevoUsuario = new NuevoUsuario("", "", "", "", ['']);
-  
+  @Input() nuevoUsuario?: NuevoUsuario;
+  @Input() modo:string='';
 
-  constructor(private formBuilder: FormBuilder, private autenticationService: AutenticacionService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, 
+    private autenticationService: AutenticacionService, 
+    private router: Router,
+    private mensajeService:NotificacionesService) {
     this.formSignup = this.formBuilder.group(
       {
         nombre: ['', [Validators.required]],
@@ -35,24 +39,20 @@ export class SignupComponent implements OnInit {
   onRegistrar(event: Event) {
 
     if (this.formSignup.valid) {
-      this.nuevoUsuario.email = this.formSignup.value["email"];
-      this.nuevoUsuario.nombre = this.formSignup.value["nombre"];
-      this.nuevoUsuario.password = this.formSignup.value["password"];
-      this.nuevoUsuario.username = this.formSignup.value["username"];
-      this.nuevoUsuario.roles = ["user"];
-
-      this.autenticationService.nuevo(this.nuevoUsuario).subscribe({
+      
+      this.autenticationService.nuevo(this.formSignup.value).subscribe({
         next: (response: any) => {
+
+        this.mensajeService.showWarn(`Se creó el Usuario ${this.formSignup.controls["nombre"].value}`);
 
           this.formSignup.reset();
           this.router.navigate(['login']);
-
         },
         error: (error: HttpErrorResponse) => {
-
-          
-          console.log(error);
-          
+         
+          //console.log(error);
+        this.mensajeService.showError(`No se pudo crear el usuario. ${error.message}`);
+         
 
           this.formSignup.get("estado")?.setValue("Error en la registración. Verifique los campos marcados");
         }

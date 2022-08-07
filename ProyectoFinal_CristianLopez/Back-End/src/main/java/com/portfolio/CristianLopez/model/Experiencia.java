@@ -4,9 +4,11 @@ package com.portfolio.CristianLopez.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Entity @Getter @Setter
 public class Experiencia {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idExp;
+    private Integer idExp;
     
     @NotNull 
     @Size(min = 1, max = 50, message ="El nombre no cumple con la longitud")
@@ -35,7 +37,8 @@ public class Experiencia {
     
     private String nombre_empresa;
     
-    @JsonIgnore
-    @ManyToOne
+    
+    @ManyToOne()
+    @JoinColumn(name="persona_id")
     private Persona persona;
 }

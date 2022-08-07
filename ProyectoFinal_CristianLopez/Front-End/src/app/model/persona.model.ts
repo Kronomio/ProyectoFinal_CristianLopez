@@ -1,17 +1,17 @@
 export interface Persona{
     id?: number;
-    nombre:String;
-    apellido:String;
-    url_foto:String;
-    fecha_nac:Date;
-    telefono:String;
-    acerca_de:String;
-    link_facebook:String;
-    link_whatsaap:String;
-    link_instagram:String;
-    link_linkedin:String;
-    link_twitter:String;
-    mail:String;
+    nombre:string;
+    apellido:string;
+    url_foto:string;
+    fecha_nac:string;
+    telefono:string;
+    acerca_de:string;
+    link_facebook:string;
+    link_whatsaap:string;
+    link_instagram:string;
+    link_linkedin:string;
+    link_twitter:string;
+    mail:string;
 
     //  constructor(
     //      nombre:String, 

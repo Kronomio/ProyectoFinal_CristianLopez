@@ -3,9 +3,12 @@ package com.portfolio.CristianLopez.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 import javax.validation.constraints.Size;
@@ -32,7 +35,8 @@ public class Estudio {
     private String color_fondo;
     private int fecha;
     
-    @JsonIgnore
-    @ManyToOne
+   
+    @ManyToOne()
+    @JoinColumn(name="persona_id")
     private Persona persona;
 }

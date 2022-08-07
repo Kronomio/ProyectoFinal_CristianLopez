@@ -1,6 +1,7 @@
 <!--Añado el btn de añadir experiencia y que abra el modal -->
 <div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="isAdmin">
-  <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#addExperienciaModal">
+  <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#addExperienciaModal"
+  (click)="abrirModal('add')">
     Registrar Experiencia
   </button>
   <br>
@@ -20,8 +21,8 @@
 
           <!-- Añado los botones de edicion y borrado-->
           <div class="col text-end" *ngIf="isAdmin">
-            <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-              data-bs-target="#editExperienciaModal" (click)="abrirModal('edit',experiencia)">
+            <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" 
+              data-bs-target="#addExperienciaModal" (click)="abrirModal('edit',experiencia)">
               <fa-icon [icon]="faPencil"></fa-icon>
             </a>
             <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal"
@@ -65,7 +66,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Registrar Experiencia</h5>
+        <h5 class="modal-title" id="tituloModalExperiencia"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
@@ -73,46 +74,41 @@
 
       <div class="modal-body">
 
-        <form class="row g-3 " #addForm="ngForm" (ngSubmit)="onAddExperiencia(addForm)" novalidate="">
-          <!-- <div class="input-group form-group">
-              <label for="fecha_realizacion" class="input-group-text textoLabel">Año</label>
-              <input type="text" class="form-control" formControlName="fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" placeholder="Año">
-            </div>  -->
-
-
+        <form class="row g-3 " [formGroup]="formExperienciaLaboral" (ngSubmit)="saveExperiencia($event)" novalidate="">
+        
           <div class="input-group form-group">
             <label for="titulo" class="input-group-text textoLabel">Título</label>
-            <input type="text" class="form-control" ngModel id="titulo" name="titulo" placeholder="Título" required>
+            <input type="text" class="form-control" formControlName="titulo" id="titulo"  placeholder="Título" required>
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel id="descripcion"
-                name="descripcion" style="height: 200px"></textarea required>
+              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion" id="descripcion"
+                name="descripcion" style="height: 200px" required></textarea >
               <label for="descripcion">Descripción</label>
             </div>
           </div>
         <div class="col-6">
           <div class="input-group form-group">
             <label for="fecha_inicio" class="input-group-text textoLabel" >Año Inicio</label>
-            <input type="text" class="form-control" ngModel name="fecha_inicio" id="fecha_inicio" placeholder="Año Inicio">
+            <input type="text" class="form-control" formControlName="fecha_inicio" name="fecha_inicio" id="fecha_inicio" placeholder="Año Inicio">
           </div>
         </div>
         <div class="col-6">
           <div class="input-group form-group">
             <label for="fecha_fin" class="input-group-text textoLabel">Año Fin </label>
-            <input type="text" class="form-control" ngModel name="fecha_fin" id="fecha_fin" placeholder="Año Fin">
+            <input type="text" class="form-control" formControlName="fecha_fin" name="fecha_fin" id="fecha_fin" placeholder="Año Fin">
           </div>
           </div>
           <p class="fs-7">En caso de ser actual, dejar año fin vacio.</p>
                        
           <div class="input-group form-group">
             <label for="nombre_empresa" class="input-group-text textoLabel">Nombre de la empresa</label>
-            <input type="text" class="form-control" placeholder="Nombre de la empresa" ngModel name="nombre_empresa" id="nombre_empresa">
+            <input type="text" class="form-control" placeholder="Nombre de la empresa" formControlName="nombre_empresa" name="nombre_empresa" id="nombre_empresa">
           </div>
         
           <div class="input-group form-group">
             <label for="logo_empresa" class="input-group-text textoLabel">Logo de la empresa</label>
-            <input type="text" class="form-control" ngModel placeholder="Logo de la empresa" name="logo_empresa" id="logo_empresa">
+            <input type="text" class="form-control" formControlName="logo_empresa" placeholder="Logo de la empresa" name="logo_empresa" id="logo_empresa">
           </div>
         
         
@@ -127,72 +123,6 @@
   </div>
 </div>
 
-<!-- Modal edit Formacion
-
-<div class="modal fade" id="editExperienciaModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Editar Experiencia</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-       
-        <form class="row g-3 " #editForm="ngForm" (ngSubmit)="onEditExperiencia(editForm.value)" novalidate="">
-           <div class="form-group">
-            <input type="hidden" ngModel={{editExperiencia?.idExp}} name="idExp" id="idExp" class="form-control">
-           </div>
-          <div class="col-md-12 form-group ">
-            <label for="titulo" class="form-label textoLabel">Título </label>
-            <input type="text" class="form-control" ngModel="{{editExperiencia?.titulo}}" id="titulo" name="titulo" placeholder="Título" required>
-          </div>
-          <div class="col-12 form-group">
-            <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" ngModel="{{editExperiencia?.descripcion}}" id="descripcion" name="descripcion"
-                style="height: 200px"></textarea>
-              <label for="descripcion">Descripción</label>
-            </div>
-          </div>
-
-          <div class="col-md-4 form-group">
-            <label for="fecha_inicio" class="form-label textoLabel">Año Inicio</label>
-            <input type="text" class="form-control" ngModel="{{editExperiencia?.fecha_inicio}}" name="fecha_inicio"
-              id="fecha_inicio">
-          </div>
-          <div class="col-md-4 form-group">
-            <label for="fecha_fin" class="form-label textoLabel">Año Fin</label>
-            <input type="text" class="form-control" ngModel="{{editExperiencia?.fecha_fin}}" name="fecha_fin"
-              id="fecha_fin">
-          </div>
-
-
-          <div class="col-9 form-group">
-            <label for="nombre_empresa" class="form-label textoLabel">Nombre de la empresa</label>
-            <input type="text" class="form-control" ngModel="{{editExperiencia?.nombre_empresa}}" name="nombre_empresa"
-              id="nombre_empresa">
-          </div>
-
-          <div class="col-9 form-group">
-            <label for="logo_empresa" class="form-label textoLabel">Logo de la empresa</label>
-            <input type="text" class="form-control" ngModel="{{editExperiencia?.logo_empresa}}" name="logo_empresa"
-              id="logo_empresa">
-          </div>
-
-
-          <div class="modal-footer form-group">
-            <button type="button" id="add-experiencia-form" class="btn btn-secondary"
-              data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-          </div>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div> -->
 
 <!-- Modal de borrar-->
 <div class="modal" id="deleteExperienciaModal" tabindex="-1">

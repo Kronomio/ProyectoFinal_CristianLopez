@@ -17,7 +17,7 @@ public interface IProyectoService {
     
     public Proyecto guardarProyecto(Proyecto proyecto);
     
-    public void eliminarProyecto(Long id);
+    public void eliminarProyecto(Integer id);
     
     public Proyecto editarProyecto(Proyecto proyecto);
     

@@ -55,7 +55,7 @@ public class EstudioController {
     
     @DeleteMapping ("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity <?> borrarEstudio (@PathVariable("id") Long id){
+    public ResponseEntity <?> borrarEstudio (@PathVariable("id") Integer id){
         iestudioService.eliminarEstudio(id);
         return new ResponseEntity<>(HttpStatus.OK);
 

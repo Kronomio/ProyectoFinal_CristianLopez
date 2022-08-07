@@ -70,7 +70,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">{{tituloModal}}</h5>
+        <h5 class="modal-title" id="tituloModalProyectos"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
@@ -85,11 +85,15 @@
        
           <div class="input-group form-group ">
             <label class="input-group-text textoLabel" for="titulo" >Título </label>
-            <input type="text" class="form-control" formControlName="titulo" id="titulo" name="titulo" placeholder="Título" required>
+            <input type="text" class="form-control" formControlName="titulo"  name="titulo" placeholder="Título" 
+            [ngClass]="{'is-invalid':Titulo?.errors && Titulo?.touched , 'is-valid':!Titulo?.errors && Titulo?.touched }"
+            required>
+            <div *ngIf="Titulo?.hasError('required')" class="invalid-feedback">El título del proyecto es requerido</div>
+
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion" id="descripcion" name="descripcion"
+              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion"  name="descripcion"
                 style="height: 200px"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
@@ -119,10 +123,9 @@
           </div>
     
           
-        
-        
+               
           <div class="modal-footer form-group">
-            <button type="button" id="add-estudio-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button"  class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="formProyecto.invalid" disabled>Guardar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"*ngIf="formProyecto.valid ">Guardar</button>
 
