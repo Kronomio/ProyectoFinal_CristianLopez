@@ -14,11 +14,12 @@ import org.springframework.stereotype.Repository;
  * @author krono
  */
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
     Optional <Usuario> findByUsername(String username);
-    
+   
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
     
+   
 
 }
