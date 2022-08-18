@@ -22,7 +22,7 @@ export class HabilidadesComponent implements OnInit {
   modo: string = '';
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
-  isAdmin = false;
+  hasAccess = false;
   constructor(
     private formBuilder: FormBuilder,
     private habilidadService: HabilidadesService,
@@ -42,7 +42,7 @@ export class HabilidadesComponent implements OnInit {
   ngOnInit(): void {
     this.getHabilidades();
 
-    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
+    this.hasAccess=(window.sessionStorage.getItem('isAdmin') === 'true' || window.sessionStorage.getItem('isCollaborator') === 'true');
     
 
 
@@ -65,6 +65,10 @@ export class HabilidadesComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     this.modo = modo;
+    $('#addHabilidadModal').on('shown.bs.modal', function () {
+      $('#nombreHabilidad').focus();
+    });
+    
     if (modo === 'add') {
       $("#tituloModalHabilidad").html("Registrar Nueva Habilidad");
 

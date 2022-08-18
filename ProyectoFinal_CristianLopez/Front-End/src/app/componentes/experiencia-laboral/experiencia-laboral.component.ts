@@ -21,14 +21,14 @@ export class ExperienciaLaboralComponent implements OnInit {
   public borrarExperiencia: Experiencia | undefined;
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
-  isAdmin = false;
+  hasAccess = false;
   authorities: string[] = [];
   formExperienciaLaboral: FormGroup;
   modo = '';
   constructor(
     private formBuider: FormBuilder,
     private experienciaService: ExperienciaService,
-    private tokenService: TokenService,
+   
     private mensajeService: NotificacionesService) {
     this.formExperienciaLaboral = this.formBuider.group({
       titulo: ['', Validators.required],
@@ -49,7 +49,7 @@ export class ExperienciaLaboralComponent implements OnInit {
     });
     this.getExperiencias();
 
-    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
+    this.hasAccess=(window.sessionStorage.getItem('isAdmin') === 'true' || window.sessionStorage.getItem('isCollaborator') === 'true');
   }
 
   public getExperiencias(): void {
@@ -70,6 +70,11 @@ export class ExperienciaLaboralComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     this.modo = modo;
+
+    $('#addExperienciaModal').on('shown.bs.modal', function () {
+      $('#tituloExperiencia').focus();
+    });
+
     if (modo === 'add') {
       button.setAttribute('data-target', '#addExperienciaModal');
       $("#tituloModalExperiencia").html("Registrar Experiencia Laboral");

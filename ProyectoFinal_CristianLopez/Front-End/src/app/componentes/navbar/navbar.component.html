@@ -38,12 +38,12 @@
 
         </li>
 
-        <div class="nav-item dropdown" *ngIf="isLogged">
+        <div class="nav-item dropdown " *ngIf="isLogged">
           <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-            {{nameUser}}
+            Welcome, {{nameUser}}
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#administrarUsusarios" *ngIf="isAdmin">Administrar Usuarios</button></li>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item" type="button" (click)="onAdministrarUsuarios()" *ngIf="isAdmin">Administrar Usuarios</button></li>
             <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalChangePassword">Cambiar Contraseña</button></li>
             <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#" *ngIf="isAdmin">Aspectos Visuales</button></li>
 

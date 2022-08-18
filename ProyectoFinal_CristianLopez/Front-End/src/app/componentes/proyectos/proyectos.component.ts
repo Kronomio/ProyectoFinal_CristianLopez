@@ -18,7 +18,7 @@ export class ProyectosComponent implements OnInit {
   public borrarProyecto: Proyecto | undefined;
   modo: string = '';
   formProyecto: FormGroup;
-  isAdmin = false;
+  hasAccess = false;
   
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
@@ -46,7 +46,7 @@ export class ProyectosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProyectos();
-    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
+    this.hasAccess=(window.sessionStorage.getItem('isAdmin') === 'true' || window.sessionStorage.getItem('isCollaborator') === 'true');
   }
 
   public getProyectos(): void {
@@ -67,7 +67,7 @@ export class ProyectosComponent implements OnInit {
   public abrirModal(modo: string, proyecto?: Proyecto): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
-    
+    this.formProyecto.reset();
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     this.modo = modo;

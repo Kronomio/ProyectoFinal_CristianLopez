@@ -1,4 +1,4 @@
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  "*ngIf="isAdmin">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  "*ngIf="hasAccess">
   <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal"
     data-bs-target="#addProyectoModal" (click)="abrirModal('add')">
     Registrar proyecto
@@ -15,7 +15,7 @@
 <div class="row p-6" id="fila-proyectos">
     <div class="col-sm-6 col-md-4 col-lg-4"  *ngFor="let proyecto of proyectos">
       <!-- Agrego los botones de edición-->
-      <div class="col text-end" *ngIf="isAdmin">
+      <div class="col text-end" *ngIf="hasAccess">
         <a type="button" class="btn btn-primary btn-sm "
         data-bs-toggle="modal"
         data-bs-target="#addProyectoModal"

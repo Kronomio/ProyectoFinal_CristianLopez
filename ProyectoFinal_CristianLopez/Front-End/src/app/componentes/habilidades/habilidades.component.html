@@ -1,5 +1,5 @@
 <!--Añado el btn de añadir habilidad y que abra el modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="isAdmin">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="hasAccess">
   <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#addHabilidadModal"
     (click)="abrirModal('add')">
     Registrar Habilidad
@@ -17,7 +17,7 @@
     <div class="container  animate__animated animate__zoomIn">
       <div class="row text-center">
         <!-- Agrego los botones de edición y borrar sólo para usuarios admin-->
-        <div class="col text-end" *ngIf="isAdmin">
+        <div class="col text-end" *ngIf="hasAccess">
           <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addHabilidadModal"
             (click)="abrirModal('edit',habilidad)">
             <fa-icon [icon]="faPencil"></fa-icon>
@@ -63,7 +63,7 @@
               <input type="hidden" formControlName="idHab" name="idHab" id="idHab" class="form-control">
               <label for="nombre" class="input-group-text textoLabel">Nombre </label>
               <input type="text" class="form-control"  name="nombre" placeholder="Nombre de la habilidad"
-                formControlName="nombre" 
+                formControlName="nombre" id="nombreHabilidad" 
                 [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched , 'is-valid':!Nombre?.errors && Nombre?.touched }"
                 required>
 

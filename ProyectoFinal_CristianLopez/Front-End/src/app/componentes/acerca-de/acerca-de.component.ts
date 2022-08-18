@@ -12,17 +12,13 @@ import { TokenService } from 'src/app/services/token.service';
 export class AcercaDeComponent implements OnInit {
  public persona:Persona | undefined;
  public editPersona:Persona | undefined;
-isAdmin=false;
-authorities:string[]=[];
+
+
   constructor(public personaService: PersonaService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
    
    this.verPersonas();
-   if(window.sessionStorage.getItem('isAdmin')==='true')
-    this.isAdmin=true;
-    else
-    this.isAdmin=false;
   }
 
   public verPersonas():void{
@@ -32,7 +28,7 @@ authorities:string[]=[];
       
       },
       error:(error:HttpErrorResponse)=>{
-      console.log(error.message);
+      
     }
       
     });

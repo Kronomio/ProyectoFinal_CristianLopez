@@ -30,9 +30,14 @@ export class ChangePasswordComponent implements OnInit {
       newPassword2: ['', [Validators.required]]
     
     });
-  this.formChangePassword.get('newPassword2')?.setValidators(ValidadorPersonalizado.confirmacionContraseña(this.formChangePassword.get('newPassword')));}
+  this.formChangePassword.get('newPassword2')?.setValidators(ValidadorPersonalizado.confirmacionContraseña(this.formChangePassword.get('newPassword')));
+ 
+}
 
   ngOnInit(): void {
+    
+    $('#oldPassword').focus();
+    
   }
   get OldPassword() { return this.formChangePassword.get("oldPassword"); }
   get NewPassword() { return this.formChangePassword.get("newPassword"); }

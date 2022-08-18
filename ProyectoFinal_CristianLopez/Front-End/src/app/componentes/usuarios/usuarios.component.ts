@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Rol } from 'src/app/model/rol.model';
 import { Usuario } from 'src/app/model/usuario.model';
+import { AutenticacionService } from 'src/app/services/autenticacion.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -16,14 +17,18 @@ export class UsuariosComponent implements OnInit {
 
   constructor(private usuarioService:UsuariosService, 
     private mensajeService: NotificacionesService,
-    private router:Router) { }
+    private router:Router,
+    private autenticationService: AutenticacionService) { }
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
   usuarios:Usuario[]=[];
+  usuarioEdit?:Usuario;
   modo:string='';
   tituloModal:string='';
   borrarUsuario?:Usuario;
   rol?:Rol;
+  nuevoRol:Rol={id:1, rolNombre:'ROLE_USER'};
+
   ngOnInit(): void {
     this.getUsuarios();
    
@@ -42,8 +47,8 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
-  public deleteUsuario(id:number):void{
-    this.usuarioService.deleteUsuario(id).subscribe({
+  public onDeleteUsuario(id?:number):void{
+    this.usuarioService.deleteUsuario(id!).subscribe({
       next: (response: void) => {
         // console.log(response);
         this.mensajeService.showWarn(`Se eliminó el Usuario`)
@@ -75,37 +80,88 @@ export class UsuariosComponent implements OnInit {
   }
 
   public abrirModal(modo: string, usuario?: Usuario): void {
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
+
+    this.usuarioService.enviarModo(modo);
     this.modo = modo;
-    if (modo === 'add') {
-      this.tituloModal = "Registrar Nuevo Usuario";
-    } else if (modo === 'delete') {
+    
+     if (modo === 'delete') {
       this.borrarUsuario = usuario;
-      button.setAttribute('data-toggle', '#deleteUsuarioModal');
+      // button.setAttribute('data-toggle', '#deleteUsuarioModal');
     } else if (modo === 'edit') {
-      this.tituloModal = "Editar Usuario";
-      this.cargarFormularioUsuario(usuario!);      
+      this.usuarioEdit=usuario;
+
+      this.cargarFormularioPermisosUsuario(usuario!);      
     }
     
-    container?.appendChild(button);
-    button.click();
+    // container?.appendChild(button);
+    // button.click();
   }
 
 
-  public cargarFormularioUsuario(usuario:Usuario){}
+  public cargarFormularioPermisosUsuario(usuario:Usuario){
+
+    for(let rol of usuario.roles)
+    {
+      if(rol.rolNombre==='ROLE_ADMIN')
+      {
+        $("#administradorCheck").prop("checked", true);
+      }
+      else if(rol.rolNombre==='ROLE_USER')
+      {
+        $("#usuarioStandarCheck").prop("checked", true);
+      }
+      else if(rol.rolNombre==='ROLE_COLLABORATOR')
+      {
+        $("#colaboradorCheck").prop("checked", true);
+
+      }
+      
+    }   // this.usuarioService.enviarUsuario(usuario);
+  }
 
   public onNuevoUsuario(){
     $("#cerrarUsuarios").click();
     this.router.navigate(['signup']);
   }
 
-  public onEditUsuario(usuario:Usuario){
+   public onNewUsuario(){
+    this.router.navigate(['signup']);
 
-    
+  }
+  public onRegresar()
+  {
+    this.router.navigate(['home']);
+  }
+  actualizarPermisos()
+  {
+    if($("#usuarioStandarCheck").prop('checked') )
+       this.nuevoRol={id:1, rolNombre:'ROLE_USER'};
+
+    else if($("#colaboradorCheck").prop('checked'))
+    this.nuevoRol={id:1, rolNombre:'ROLE_COLLABORATOR'};
+      else if($("#administradorCheck").prop('checked'))
+      this.nuevoRol={id:1, rolNombre:'ROLE_ADMIN'};
+       
+      this.usuarioEdit?.roles.push(this.nuevoRol);
+      
+    this.usuarioService.updateRolesUsuario(this.usuarioEdit?.username!,this.nuevoRol).subscribe({
+      next:(response:any)=>{
+        //Actualizar lista
+        this.getUsuarios();
+        this.mensajeService.showSuccess(`Se editaron correctamente los permisos del usuario`);
+
+      }, 
+      error:(error:HttpErrorResponse)=>{
+        this.mensajeService.showError(`No fué posible editar los permisos del usuario.  ${error.message}`);
+
+      }
+        
+  
+      
+
+    });
+   
+  
 
   }
 }

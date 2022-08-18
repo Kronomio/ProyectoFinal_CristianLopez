@@ -1,5 +1,5 @@
 <!--Añado el btn de añadir formacion y que abra el modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="isAdmin">
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="hasAccess">
   <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addFormacionModal"
     (click)="abrirModal('add')">
     Registrar formación
@@ -21,7 +21,7 @@
 
       <!--Agrego los botones de edición y borrar -->
 
-      <div class="col text-end" *ngIf="isAdmin">
+      <div class="col text-end" *ngIf="hasAccess">
         <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addFormacionModal"
           (click)="abrirModal('edit',estudio)">
           <fa-icon [icon]="faPencil"></fa-icon>
@@ -82,7 +82,7 @@
           <div class="input-group form-group">
             <label for="titulo" class="input-group-text textoLabel">Título </label>
             <input type="text" class="form-control" formControlName="titulo" name="titulo"
-              placeholder="Título" required>
+              placeholder="Título" id="tituloFormacion" required>
             <div *ngIf="Titulo?.errors && Titulo?.touched">
               <p *ngIf="Titulo?.hasError('required')" class="text-danger">El título de la formación es requerido</p>
             </div>

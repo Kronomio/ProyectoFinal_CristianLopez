@@ -2,8 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { TokenService } from 'src/app/services/token.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 @Component({
@@ -17,7 +16,7 @@ export class PortadaComponent implements OnInit {
   public editPersona: Persona | undefined;
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
-  isAdmin = false;
+  hasAccess = false;
   isLogged=false;
   formDatosPersonales: FormGroup;
   constructor(private formBuilder:FormBuilder,
@@ -45,7 +44,7 @@ export class PortadaComponent implements OnInit {
   ngOnInit(): void {
     this.verPersonas();
     
-    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
+    this.hasAccess=(window.sessionStorage.getItem('isAdmin') === 'true' || window.sessionStorage.getItem('isCollaborator') === 'true');
   }
 
   public verPersonas(): void {
@@ -87,6 +86,10 @@ export class PortadaComponent implements OnInit {
     }
   }
   cargarDatosPersonales(persona:Persona){
+   
+    $('#modificarDatosPersonales').on('shown.bs.modal', function () {
+      $('#nombre').focus();
+    });
     
     this.formDatosPersonales.patchValue(persona);
   }

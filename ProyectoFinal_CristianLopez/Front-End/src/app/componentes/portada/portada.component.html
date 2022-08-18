@@ -29,7 +29,7 @@
 <!-- Button trigger modal -->
 <div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" >
   <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-    data-bs-target="#modificarDatosPersonales" *ngIf="isAdmin">
+    data-bs-target="#modificarDatosPersonales" *ngIf="hasAccess">
     Modificar información personal
   </button>
 
@@ -54,7 +54,7 @@
           <div class=" col-md-6 input-group">
 
             <label for="inputNombre" class="input-group-text">Nombre</label>
-            <input type="text" class="form-control"  name="nombre" formControlName="nombre"  required>
+            <input type="text" class="form-control"  name="nombre" id="nombre" formControlName="nombre"  required>
          
             <label for="inputApellido" class="input-group-text">Apellido</label>
             <input type="text" class="form-control" name="apellido"  formControlName="apellido" required>
@@ -124,9 +124,5 @@
   </div>
 </div>
 
-<app-change-password *ngIf="isAdmin"></app-change-password>
-<app-usuarios *ngIf="isAdmin">
-  <app-signup ></app-signup>
 
-</app-usuarios>
 

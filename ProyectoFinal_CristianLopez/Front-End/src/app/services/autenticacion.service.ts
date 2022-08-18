@@ -7,6 +7,8 @@ import { LoginUsuario } from '../model/login-usuario';
 import { JwtDto } from '../model/jwt-dto';
 
 import { ChangePasswordUsuario } from '../model/change-password';
+import { Usuario } from '../model/usuario.model';
+import { Rol } from '../model/rol.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +38,9 @@ export class AutenticacionService {
   public nuevo (nuevoUsuario: NuevoUsuario):Observable<any>{
     return this.httpClient.post(this.url+'new', nuevoUsuario);
   }
+  public updateUsuario(usuario:Usuario):Observable<any>{
+    return this.httpClient.post(this.url+'updateUsuario', usuario);
+  }
 
 
   public login(loginUsuario:LoginUsuario): Observable <JwtDto>{
@@ -59,4 +64,6 @@ export class AutenticacionService {
     return this.httpClient.post<String>(this.url + 'updatePassword', changePassword)
 
   }
+
+  
 }

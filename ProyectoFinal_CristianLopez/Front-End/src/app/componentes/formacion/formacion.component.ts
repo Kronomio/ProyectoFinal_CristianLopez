@@ -14,13 +14,13 @@ export class FormacionComponent implements OnInit {
 
   public estudios: Estudio[] = [];
   public borrarEstudio: Estudio | undefined;
-  isAdmin = false;
+  hasAccess = false;
   authorities: string[] = [];
   faPencil = faPencilAlt;
   basuraIcono = faTrashCan;
   formFormacion: FormGroup;
   modo: string = '';
- 
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,7 +46,7 @@ export class FormacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEstudios();
-    this.isAdmin=(window.sessionStorage.getItem('isAdmin') === 'true');
+    this.hasAccess=(window.sessionStorage.getItem('isAdmin') === 'true' || window.sessionStorage.getItem('isCollaborator') === 'true');
   }
 
   public getEstudios(): void {
@@ -71,18 +71,22 @@ export class FormacionComponent implements OnInit {
     button.setAttribute('data-toggle', 'modal');
     this.formFormacion.reset();
     this.modo = modo;
+    let myModal = document.getElementById('addFormacionModal')
+    let myInput = document.getElementById('tituloFormacion')
+
+    $('#addFormacionModal').on('shown.bs.modal', function () {
+      $('#tituloFormacion').focus();
+    });
+
     if (modo === 'add') {
       $("#tituloFormFormacion").html("Registrar Nueva Formación");
-      
       button.setAttribute('data-target', '#addFormacionModal');
-    } else if (modo === 'delete') {
+    }
+    else if (modo === 'delete') {
       this.borrarEstudio = estudio;
       button.setAttribute('data-toggle', '#deleteFormacionModal');
     } else if (modo === 'edit') {
       $("#tituloFormFormacion").html("Editar Formación");
-
-     
- 
       this.cargarFormularioFormacion(estudio!);
       button.setAttribute('data-toggle', '#addFormacionModal');
 
@@ -91,14 +95,12 @@ export class FormacionComponent implements OnInit {
     button.click();
   }
 
-  public saveFormacion(event: Event) {
-
-   
+  saveFormacion(event: Event) {
     if (this.modo === 'add') {
       if (this.formFormacion.valid) {
         this.formacionService.addEstudio(this.formFormacion.value).subscribe({
           next: (response: Estudio) => {
-             this.mensajeService.showSuccess(`Se guardó correctamente la formación ${this.formFormacion.value["titulo"]}`);
+            this.mensajeService.showSuccess(`Se guardó correctamente la formación ${this.formFormacion.value["titulo"]}`);
             this.getEstudios();
             this.formFormacion.reset();
           },
@@ -111,6 +113,7 @@ export class FormacionComponent implements OnInit {
         });
       }
     }
+
     else if (this.modo === 'edit') {
       this.formacionService.updateEstudio(this.formFormacion.value).subscribe({
         next: (response: Estudio) => {
@@ -120,7 +123,7 @@ export class FormacionComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.mensajeService.showError(`No fué posible editar la formación ${error.message}`);
-         }
+        }
       });
     }
   }
@@ -134,12 +137,12 @@ export class FormacionComponent implements OnInit {
 
     this.formacionService.deleteEstudio(idEdu).subscribe({
       next: (response: void) => {
-        
+
         this.mensajeService.showWarn(`Se eliminó la formación`)
         this.getEstudios();
       },
       error: (error: HttpErrorResponse) => {
-        this.mensajeService.showError(`No se pudo eliminar la formación. ${error.message}`);
+        this.mensajeService.showError(`No se pudo eliminar la formación. ${error.headers}`);
       }
     });
   }

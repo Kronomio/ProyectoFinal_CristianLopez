@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactoComponent implements OnInit {
 
+  hasAccess=false;
   constructor() { }
 
   ngOnInit(): void {
+    this.hasAccess=(window.sessionStorage.getItem('isUser') === 'true' || window.sessionStorage.getItem('isCollaborator') === 'true' || window.sessionStorage.getItem('isAdmin') === 'true');
   }
 
 }
