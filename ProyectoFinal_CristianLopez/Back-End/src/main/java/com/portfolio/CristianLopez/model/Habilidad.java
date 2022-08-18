@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Habilidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idHab;
+    private Integer idHab;
     private String nombre;
     private Long porcentaje;
     private String color1;

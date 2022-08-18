@@ -23,7 +23,7 @@ import lombok.Setter;
 @Entity @Getter @Setter
 public class Proyecto {
     @Id @GeneratedValue(strategy = GenerationType.AUTO )
-    private Long id;
+    private Integer id;
     
     private String descripcion;
     
