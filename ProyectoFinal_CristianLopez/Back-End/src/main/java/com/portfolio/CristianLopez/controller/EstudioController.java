@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin (origins = {"http://localhost:4200","https://acortar.link/"})
+@CrossOrigin (origins = {"http://localhost:4200","https://portfoliowebcl.web.app/"})
 
 
 @RequestMapping("/estudio")

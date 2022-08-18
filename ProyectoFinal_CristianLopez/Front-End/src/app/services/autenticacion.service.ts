@@ -9,11 +9,12 @@ import { JwtDto } from '../model/jwt-dto';
 import { ChangePasswordUsuario } from '../model/change-password';
 import { Usuario } from '../model/usuario.model';
 import { Rol } from '../model/rol.model';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticacionService {
-  url="http://localhost:8080/auth/";
+  url=environment.apiBaseUrl+"auth/";
   currentUserSubject: BehaviorSubject<any>
 
  
