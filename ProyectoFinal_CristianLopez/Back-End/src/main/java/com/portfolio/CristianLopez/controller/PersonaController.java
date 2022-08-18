@@ -51,7 +51,7 @@ public class PersonaController {
     }
 
     //URL puerto/personas/editar/(Id)/nommbre & apellido & url_img
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     @PutMapping("/edit/personas/{id}")
     public Persona editarPersona(@PathVariable Integer id,
             @RequestParam("nombre") String nuevoNombre,
@@ -85,7 +85,7 @@ public class PersonaController {
         return persona;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     @PutMapping("/edit/persona/{id}")
     public Persona editarPersona(@PathVariable Integer id, @RequestBody Persona pers) {
 

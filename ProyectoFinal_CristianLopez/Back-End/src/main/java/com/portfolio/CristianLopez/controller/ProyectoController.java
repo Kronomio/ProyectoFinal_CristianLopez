@@ -44,14 +44,14 @@ public class ProyectoController {
     
     
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity <Proyecto> crearProyecto(@RequestBody Proyecto proyecto){
         Proyecto nuevoProyecto=iproyectoService.guardarProyecto(proyecto);
           return new ResponseEntity<>(nuevoProyecto, HttpStatus.CREATED);
     }
     
     @DeleteMapping ("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity <?> borrarProyecto (@PathVariable("id") Integer id){
         iproyectoService.eliminarProyecto(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -59,7 +59,7 @@ public class ProyectoController {
     }
     
      @PutMapping("/update")
-     @PreAuthorize("hasRole('ADMIN')")
+     @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
      public ResponseEntity <Proyecto> editarProyecto(@RequestBody Proyecto proyecto){
          Proyecto updateProyecto=iproyectoService.editarProyecto(proyecto);
          return new ResponseEntity <> (updateProyecto, HttpStatus.OK);

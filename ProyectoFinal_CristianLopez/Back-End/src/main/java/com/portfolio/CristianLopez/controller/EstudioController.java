@@ -47,14 +47,14 @@ public class EstudioController {
     
     
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity <Estudio> crearEstudio(@RequestBody Estudio estudio){
         Estudio nuevoEstudio=iestudioService.guardarEstudio(estudio);
           return new ResponseEntity<>(nuevoEstudio, HttpStatus.CREATED);
     }
     
     @DeleteMapping ("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity <?> borrarEstudio (@PathVariable("id") Integer id){
         iestudioService.eliminarEstudio(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -62,7 +62,7 @@ public class EstudioController {
     }
     
      @PutMapping("/update")
-     @PreAuthorize("hasRole('ADMIN')")
+     @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
      public ResponseEntity <Estudio> editarEstudio(@RequestBody Estudio estudio){
          Estudio updateEstudio=iestudioService.editarEstudio(estudio);
          return new ResponseEntity <> (updateEstudio, HttpStatus.OK);

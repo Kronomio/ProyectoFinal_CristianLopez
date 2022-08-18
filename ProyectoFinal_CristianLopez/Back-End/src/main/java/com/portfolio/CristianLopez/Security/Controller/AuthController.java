@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.portfolio.CristianLopez.Security.Controller;
+
 import com.portfolio.CristianLopez.Security.Dto.LoginUsuario;
 import com.portfolio.CristianLopez.Security.Dto.JwtDto;
 import com.portfolio.CristianLopez.Security.Dto.NuevoUsuario;
@@ -45,8 +46,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author krono
  */
 @RestController
-@RequestMapping("/auth")
 @CrossOrigin("http://localhost:4200")
+@RequestMapping("/auth")
+
 
 public class AuthController {
 
@@ -85,6 +87,7 @@ public class AuthController {
             }
             return new ResponseEntity(new Mensaje(mensaje), HttpStatus.BAD_REQUEST);
         } else {
+            System.out.print(nuevoUsuario.getPassword());
             Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getUsername(),
                     nuevoUsuario.getEmail(),
                     passwordEncoder.encode(nuevoUsuario.getPassword()));
@@ -127,42 +130,30 @@ public class AuthController {
     }
 
     @PostMapping("/updatePassword")
-    public ResponseEntity  updatePassword (@Valid @RequestBody UpdatePassword userUpdatePassword, BindingResult bindingResult)
-    {
+    public ResponseEntity updatePassword(@Valid @RequestBody UpdatePassword userUpdatePassword, BindingResult bindingResult) {
         //System.out.print("Ingreso al update");
         Usuario user;
-        Optional <Usuario> usuarioOptional=usuarioService.getByUsername(userUpdatePassword.getUsername());
-        if(usuarioOptional.isPresent())
-        {
-            user=usuarioOptional.get();
-                    
-        }
-        else
-        {
+        Optional<Usuario> usuarioOptional = usuarioService.getByUsername(userUpdatePassword.getUsername());
+        if (usuarioOptional.isPresent()) {
+            user = usuarioOptional.get();
+
+        } else {
 
             return new ResponseEntity(new Mensaje("Username no encontrado"), HttpStatus.BAD_REQUEST);
         }
-         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userUpdatePassword.getUsername(), userUpdatePassword.getOldPassword()));
-             
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userUpdatePassword.getUsername(), userUpdatePassword.getOldPassword()));
 
-                 
-        if(authentication.isAuthenticated())
-        {
-          
+        if (authentication.isAuthenticated()) {
 
             user.setPassword(passwordEncoder.encode(userUpdatePassword.getNewPassword()));
-          Usuario newUsuario=  usuarioService.updateUsuario(user);
-          return new ResponseEntity<>(newUsuario,HttpStatus.OK);
-        }
-        else
-        {
-                         return new ResponseEntity(new Mensaje("Contraseña incorrecta"), HttpStatus.BAD_REQUEST);
+            Usuario newUsuario = usuarioService.updateUsuario(user);
+            return new ResponseEntity<>(newUsuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(new Mensaje("Contraseña incorrecta"), HttpStatus.BAD_REQUEST);
 
-             
-        }       
+        }
     }
-    
-    
+
     @GetMapping("/existEmail")
     public boolean existEmail(@RequestParam String email) {
 
@@ -186,17 +177,53 @@ public class AuthController {
     @DeleteMapping("/deleteUsuario/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUsuario(@PathVariable("id") Long id) {
-      
+
         usuarioService.deleteUsuario(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    
-    
+
     @PutMapping("/updateUsuario")
-      @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN', 'COLLABORATOR')")
     public ResponseEntity<Usuario> updateUsuario(Usuario user) {
         Usuario usuario = usuarioService.updateUsuario(user);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
+
+    }
+
+    @PutMapping("/updateRoles/{username}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Usuario> updateRoles(@PathVariable String username,@RequestBody String rol) {
+        Usuario userEdit;
+        
+
+        Optional<Usuario> userOptional = usuarioService.getByUsername(username);
+        if (userOptional.isPresent()) {
+            userEdit = userOptional.get();
+        } else {
+
+            return new ResponseEntity(new Mensaje("Username no encontrado"), HttpStatus.BAD_REQUEST);
+        }
+
+        Set<Rol> roles = new HashSet<>();
+        if (rol.equals("ROLE_ADMIN")) {
+           
+            roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
+        }
+        if (rol.equals("ROLE_COLLABORATOR")) {
+            roles.add(rolService.getByRolNombre(RolNombre.ROLE_COLLABORATOR).get());
+            
+
+        }
+        if (rol.equals("ROLE_USER")) {
+            roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
+         
+
+        }
+            
+
+        userEdit.setRoles(roles);
+        usuarioService.updateUsuario(userEdit);
+        return new ResponseEntity<>(userEdit, HttpStatus.OK);
 
     }
 }

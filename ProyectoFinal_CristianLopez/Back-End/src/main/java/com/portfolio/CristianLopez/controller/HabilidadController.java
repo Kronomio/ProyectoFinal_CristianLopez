@@ -38,14 +38,14 @@ public class HabilidadController {
 
     
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity<Habilidad> crearHabilidad(@RequestBody Habilidad habilidad) {
         Habilidad nuevoHabilidad = ihabilidadService.guardarHabilidad(habilidad);
         return new ResponseEntity<>(nuevoHabilidad, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity<?> borrarHabilidad(@PathVariable("id") Integer id) {
         ihabilidadService.eliminarHabilidad(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -53,7 +53,7 @@ public class HabilidadController {
     }
 
     @PutMapping("/update")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')"+"||hasRole('COLLABORATOR')")
     public ResponseEntity<Habilidad> editarHabilidad(@RequestBody Habilidad habilidad) {
         Habilidad updateHabilidad = ihabilidadService.editarHabilidad(habilidad);
         return new ResponseEntity<>(updateHabilidad, HttpStatus.OK);
