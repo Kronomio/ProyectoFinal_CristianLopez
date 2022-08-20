@@ -22,7 +22,9 @@ import { SignupComponent } from './componentes/signup/signup.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 import { ChangePasswordComponent } from './componentes/change-password/change-password.component';
-import { ConfiguracionesComponent } from './componentes/configuraciones/configuraciones.component'
+import { ConfiguracionesComponent } from './componentes/configuraciones/configuraciones.component';
+import { SpinnerComponent } from './utils/spinner/spinner.component'
+import { SpinnerInterceptor } from './utils/spinner/spinner.interceptor';
 
 
 
@@ -43,7 +45,8 @@ import { ConfiguracionesComponent } from './componentes/configuraciones/configur
     SignupComponent,
     UsuariosComponent,
     ChangePasswordComponent,
-    ConfiguracionesComponent
+    ConfiguracionesComponent,
+    SpinnerComponent
   
 
   ],
@@ -73,6 +76,11 @@ import { ConfiguracionesComponent } from './componentes/configuraciones/configur
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
       multi: true
     }
   ],

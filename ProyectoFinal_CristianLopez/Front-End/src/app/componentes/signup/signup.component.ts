@@ -2,11 +2,10 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NuevoUsuario } from 'src/app/model/nuevo-usuario';
+
 import { Usuario } from 'src/app/model/usuario.model';
 import { AutenticacionService } from 'src/app/services/autenticacion.service';
-import { NotificacionesService } from 'src/app/services/notificaciones.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ValidadorPersonalizado } from '../../utils/validador-personalizado'
 @Component({
   selector: 'app-signup',

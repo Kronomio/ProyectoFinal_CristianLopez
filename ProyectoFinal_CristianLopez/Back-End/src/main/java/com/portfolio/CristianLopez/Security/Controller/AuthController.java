@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author krono
  */
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin (origins = {"http://localhost:4200","https://portfoliowebcl.web.app/"})
 @RequestMapping("/auth")
 
 
@@ -176,7 +176,7 @@ public class AuthController {
 
     @DeleteMapping("/deleteUsuario/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> deleteUsuario(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteUsuario(@PathVariable("id") Integer id) {
 
         usuarioService.deleteUsuario(id);
         return new ResponseEntity<>(HttpStatus.OK);

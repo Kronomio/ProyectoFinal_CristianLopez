@@ -76,6 +76,9 @@
 
         <form class="row g-3 " [formGroup]="formExperienciaLaboral" (ngSubmit)="saveExperiencia($event)" novalidate="">
         
+          <div class="form-group">
+            <input type="hidden" formControlName="idExp" name="idExp" id="idExp" class="form-control">
+          </div>
           <div class="input-group form-group">
             <label for="titulo" class="input-group-text textoLabel">Título</label>
             <input type="text" class="form-control" formControlName="titulo" id="tituloExperiencia"  placeholder="Título" required>

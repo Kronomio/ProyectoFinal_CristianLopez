@@ -36,3 +36,8 @@
 .textoLabel{
     color: rgb(124, 123, 123);
 }
+
+@media(max-width: 570px)
+{
+    
+}

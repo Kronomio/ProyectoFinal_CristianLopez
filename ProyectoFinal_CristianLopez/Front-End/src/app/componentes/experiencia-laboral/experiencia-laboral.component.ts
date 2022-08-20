@@ -31,6 +31,7 @@ export class ExperienciaLaboralComponent implements OnInit {
    
     private mensajeService: NotificacionesService) {
     this.formExperienciaLaboral = this.formBuider.group({
+      idExp:[],
       titulo: ['', Validators.required],
       descripcion: [''],
       nombre_empresa: [''],
@@ -116,8 +117,10 @@ export class ExperienciaLaboralComponent implements OnInit {
     }
     else if (this.modo === 'edit') {
      
+      
       this.experienciaService.updateExperiencia(this.formExperienciaLaboral.value).subscribe({
         next: (response: Experiencia) => {
+          
           this.mensajeService.showSuccess("Se modificó la experiencia correctamente");
           this.getExperiencias();
         },
@@ -133,10 +136,10 @@ export class ExperienciaLaboralComponent implements OnInit {
   }
 
 
-  public onDeleteExperiencia(idExp: number): void {
+  public onDeleteExperiencia(id_exp: number): void {
 
 
-    this.experienciaService.deleteExperiencia(idExp).subscribe({
+    this.experienciaService.deleteExperiencia(id_exp).subscribe({
       next: (response: void) => {
 
         this.mensajeService.showWarn(`Se eliminó la experiencia laboral.`);

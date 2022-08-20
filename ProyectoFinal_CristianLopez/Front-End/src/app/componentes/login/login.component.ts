@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault;
     this.autenticacionService.login(this.form.value).subscribe({
       next: (data: any) => {
-        //console.log("DATA: " + JSON.stringify(data));
+        console.log("DATA: " + JSON.stringify(data));
         this.tokenService.setToken(data.token);
         this.tokenService.setUserName(data.username);
         this.tokenService.setAuthorities(data.authorities);
