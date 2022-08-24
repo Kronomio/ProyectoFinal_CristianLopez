@@ -39,33 +39,43 @@ public class Persona implements Serializable{
     @Size(min = 1, max = 250, message ="El url de imágen no cumple con la longitud")
     private String url_foto;
     
-    
+    @Size(min = 1, max = 250, message ="El url de imágen no cumple con la longitud")
+    private String url_fondo;
     
     private Date fecha_nac;
     
-   @Size(min = 1, max = 250, message ="El teléfono no cumple con la longitud")
+   
    private String telefono;
 
   @Size(min = 1, max = 500, message ="El acercaDe no cumple con la longitud")
   private String acerca_de;
     
-  @Size(min = 1, max = 250, message ="El link a Facebook no cumple con la longitud")
+  @Size(min = 0, max = 250, message ="El link a Facebook no cumple con la longitud")
   private String link_facebook;
     
-  @Size(min = 1, max = 250, message ="El link a LinkedIn no cumple con la longitud")
+  @Size(min = 0, max = 250, message ="El link a LinkedIn no cumple con la longitud")
   private String link_linkedin;
     
-  @Size(min = 1, max = 250, message ="El link a Twitter no cumple con la longitud")
+  @Size(min = 0, max = 250, message ="El link a Twitter no cumple con la longitud")
   private String link_twitter;
   
-@Size(min = 1, max = 250, message ="El link a Whatsaap no cumple con la longitud")
-private String link_whatsaap;
+@Size(min = 0, max = 250, message ="El link a Whatsaap no cumple con la longitud")
+private String link_google;
+
+@Size(min = 0, max = 250, message ="El link a Whatsaap no cumple con la longitud")
+private String link_github;
     
-@Size(min = 1, max = 250, message ="El link a Instagram no cumple con la longitud")
+@Size(min = 0, max = 250, message ="El link a Instagram no cumple con la longitud")
 private String link_instagram;
    
-@Size(min = 1, max = 250, message ="La dirección de mail no cumple con la longitud")
+@Size(min = 0, max = 250, message ="La dirección de mail no cumple con la longitud")
 private String mail;
+
+@Size(min = 0, max = 50, message ="La ciudad no cumple con la longitud")
+private String ciudad;
+    
+@Size(min = 0, max = 50, message ="El país no cumple con la longitud")
+    private String pais;
 
     @JsonIgnore
     @OneToMany(mappedBy="persona")
