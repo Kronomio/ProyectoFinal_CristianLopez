@@ -25,6 +25,7 @@ import { ChangePasswordComponent } from './componentes/change-password/change-pa
 import { ConfiguracionesComponent } from './componentes/configuraciones/configuraciones.component';
 import { SpinnerComponent } from './utils/spinner/spinner.component'
 import { SpinnerInterceptor } from './utils/spinner/spinner.interceptor';
+import { SocialBarFloatingComponent } from './utils/social-bar-floating/social-bar-floating.component';
 
 
 
@@ -46,7 +47,8 @@ import { SpinnerInterceptor } from './utils/spinner/spinner.interceptor';
     UsuariosComponent,
     ChangePasswordComponent,
     ConfiguracionesComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SocialBarFloatingComponent
   
 
   ],

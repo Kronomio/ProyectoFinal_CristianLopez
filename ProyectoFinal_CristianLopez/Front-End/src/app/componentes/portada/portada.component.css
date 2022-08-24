@@ -1,6 +1,7 @@
 .home
 {
-    background: url("/assets/fondoHeader.jpg") no-repeat center;
+    background-repeat:no-repeat;
+    background-size: cover;
     
 }
 .bg-text
