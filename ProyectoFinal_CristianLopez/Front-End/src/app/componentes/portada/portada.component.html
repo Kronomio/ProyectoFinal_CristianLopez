@@ -1,5 +1,6 @@
-<div class="container-fluid bg home">
-  <app-navbar></app-navbar>
+<div class="container-fluid bg home"  style="background-image:url('{{persona?.url_fondo}}')" id="home">
+  
+  <app-navbar [persona]="persona"></app-navbar>
   <div class="container">
     <div class="row">
       <div class="col-8">
@@ -11,7 +12,7 @@
           Desarrollador Web Full Stack
         </p>
         <p class="h4 bg-text text3 animate__animated animate__bounceInUp">
-          Córdoba (Argentina)
+          {{persona?.ciudad}} ({{persona?.pais}})
         </p>
       </div>
       <div class="col-4 justify-content-end">
@@ -29,7 +30,7 @@
 <!-- Button trigger modal -->
 <div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" >
   <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
-    data-bs-target="#modificarDatosPersonales" *ngIf="hasAccess">
+    data-bs-target="#modificarDatosPersonales" *ngIf="hasAccess" (click)="cargarDatosPersonales(persona!)">
     Modificar información personal
   </button>
 
@@ -40,7 +41,7 @@
 <!-- Modal de edicion de Datos Personales-->
 
 
-<div class="modal fade modal-lg" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade modal-lg" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -64,10 +65,12 @@
 
             <label for="inputFecha" class="input-group-text">Fecha Nac.</label>
             <input type="date" class="form-control" name="fecha_nac"  formControlName="fecha_nac">
-                      <label for="inputApellido" class="input-group-text">Ciudad</label>
-            <input type="text" class="form-control"   value="Córdoba">
+          </div>
+          <div class="col-md-4 input-group">
+            <label for="inputApellido" class="input-group-text">Ciudad</label>
+            <input type="text" class="form-control" name="ciudad"  formControlName="ciudad"  >
             <label for="inputApellido" class="input-group-text">País</label>
-            <input type="text" class="form-control" value="Argentina">
+            <input type="text" class="form-control" name="pais"  formControlName="pais">
           </div>
 
           <div class="col-12 input-group">
@@ -82,6 +85,12 @@
             <img src="{{formDatosPersonales.value['url_foto']}}" class="img-thumbnail" width=300px alt="...">
           </div>
 
+          <div class="col-5 input-group">
+            <label for="inputFoto" class="input-group-text">Imágen de Fondo</label>
+            <input type="text" class="form-control" placeholder="URL imágen de Fondo" name="url_fondo"  formControlName="url_fondo">
+            <img src="{{formDatosPersonales.value['url_fondo']}}" class="img-thumbnail" width=300px alt="...">
+          </div>
+
 
 
           <div class="col-12 input-group"> 
@@ -92,30 +101,41 @@
           </div>
           <!-- Redes Sociales -->
          
-          <div class="col-2">
-            <img src="assets/logoLinkedIn.png" class="float-end" width=40px alt="...">
-          </div>
-          <div class="col-md-9">
+          <div class="col-10 input-group"> 
+             <span class="input-group-text" style="background-color: #0082ca" id="basic-addon1"><i class="fab fa-linkedin-in" style="color: white"></i></span>
             <input type="text" class="form-control"  placeholder="LinkedIn" name="link_linkedin" formControlName="link_linkedin">
           </div> 
            
-          <div class="col-2">
-            <img src="assets/logoInstagram.png" class="float-end" width=40px alt="...">
-          </div>
-          <div class="col-md-9">
+          <div class="col-10 input-group"> 
+            <span class="input-group-text" style="background-color: #333333;" id="basic-addon1"><i class="fab fa-github" style="color: white"></i></span>
+           <input type="text" class="form-control"  placeholder="GitHub" name="link_github" formControlName="link_github">
+         </div> 
+
+         <div class="col-10 input-group"> 
+          <span class="input-group-text" style="background-color: #dd4b39;" id="basic-addon1"><i class="fab fa-google" style="color: white"></i></span>
+         <input type="text" class="form-control"  placeholder="Google" name="link_google" value="null" formControlName="link_google">
+       </div> 
+
+          <div class="col-10 input-group">
+            <span class="input-group-text" style="background-color: #ac2bac" id="basic-addon1"><i class="fab fa-instagram" style="color: white"></i></span>
             <input type="text" class="form-control"   placeholder="Instagram" name="link_instagram" formControlName="link_instagram">
           </div>
 
-          <div class="col-2">
-            <img src="assets/icons8-twitter-cuadrado-48.png" class="float-end"  width=40px alt="...">
-          </div>
-          <div class="col-md-9">
-           
+          <div class="col-10 input-group">
+            <span class="input-group-text" style="background-color: #55acee;;" id="basic-addon1"><i class="fab fa-twitter" style="color: white"></i></span>      
             <input type="text" class="form-control"   placeholder="Twitter" name="link_twitter" formControlName="link_twitter">
           </div>
+
+          <div class="col-10 input-group"> 
+            <span class="input-group-text" style="background-color: #3b5998;" id="basic-addon1"><i class="fab fa-facebook-f" style="color: white"></i></span>
+           <input type="text" class="form-control"  placeholder="Facebook" name="link_facebook" formControlName="link_facebook">
+         </div> 
+
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
           </div> 
           </form>
       </div>

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
@@ -13,7 +13,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class NavbarComponent implements OnInit {
   modalSwitch: boolean | undefined;
-  public persona: Persona | undefined;
+  @Input() public persona: Persona | undefined;
   public editPersona: Persona | undefined;
   isLogged = false;
   nameUser: string = '';
@@ -33,22 +33,22 @@ export class NavbarComponent implements OnInit {
       this.isLogged = false;
       this.nameUser = '';
     }
-    this.verPersonas();
+    //this.verPersonas();
 
   }
 
-  public verPersonas(): void {
-    this.personaService.verPersonas().subscribe({
-      next: (response: Persona) => {
-        this.persona = response;
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+  // public verPersonas(): void {
+  //   this.personaService.verPersonas().subscribe({
+  //     next: (response: Persona) => {
+  //       this.persona = response;
+  //     },
+  //     error: (error: HttpErrorResponse) => {
+  //       alert(error.message);
+  //     }
 
-    });
+  //   });
 
-  }
+  // }
 
   abrirLogin() { this.modalSwitch = true; }
 

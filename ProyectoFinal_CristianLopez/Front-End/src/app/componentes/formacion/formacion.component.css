@@ -4,14 +4,13 @@
     justify-content: center;
     text-align: center;
     align-content: center;
-}
-#items_formacion2{
-    text-align: center;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
     
 }
+.col{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .h2{
     font-family: 'Cabin', sans-serif;
     color:var(--lineaColor);
@@ -37,7 +36,3 @@
     color: rgb(124, 123, 123);
 }
 
-@media(max-width: 570px)
-{
-    
-}

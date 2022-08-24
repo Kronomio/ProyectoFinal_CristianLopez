@@ -20,13 +20,13 @@
         data-bs-toggle="modal"
         data-bs-target="#addProyectoModal"
         (click)="abrirModal('edit',proyecto)">
-          <fa-icon [icon]="faPencil"></fa-icon>
+        <i class="fa-solid fa-pen"></i>
         </a>
         <a type="button" class="btn btn-secondary btn-sm "
         data-bs-toggle="modal"
         data-bs-target="#deleteProyectoModal"
         (click)="abrirModal('delete',proyecto)">
-          <fa-icon [icon]="basuraIcono"></fa-icon>
+        <i class="fa-solid fa-trash-can"></i>
         </a>
       </div>
       <!--Añado cada uno de las tarjetas -->
@@ -66,13 +66,13 @@
 
 <!-- Modal añadir y editar Formacion-->
 
-<div class="modal fade" id="addProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" role="document">
+<div class="modal fade" id="addProyectoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"  role="document">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="tituloModalProyectos"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
+          <span ></span>
         </button>
       </div>
 

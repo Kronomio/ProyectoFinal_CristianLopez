@@ -1,0 +1,109 @@
+
+#btn-mas{
+    display: none;
+}
+
+#btn-mas:checked~ .redes a{
+    margin-bottom: 10px;
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.container-bar{
+    
+    
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    visibility: hidden;
+    
+
+}
+.container-bar a{
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    position: relative;
+    transition: all 500ms ease;
+    text-align: center;
+    box-shadow: 0px 1px 10px
+    rgba(0,0,0,0,4);
+
+}
+
+.icon-mas{
+    display: block;
+    background:var(--lineaColor);
+    color: aliceblue;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 35px;
+    text-align: center;
+    line-height: 55px;
+    transition: all 500ms ease;
+}
+
+
+.container-bar a:hover, .icon-mas:hover{
+    background: #1c1c1c;
+    transform: scale(1.2);
+
+}
+
+.container-bar .icon-facebook{
+    background: #1877f2;
+    border-radius: 50%;
+}
+.container-bar .icon-google{
+    background: #db4a39;
+    border-radius: 50%;
+}
+.container-bar .icon-twitter{
+    background: #1DA1F2;
+    border-radius: 50%;
+}
+.container-bar .icon-github{
+    background: #171515;
+    border-radius: 50%;
+}
+.container-bar .icon-instagram{
+    background: #9E37B8;
+    border-radius: 50%;
+}
+.container-bar .icon-mail{
+    background:dimgrey;
+    border-radius: 50%;
+}
+.container-bar .icon-linkedin{
+    background: #0073b1;
+    border-radius: 50%;
+}
+
+.redes a{
+    visibility: hidden;
+    opacity: 0;
+
+}
+
+@media (max-width: 1000px) {
+    .container-bar{
+        visibility: visible;
+        transition: all 2s;
+    }
+    
+}
+
+@media (min-width: 1000px) {
+    .container-bar, .redes a{
+        visibility: hidden;
+        display: none;
+        
+    }
+    
+}
+
+
+
+

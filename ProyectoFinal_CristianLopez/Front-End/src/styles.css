@@ -7,5 +7,6 @@
     --defaultTextSize: 30px;
     --animate-duration: 800ms;
     --animate-delay: 10.9s;
+    --url_fondo:url("/assets/fondoHeader.jpg") no-repeat center;
       
 }

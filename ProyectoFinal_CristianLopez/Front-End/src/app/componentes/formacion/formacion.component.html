@@ -14,21 +14,19 @@
 
 <div class="container animate__animated ">
   <div class="row" id="items_formacion">
-    <div class="col-4" *ngFor="let estudio of estudios">
-
-      <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" *ngFor="let estudio of estudios"> -->
+    <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let estudio of estudios">
+      <div class="col">
 
       <!--Agrego los botones de edición y borrar -->
 
       <div class="col text-end" *ngIf="hasAccess">
         <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addFormacionModal"
           (click)="abrirModal('edit',estudio)">
-          <fa-icon [icon]="faPencil"></fa-icon>
+          <i class="fa-solid fa-pen"></i>
         </a>
         <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal" data-bs-target="#deleteFormacionModal"
           (click)="abrirModal('delete',estudio)">
-          <fa-icon [icon]="basuraIcono"></fa-icon>
+          <i class="fa-solid fa-trash-can"></i>
         </a>
       </div>
 
@@ -54,6 +52,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 

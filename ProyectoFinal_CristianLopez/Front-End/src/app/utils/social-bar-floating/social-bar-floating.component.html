@@ -1,0 +1,51 @@
+<div class="container-bar">
+    <div class="flotante_redes">
+        <input type="checkbox" id="btn-mas"> 
+        <div class="redes">
+            <!--Correo-->
+            <a class="btn btn-primary m-1 btn-social icon-mail" href="mailto:{{persona?.mail}}?" role="button" target="_blank"><i
+                class="fa-regular fa-envelope" data-bs-toggle="mensaje" title={{persona?.mail}}></i></a>
+            <!-- Linkedin -->
+            
+            <a class="btn btn-primary btn-floating m-1 btn-social icon-linkedin" *ngIf="persona?.link_linkedin!=''" href={{persona?.link_linkedin}} role="button"
+            target="_blank"><i class="fab fa-linkedin-in" data-bs-toggle="mensaje" title="LinkedIn">
+            </i></a>
+    
+    <!-- Github -->
+    
+        <a class="btn btn-primary btn-floating m-1 btn-social icon-github" *ngIf="persona?.link_github!=''" href={{persona?.link_github}} role="button"
+            target="_blank" data-bs-toggle="mensaje" title="GitHub"><i class="fab fa-github"></i></a>
+    
+            
+            <!-- Facebook -->
+            
+                <a class="btn btn-primary m-1 btn-social icon-facebook" *ngIf="persona?.link_facebook!=''" href={{persona?.link_facebook}} role="button"
+                    target="_blank"><i class="fab fa-facebook-f" data-bs-toggle="mensaje" title="Facebook"></i></a>
+            
+            <!-- Twitter -->
+            
+                <a class="btn btn-primary btn-floating m-1 btn-social icon-twitter" *ngIf="persona?.link_twitter!=''" href={{persona?.link_twitter}} role="button"
+                    target="_blank"><i class="fab fa-twitter" data-bs-toggle="mensaje" title="Twitter"></i></a>
+            
+
+            <!-- Google -->
+            
+                <a class="btn btn-primary btn-floating m-1 btn-social icon-google" *ngIf="persona?.link_google!=''" href={{persona?.link_google}} role="button"
+                    target="_blank"><i class="fab fa-google" data-bs-toggle="mensaje" title="Google"
+                        data-bs-toggle="mensaje" title="Google"></i></a>
+           
+
+            <!-- Instagram -->
+            
+                <a class="btn btn-primary btn-floating m-1 btn-social icon-instagram" *ngIf="persona?.link_instagram!=''" href={{persona?.link_instagram}} role="button"
+                    target="_blank"><i class="fab fa-instagram" data-bs-toggle="mensaje" title="Instagram"></i></a>
+            
+
+        </div>
+     
+        <div class="btn-mas">
+        <label for="btn-mas" class="fa-solid fa-plus icon-mas"></label>
+        </div>
+    
+    </div>
+</div>

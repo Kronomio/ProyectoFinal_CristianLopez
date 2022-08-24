@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 import { Experiencia } from 'src/app/model/experiencia.model';
-import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TokenService } from 'src/app/services/token.service';
+
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
 
@@ -19,8 +19,7 @@ export class ExperienciaLaboralComponent implements OnInit {
   public experiencias: Experiencia[] = [];
   public editExperiencia: Experiencia | undefined;
   public borrarExperiencia: Experiencia | undefined;
-  faPencil = faPencilAlt;
-  basuraIcono = faTrashCan;
+
   hasAccess = false;
   authorities: string[] = [];
   formExperienciaLaboral: FormGroup;
