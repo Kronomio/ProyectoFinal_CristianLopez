@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/model/estudio.model';
 import { FormacionService } from 'src/app/services/formacion.service';
-import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 @Component({
@@ -16,8 +16,7 @@ export class FormacionComponent implements OnInit {
   public borrarEstudio: Estudio | undefined;
   hasAccess = false;
   authorities: string[] = [];
-  faPencil = faPencilAlt;
-  basuraIcono = faTrashCan;
+ 
   formFormacion: FormGroup;
   modo: string = '';
 

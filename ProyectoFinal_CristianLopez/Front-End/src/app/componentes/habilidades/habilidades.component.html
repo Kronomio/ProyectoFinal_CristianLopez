@@ -20,11 +20,11 @@
         <div class="col text-end" *ngIf="hasAccess">
           <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addHabilidadModal"
             (click)="abrirModal('edit',habilidad)">
-            <fa-icon [icon]="faPencil"></fa-icon>
+            <i class="fa-solid fa-pen"></i>
           </a>
           <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal"
             data-bs-target="#deleteHabilidadModal" (click)="abrirModal('delete',habilidad)">
-            <fa-icon [icon]="basuraIcono"></fa-icon>
+            <i class="fa-solid fa-trash-can"></i>
           </a>
         </div>
         <circle-progress [percent]="habilidad!.porcentaje" [radius]="80" [showUnits]="true" [outerStrokeWidth]="9"
@@ -32,8 +32,8 @@
           [outerStrokeGradientStopColor]="habilidad.color2" [innerStrokeColor]="'#627bdf'" [animation]="true"
           [animationDuration]="3000" [showImage]="true" [imageWidth]="80" [imageHeight]="80"
           [imageSrc]="habilidad!.url_imagen.toString()" [showBackground]="false"></circle-progress>
-        <p class="h5 texto">{{habilidad?.nombre}}</p>
-        <p class="h7 texto">{{habilidad?.porcentaje}} %</p>
+        <label class="h5 texto">{{habilidad?.nombre}} - <font SIZE=2>{{habilidad?.porcentaje}} %</font> </label>
+        
 
       </div>
     </div>

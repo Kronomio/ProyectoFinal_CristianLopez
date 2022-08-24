@@ -1,5 +1,9 @@
 #experiencias{
     background-color:var(--colorPrimary);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
 }
 .col{
     padding: 20px;

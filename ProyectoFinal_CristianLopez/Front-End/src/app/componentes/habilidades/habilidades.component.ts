@@ -2,9 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Habilidad } from 'src/app/model/habilidad.model';
 import { HabilidadesService } from 'src/app/services/habilidades.service';
-import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TokenService } from 'src/app/services/token.service';
+
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
 
@@ -20,8 +20,7 @@ export class HabilidadesComponent implements OnInit {
 
   form: FormGroup;
   modo: string = '';
-  faPencil = faPencilAlt;
-  basuraIcono = faTrashCan;
+ 
   hasAccess = false;
   constructor(
     private formBuilder: FormBuilder,

@@ -1,11 +1,7 @@
 
-
-<div>
-  
-  <app-spinner></app-spinner>
-   <app-portada></app-portada> 
+   <app-portada [persona]="persona" ></app-portada> 
     <br> 
-    <app-acerca-de></app-acerca-de>
+    <app-acerca-de [persona]="persona"></app-acerca-de>
     <br>
     <app-experiencia-laboral></app-experiencia-laboral>
     <br>
@@ -16,9 +12,10 @@
     <app-proyectos ></app-proyectos>
     <br>
     
-    <app-footer></app-footer>
+    <app-footer [persona]="persona"></app-footer>
     <app-change-password *ngIf="isAdmin"></app-change-password>
-    
-    
-  </div>
+    <app-social-bar-floating [persona]="persona"></app-social-bar-floating>
+  
+  
+
   

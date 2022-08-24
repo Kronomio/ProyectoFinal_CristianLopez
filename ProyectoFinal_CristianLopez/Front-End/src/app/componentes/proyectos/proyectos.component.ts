@@ -20,12 +20,12 @@ export class ProyectosComponent implements OnInit {
   formProyecto: FormGroup;
   hasAccess = false;
   
-  faPencil = faPencilAlt;
+  
   basuraIcono = faTrashCan;
   constructor(
     private formBuilder: FormBuilder,
     private proyectoService: ProyectoService,
-    private tokenService: TokenService,
+  
     private mensajeService: NotificacionesService) {
     this.formProyecto = formBuilder.group({
       id: [],

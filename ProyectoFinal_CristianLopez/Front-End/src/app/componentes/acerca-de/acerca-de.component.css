@@ -15,7 +15,7 @@
 }
 #fotoPerfil{
     box-shadow: 5px 5px 5px grey;
-    
+    width: 350px;
 }
 
 .linea
@@ -29,11 +29,11 @@
     
 
 }
+#marco_foto{
+    text-align: center;
+}
 @media (max-width: 990px) {
-    #marco_foto{
-        
-       text-align: center;
-    }
+  
    
     #texto_acerca_de{
         
@@ -45,11 +45,8 @@
 }
 
 @media (max-width: 570px) {
-    #marco_foto{
-        
-       text-align: center;
-    }
-   #fotoPerfil{width: 300px;}
+   
+   
 
     #texto_acerca_de{
         text-align: center;

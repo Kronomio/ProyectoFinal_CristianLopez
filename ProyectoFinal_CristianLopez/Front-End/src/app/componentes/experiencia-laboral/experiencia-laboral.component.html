@@ -23,11 +23,11 @@
           <div class="col text-end" *ngIf="hasAccess">
             <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" 
               data-bs-target="#addExperienciaModal" (click)="abrirModal('edit',experiencia)">
-              <fa-icon [icon]="faPencil"></fa-icon>
+              <i class="fa-solid fa-pen"></i>
             </a>
             <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal"
               data-bs-target="#deleteExperienciaModal" (click)="abrirModal('delete',experiencia)">
-              <fa-icon [icon]="basuraIcono"></fa-icon>
+              <i class="fa-solid fa-trash-can"></i>
             </a>
           </div>
           <div class="card" id="items_experiencia">
