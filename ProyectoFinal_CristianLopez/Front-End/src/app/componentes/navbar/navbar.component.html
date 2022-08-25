@@ -73,12 +73,9 @@
                 *ngIf="isAdmin">Administrar Usuarios</button></li>
             <li><button class="dropdown-item" type="button" data-bs-toggle="modal"
                 data-bs-target="#modalChangePassword">Cambiar Contraseña</button></li>
-            <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#"
-                *ngIf="isAdmin">Aspectos Visuales</button></li>
-
-            <li>
+            
               <hr class="dropdown-divider">
-            </li>
+           
 
             <li><a class="dropdown-item" href="" (click)="onLogOut()" *ngIf="isLogged">Cerrar Sesión</a></li>
           </ul>
