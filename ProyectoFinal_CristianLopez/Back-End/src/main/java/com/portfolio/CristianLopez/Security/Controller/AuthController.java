@@ -46,9 +46,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author krono
  */
 @RestController
-@CrossOrigin (origins = {"http://localhost:4200","https://portfoliowebcl.web.app/"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://portfoliowebcl.web.app/"})
 @RequestMapping("/auth")
-
 
 public class AuthController {
 
@@ -177,26 +176,32 @@ public class AuthController {
     @DeleteMapping("/deleteUsuario/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUsuario(@PathVariable("id") Integer id) {
-
-        usuarioService.deleteUsuario(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            usuarioService.deleteUsuario(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/updateUsuario")
     @PreAuthorize("hasRole('ADMIN', 'COLLABORATOR')")
-    public ResponseEntity<Usuario> updateUsuario(Usuario user) {
-        Usuario usuario = usuarioService.updateUsuario(user);
-        return new ResponseEntity<>(usuario, HttpStatus.OK);
-
+    public ResponseEntity<?> updateUsuario(Usuario user) {
+        try {
+            Usuario usuario = usuarioService.updateUsuario(user);
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/updateRoles/{username}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Usuario> updateRoles(@PathVariable String username,@RequestBody String rol) {
+    public ResponseEntity<?> updateRoles(@PathVariable String username, @RequestBody String rol) {
         Usuario userEdit;
-        
 
         Optional<Usuario> userOptional = usuarioService.getByUsername(username);
+        try{
         if (userOptional.isPresent()) {
             userEdit = userOptional.get();
         } else {
@@ -206,24 +211,26 @@ public class AuthController {
 
         Set<Rol> roles = new HashSet<>();
         if (rol.equals("ROLE_ADMIN")) {
-           
+
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
         }
         if (rol.equals("ROLE_COLLABORATOR")) {
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_COLLABORATOR).get());
-            
 
         }
         if (rol.equals("ROLE_USER")) {
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
-         
 
         }
-            
 
         userEdit.setRoles(roles);
         usuarioService.updateUsuario(userEdit);
         return new ResponseEntity<>(userEdit, HttpStatus.OK);
+        }
+        
+        catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
 
     }
 }
