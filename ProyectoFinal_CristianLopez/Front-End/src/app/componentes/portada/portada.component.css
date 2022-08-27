@@ -1,135 +1,130 @@
-.home
-{
-    background-repeat:no-repeat;
-    background-size: cover;
-    
+.home {
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.bg-text
-{
-    color:white;
-    padding-left: 10%;
-
+.bg-text {
+  color: white;
+  padding-left: 10%;
 }
-.bg{
-    height: 600px;
-    background-size: cover;
+.bg {
+  height: 600px;
+  background-size: cover;
 }
-.text1{
-    color: white;
-    font-size: 100px;
-    font-style: italic;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    padding-top: 15%;
-    padding-left: 15%;
-    padding-bottom: 0;
+.text1 {
+  color: white;
+  font-size: 100px;
+  font-style: italic;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  padding-top: 15%;
+  padding-left: 15%;
+  padding-bottom: 0;
 }
-#logoCL{
-    padding-top: 170px;
-    width: 70%;
-    opacity: 50%;
+#logoCL {
+  padding-top: 170px;
+  width: 70%;
+  opacity: 50%;
 }
 
-.text2{
-    color: white;
-    font-family: 'Ephesis', cursive;
-    font-size: 90px;
-    padding-left: 15%;
+.text2 {
+  color: white;
+  font-family: "Ephesis", cursive;
+  font-size: 90px;
+  padding-left: 15%;
 }
-.text3{
-    padding-left: 15%;
-}   
-#logoCL:hover{
-    opacity: 100%;
+.text3 {
+  padding-left: 15%;
+}
+#logoCL:hover {
+  opacity: 100%;
+  transform: scale(1.05);
+  transition: all 1.5s ease;
 }
 @media (max-width: 1200px) {
-    .text2 {
-        font-size: 40px;
-    }
+  .text2 {
+    font-size: 40px;
+  }
 
-    .text1 {
-        font-size: 50px;
-        padding-top: 12%;
-    }
+  .text1 {
+    font-size: 50px;
+    padding-top: 12%;
+  }
 
-    .text3 {
-        font-size: 15px;
-    }
+  .text3 {
+    font-size: 15px;
+  }
 
-    .bg-text {
-        color: white;
-        padding-left: 5%;
-    }
-    .bg{
-        height: 350px;
-    }
-    #logoCL{
-        padding-top: 100px;
+  .bg-text {
+    color: white;
+    padding-left: 5%;
+  }
+  .bg {
+    height: 350px;
+  }
+  #logoCL {
+    padding-top: 100px;
     width: 150px;
     opacity: 50%;
-    }
+  }
 }
 @media (max-width: 460px) {
-    .text2 {
-        font-size: 35px;
-       
-    }
+  .text2 {
+    font-size: 35px;
+  }
 
-    .text1 {
-        font-size: 30px;
-        padding-top: 12%;
-    }
+  .text1 {
+    font-size: 30px;
+    padding-top: 12%;
+  }
 
-    .text3 {
-        font-size: 15px;
-    }
+  .text3 {
+    font-size: 15px;
+  }
 
-    .bg-text {
-        color: white;
-        padding-left: 5%;
-    }
-    .bg{
-        height: 350px;
-    }
-    #logoCL{
-        visibility: hidden;
-    }
-    .bg{
-        height: 300px;
-    }
+  .bg-text {
+    color: white;
+    padding-left: 5%;
+  }
+  .bg {
+    height: 350px;
+  }
+  #logoCL {
+    visibility: hidden;
+  }
+  .bg {
+    height: 300px;
+  }
 }
 
 @media (max-width: 410px) {
-    .text2 {
-        font-size: 30px;
-       
-    }
+  .text2 {
+    font-size: 30px;
+  }
 
-    .text1 {
-        font-size: 30px;
-        padding-top: 12%;
-    }
+  .text1 {
+    font-size: 30px;
+    padding-top: 12%;
+  }
 
-    .text3 {
-        font-size: 10px;
-    }
+  .text3 {
+    font-size: 10px;
+  }
 
-    .bg-text {
-        color: white;
-        padding-left: 5%;
-    }
-    .bg{
-        height: 350px;
-    }
-    #logoCL{
-        visibility: hidden;
-    }
-    .bg{
-        height: 250px;
-    }
+  .bg-text {
+    color: white;
+    padding-left: 5%;
+  }
+  .bg {
+    height: 350px;
+  }
+  #logoCL {
+    visibility: hidden;
+  }
+  .bg {
+    height: 250px;
+  }
 }
 
-
-#imagenPerfilModal{
-    align-items: center;
-    text-align: center;
+#imagenPerfilModal {
+  align-items: center;
+  text-align: center;
 }

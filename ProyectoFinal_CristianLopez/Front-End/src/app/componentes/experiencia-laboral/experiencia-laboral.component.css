@@ -18,6 +18,11 @@
 .card{
     box-shadow: 2px 2px 5px #999;
 }
+
+.card:hover{
+    transform: scale(1.2);
+    transition: all 1.5s ease;
+}
 .linea
 {
     border-top: 1.5px solid var(--lineaColor);

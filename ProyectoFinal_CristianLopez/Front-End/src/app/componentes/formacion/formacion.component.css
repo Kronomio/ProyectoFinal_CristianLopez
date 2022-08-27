@@ -20,7 +20,21 @@
 
 .card{
     box-shadow: 2px 2px 5px #999;
+    background-color:white;
+
 }
+.card:hover{
+    transform: scale(1.2);
+    transition: all 1.5s ease;
+}
+.columna_imagen{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center ;
+    padding: 30px;
+}
+
 
 
 .linea
