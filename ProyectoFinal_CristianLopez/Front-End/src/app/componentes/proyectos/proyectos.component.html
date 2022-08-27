@@ -86,40 +86,96 @@
           <div class="input-group form-group ">
             <label class="input-group-text textoLabel" for="titulo" >Título </label>
             <input type="text" class="form-control" formControlName="titulo"  name="titulo" placeholder="Título" 
-            [ngClass]="{'is-invalid':Titulo?.errors && Titulo?.touched , 'is-valid':!Titulo?.errors && Titulo?.touched }"
+            [ngClass]="{'is-invalid':titulo?.errors && titulo?.touched , 'is-valid':!titulo?.errors && titulo?.touched }"
             required>
-            <div *ngIf="Titulo?.hasError('required')" class="invalid-feedback">El título del proyecto es requerido</div>
+            <div *ngIf="titulo?.invalid && (titulo?.dirty || titulo?.touched)" class="text-danger">
+              <div *ngIf="titulo?.errors?.['required']">
+                El título del proyecto es requerido.
+              </div>
+              <div *ngIf="titulo?.errors?.['maxlength']">
+                El título no puede superar los 50 caracteres. 
+              </div>
+              
+            </div>
 
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
               <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion"  name="descripcion"
-                style="height: 200px"></textarea>
+                style="height: 200px"
+                [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.touched, 'is-valid':!descripcion?.errors && descripcion?.touched}"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
+          </div>
+          <div *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)" class=" container text-danger">
+              
+            <div *ngIf="descripcion?.errors?.['maxlength']">
+              La descripción no puede superar los 250 caracteres. 
+            </div>
+            
           </div>
         
           <div class="input-group form-group">
             <label for="fecha_realizacion" class="input-group-text textoLabel">Año</label>
-            <input type="text" class="form-control" formControlName="fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" placeholder="Año">
+            <input type="text" class="form-control" formControlName="fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" placeholder="Año"
+            [ngClass]="{'is-invalid':fecha_realizacion?.errors && fecha_realizacion?.touched, 'is-valid':!fecha_realizacion?.errors && fecha_realizacion?.touched}">
           </div>
-
+          <div *ngIf="fecha_realizacion?.invalid && (fecha_realizacion?.dirty || fecha_realizacion?.touched)" class="container text-danger">
+              
+            <div *ngIf="fecha_realizacion?.errors?.['maxlength'] || fecha_realizacion?.errors?.['minlength']">
+              Ingrese un año válido. 
+            </div>
+            
+          </div>
           <div class="input-group form-group">
             <label for="link" class="input-group-text textoLabel">Link del Proyecto</label>
             <input type="text" class="form-control" placeholder="Link del proyecto" formControlName="link" name="link" id="link">
           </div>
+          <div *ngIf="link?.invalid && (link?.dirty || link?.touched)" class="text-danger"
+          [ngClass]="{'is-invalid':link?.errors && link?.touched, 'is-valid':!link?.errors && link?.touched}">
+              
+            <div *ngIf="link?.errors?.['maxlength']">
+             El enlace no puede superar los 45 caracteres. 
+            </div>
+            
+          </div>
                        
           <div class="input-group form-group">
             <label for="url_image1" class="input-group-text textoLabel">Imágen 1</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 1" formControlName="url_image1" name="url_image1" id="url_image1">
+            <input type="text" class="form-control" placeholder="URL de imágen 1" formControlName="url_image1" name="url_image1" id="url_image1"
+            [ngClass]="{'is-invalid':url_image1?.errors && url_image1?.touched, 'is-valid':!url_image1?.errors && url_image1?.touched}">
+          </div>
+          <div *ngIf="url_image1?.invalid && (url_image1?.dirty || url_image1?.touched)" class="text-danger"
+          >
+              
+            <div *ngIf="url_image1?.errors?.['maxlength']">
+             La url no puede superar los 45 caracteres. 
+            </div>
+            
           </div>
           <div class="input-group form-group">
             <label for="url_image2" class="input-group-text textoLabel">Imágen 2</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 2" formControlName="url_image2" name="url_image2" id="url_image2">
+            <input type="text" class="form-control" placeholder="URL de imágen 2" formControlName="url_image2" name="url_image2" id="url_image2"
+            [ngClass]="{'is-invalid':url_image2?.errors && url_image2?.touched, 'is-valid':!url_image2?.errors && url_image2?.touched}">
+          </div>
+          <div *ngIf="url_image2?.invalid && (url_image2?.dirty || url_image2?.touched)" class="text-danger">
+              
+            <div *ngIf="url_image2?.errors?.['maxlength']">
+             La url no puede superar los 45 caracteres. 
+            </div>
+            
           </div>
           <div class="input-group form-group">
             <label for="url_image3" class="input-group-text textoLabel">Imágen 3</label>
-            <input type="text" class="form-control" placeholder="URL de imágen 3" formControlName="url_image3" name="url_image3" id="url_image3">
+            <input type="text" class="form-control" placeholder="URL de imágen 3" formControlName="url_image3" name="url_image3" id="url_image3"
+            [ngClass]="{'is-invalid':url_image3?.errors && url_image3?.touched, 'is-valid':!url_image3?.errors && url_image3?.touched}">
+          </div>
+          <div *ngIf="url_image3?.invalid && (url_image3?.dirty || url_image3?.touched)" class="text-danger">
+              
+            <div *ngIf="url_image3?.errors?.['maxlength']">
+             La url no puede superar los 45 caracteres. 
+            </div>
+            
           </div>
     
           

@@ -28,16 +28,16 @@ export class FormacionComponent implements OnInit {
     this.formFormacion = this.formBuilder.group(
       {
         idEst: [],
-        titulo: ['', [Validators.required]],
+        titulo: ['', [Validators.required, Validators.maxLength(50)]],
         descripcion: ['', [Validators.maxLength(250)]],
-        fecha: ['', [Validators.min(1980)]],
-        url_certificado: [],
-        url_imagen_estudio: ['']
+        fecha: ['', [Validators.maxLength(4)]],
+        url_certificado: ['', [Validators.maxLength(50)]],
+        url_imagen_estudio: ['', [Validators.maxLength(50)]]
 
       }
     )
   }
-  get Titulo() { return this.formFormacion.get("titulo"); }
+  get Titulo() { return this.formFormacion.get('titulo'); }
   get Descripcion() { return this.formFormacion.get("descripcion"); }
   get Fecha() { return this.formFormacion.get("fecha"); }
   get Url_certificado() { return this.formFormacion.get("url_certificado"); }
@@ -55,8 +55,6 @@ export class FormacionComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.mensajeService.showError(`${error.message}`);
-
-        // console.log(error.message);
       }
     })
   }

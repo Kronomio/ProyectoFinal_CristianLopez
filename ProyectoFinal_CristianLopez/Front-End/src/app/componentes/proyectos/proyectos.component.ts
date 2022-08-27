@@ -29,20 +29,25 @@ export class ProyectosComponent implements OnInit {
     private mensajeService: NotificacionesService) {
     this.formProyecto = formBuilder.group({
       id: [],
-      titulo: ['', [Validators.required]],
-      descripcion: [],
-      link: [],
-      url_image1: [],
-      url_image2: [],
-      url_image3: [],
-      fecha_realizacion: []
+      titulo: ['', [Validators.required, Validators.maxLength(45)]],
+      descripcion: ['', [Validators.maxLength(250)]],
+      link: ['', [ Validators.maxLength(45)]],
+      url_image1: ['', [Validators.maxLength(45)]],
+      url_image2: ['', [Validators.maxLength(45)]],
+      url_image3: ['', [Validators.maxLength(45)]],
+      fecha_realizacion: ['', [Validators.maxLength(4), Validators.minLength(4)]]
 
     });
  
   }
-  get Titulo() { return this.formProyecto.get("titulo"); }
-  get Descripcion() { return this.formProyecto.get("descripcion"); }
-  
+  get titulo() { return this.formProyecto.get("titulo"); }
+  get descripcion() { return this.formProyecto.get("descripcion"); }
+  get link() { return this.formProyecto.get("link"); }
+  get url_image1() { return this.formProyecto.get("url_image1"); }
+  get url_image2() { return this.formProyecto.get("url_image2"); }
+  get url_image3() { return this.formProyecto.get("url_image3"); }
+  get fecha_realizacion() { return this.formProyecto.get("fecha_realizacion"); }
+
 
   ngOnInit(): void {
     this.getProyectos();

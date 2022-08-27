@@ -1,7 +1,7 @@
 <!--Añado el btn de añadir experiencia y que abra el modal -->
 <div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end  " *ngIf="hasAccess">
   <button type="button" class="btn btn-primary btn-sm  " data-bs-toggle="modal" data-bs-target="#addExperienciaModal"
-  (click)="abrirModal('add')">
+    (click)="abrirModal('add')">
     Registrar Experiencia
   </button>
   <br>
@@ -16,12 +16,11 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let experiencia of experiencias">
-        <div class="col" data-aos="flip-down" data-aos-offset="150"
-        data-aos-duration="3000">
+        <div class="col" data-aos="flip-down" data-aos-offset="150" data-aos-duration="3000">
 
           <!-- Añado los botones de edicion y borrado-->
           <div class="col text-end" *ngIf="hasAccess">
-            <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" 
+            <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
               data-bs-target="#addExperienciaModal" (click)="abrirModal('edit',experiencia)">
               <i class="fa-solid fa-pen"></i>
             </a>
@@ -75,53 +74,109 @@
       <div class="modal-body">
 
         <form class="row g-3 " [formGroup]="formExperienciaLaboral" (ngSubmit)="saveExperiencia($event)" novalidate="">
-        
+
           <div class="form-group">
             <input type="hidden" formControlName="idExp" name="idExp" id="idExp" class="form-control">
           </div>
           <div class="input-group form-group">
             <label for="titulo" class="input-group-text textoLabel">Título</label>
-            <input type="text" class="form-control" formControlName="titulo" id="tituloExperiencia"  placeholder="Título" required>
+            <input type="text" class="form-control" formControlName="titulo" id="tituloExperiencia" placeholder="Título"
+              [ngClass]="{'is-invalid':titulo?.errors && titulo?.touched , 'is-valid':!titulo?.errors && titulo?.touched }"
+              required>
+          </div>
+          <div *ngIf="titulo?.invalid && (titulo?.dirty || titulo?.touched)" class="container text-danger">
+            <div *ngIf="titulo?.errors?.['required']">
+              El título es requerido.
+            </div>
+            <div *ngIf="titulo?.errors?.['maxlength']">
+              El título no puede superar los 50 caracteres.
+            </div>
+
           </div>
           <div class="col-12 form-group">
             <div class="form-floating ">
-              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion" id="descripcion"
-                name="descripcion" style="height: 200px" required></textarea >
+              <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion"
+                id="descripcion" name="descripcion" style="height: 200px"
+                [ngClass]="{'is-invalid':descripcion?.errors && descripcion?.touched, 'is-valid':!descripcion?.errors && descripcion?.touched}"
+                required> </textarea>
               <label for="descripcion">Descripción</label>
             </div>
+
           </div>
-        <div class="col-6">
-          <div class="input-group form-group">
-            <label for="fecha_inicio" class="input-group-text textoLabel" >Año Inicio</label>
-            <input type="text" class="form-control" formControlName="fecha_inicio" name="fecha_inicio" id="fecha_inicio" placeholder="Año Inicio">
+          <div *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)"
+            class=" container text-danger">
+
+            <div *ngIf="descripcion?.errors?.['maxlength']">
+              La descripción no puede superar los 250 caracteres.
+            </div>
+
           </div>
-        </div>
-        <div class="col-6">
-          <div class="input-group form-group">
-            <label for="fecha_fin" class="input-group-text textoLabel">Año Fin </label>
-            <input type="text" class="form-control" formControlName="fecha_fin" name="fecha_fin" id="fecha_fin" placeholder="Año Fin">
+          <div class="col-6">
+            <div class="input-group form-group">
+              <label for="fecha_inicio" class="input-group-text textoLabel">Año Inicio</label>
+              <input type="text" class="form-control" formControlName="fecha_inicio" name="fecha_inicio"
+                id="fecha_inicio" placeholder="Año Inicio"
+                [ngClass]="{'is-invalid':fecha_inicio?.errors && fecha_inicio?.touched, 'is-valid':!fecha_inicio?.errors && fecha_inicio?.touched}">
+            </div>
           </div>
+          
+          <div class="col-6">
+            <div class="input-group form-group">
+              <label for="fecha_fin" class="input-group-text textoLabel">Año Fin </label>
+              <input type="text" class="form-control" formControlName="fecha_fin" name="fecha_fin" id="fecha_fin"
+                placeholder="Año Fin"
+                [ngClass]="{'is-invalid':fecha_fin?.errors && fecha_fin?.touched, 'is-valid':!fecha_fin?.errors && fecha_fin?.touched}">
+            </div>
           </div>
           <p class="fs-7">En caso de ser actual, dejar año fin vacio.</p>
-                       
+          <div *ngIf="fecha_inicio?.invalid && (fecha_inicio?.dirty || fecha_inicio?.touched)"
+          class="container text-danger">
+
+          <div *ngIf="fecha_inicio?.errors?.['maxlength'] || fecha_inicio?.errors?.['minlength']">
+            Fecha de inicio inválida. 
+          </div>
+
+        </div>
+          <div *ngIf="fecha_fin?.invalid && (fecha_fin?.dirty || fecha_fin?.touched)" class="container text-danger">
+
+            <div *ngIf="fecha_fin?.errors?.['maxlength']">
+              Fceha de fin inválida. 
+            </div>
+
+          </div>
           <div class="input-group form-group">
             <label for="nombre_empresa" class="input-group-text textoLabel">Nombre de la empresa</label>
-            <input type="text" class="form-control" placeholder="Nombre de la empresa" formControlName="nombre_empresa" name="nombre_empresa" id="nombre_empresa">
+            <input type="text" class="form-control" placeholder="Nombre de la empresa" formControlName="nombre_empresa"
+              name="nombre_empresa" id="nombre_empresa"
+              [ngClass]="{'is-invalid':nombre_empresa?.errors && nombre_empresa?.touched, 'is-valid':!nombre_empresa?.errors && nombre_empresa?.touched}">
           </div>
-        
+          <div *ngIf="nombre_empresa?.invalid && (nombre_empresa?.dirty || nombre_empresa?.touched)"
+            class="container text-danger">
+
+            <div *ngIf="nombre_empresa?.errors?.['maxlength']">
+              El nombre de la empresa no puede superar los 45 caracteres.
+            </div>
+          </div>
           <div class="input-group form-group">
             <label for="logo_empresa" class="input-group-text textoLabel">Logo de la empresa</label>
-            <input type="text" class="form-control" formControlName="logo_empresa" placeholder="Logo de la empresa" name="logo_empresa" id="logo_empresa">
+            <input type="text" class="form-control" formControlName="logo_empresa" placeholder="Logo de la empresa"
+              name="logo_empresa" id="logo_empresa"
+              [ngClass]="{'is-invalid':logo_empresa?.errors && logo_empresa?.touched, 'is-valid':!logo_empresa?.errors && logo_empresa?.touched}">
           </div>
-        
-        
+          <div *ngIf="logo_empresa?.invalid && (logo_empresa?.dirty || logo_empresa?.touched)"
+            class="container text-danger">
+            <div *ngIf="logo_empresa?.errors?.['maxlength']">
+              El enlace no puede superar los 45 caracteres.
+            </div>
+          </div>
           <div class="modal-footer form-group">
-            <button type="button" id="add-experiencia-form" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="add-experiencia-form" class="btn btn-secondary"
+              data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
           </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 </div>

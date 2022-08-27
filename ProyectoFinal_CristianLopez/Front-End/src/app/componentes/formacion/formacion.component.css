@@ -50,3 +50,7 @@
     color: rgb(124, 123, 123);
 }
 
+.text-danger{
+    background-color: rgba(255, 0, 0, 0.2);
+   
+}

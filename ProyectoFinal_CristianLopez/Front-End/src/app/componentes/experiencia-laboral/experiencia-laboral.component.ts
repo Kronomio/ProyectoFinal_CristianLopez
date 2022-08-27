@@ -31,16 +31,21 @@ export class ExperienciaLaboralComponent implements OnInit {
     private mensajeService: NotificacionesService) {
     this.formExperienciaLaboral = this.formBuider.group({
       idExp:[],
-      titulo: ['', Validators.required],
-      descripcion: [''],
-      nombre_empresa: [''],
-      fecha_inicio: [],
-      fecha_fin: [],
-      logo_empresa: []
+      titulo: ['', [Validators.required, Validators.maxLength(45)]],
+      descripcion: ['', Validators.maxLength(250)],
+      nombre_empresa: ['', Validators.maxLength(45)],
+      fecha_inicio: ['', [Validators.maxLength(4), Validators.minLength(4)]],
+      fecha_fin: ['', [Validators.maxLength(4)]],
+      logo_empresa: ['', [Validators.maxLength(45)]]
 
     })
   }
-
+  get titulo() { return this.formExperienciaLaboral.get("titulo"); }
+  get descripcion() { return this.formExperienciaLaboral.get("descripcion"); }  
+  get nombre_empresa() { return this.formExperienciaLaboral.get("nombre_empresa"); }
+  get fecha_inicio() { return this.formExperienciaLaboral.get("fecha_inicio"); }
+  get fecha_fin() { return this.formExperienciaLaboral.get("fecha_fin"); }
+  get logo_empresa() { return this.formExperienciaLaboral.get("logo_empresa"); }
   ngOnInit(): void {
     AOS.init({
       delay: 0,
