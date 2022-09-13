@@ -20,7 +20,7 @@ public class UsuarioPrincipal implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private Long id;
+    private Integer id;
     private String nombre;
     private String username;
     private String email;
