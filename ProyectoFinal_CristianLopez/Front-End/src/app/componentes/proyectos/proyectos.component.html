@@ -88,7 +88,7 @@
             <input type="text" class="form-control" formControlName="titulo"  name="titulo" placeholder="Título" 
             [ngClass]="{'is-invalid':titulo?.errors && titulo?.touched , 'is-valid':!titulo?.errors && titulo?.touched }"
             required>
-            <div *ngIf="titulo?.invalid && (titulo?.dirty || titulo?.touched)" class="text-danger">
+            <div *ngIf="titulo?.invalid && (titulo?.dirty || titulo?.touched)" class="invalid-feedback">
               <div *ngIf="titulo?.errors?.['required']">
                 El título del proyecto es requerido.
               </div>
@@ -107,7 +107,7 @@
               <label for="descripcion">Descripción</label>
             </div>
           </div>
-          <div *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)" class=" container text-danger">
+          <div *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)" class="invalid-feedback">
               
             <div *ngIf="descripcion?.errors?.['maxlength']">
               La descripción no puede superar los 250 caracteres. 
@@ -120,7 +120,7 @@
             <input type="text" class="form-control" formControlName="fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" placeholder="Año"
             [ngClass]="{'is-invalid':fecha_realizacion?.errors && fecha_realizacion?.touched, 'is-valid':!fecha_realizacion?.errors && fecha_realizacion?.touched}">
           </div>
-          <div *ngIf="fecha_realizacion?.invalid && (fecha_realizacion?.dirty || fecha_realizacion?.touched)" class="container text-danger">
+          <div *ngIf="fecha_realizacion?.invalid && (fecha_realizacion?.dirty || fecha_realizacion?.touched)" class="invalid-feedback">
               
             <div *ngIf="fecha_realizacion?.errors?.['maxlength'] || fecha_realizacion?.errors?.['minlength']">
               Ingrese un año válido. 
@@ -131,11 +131,11 @@
             <label for="link" class="input-group-text textoLabel">Link del Proyecto</label>
             <input type="text" class="form-control" placeholder="Link del proyecto" formControlName="link" name="link" id="link">
           </div>
-          <div *ngIf="link?.invalid && (link?.dirty || link?.touched)" class="text-danger"
+          <div *ngIf="link?.invalid && (link?.dirty || link?.touched)" class="invalid-feedback"
           [ngClass]="{'is-invalid':link?.errors && link?.touched, 'is-valid':!link?.errors && link?.touched}">
               
             <div *ngIf="link?.errors?.['maxlength']">
-             El enlace no puede superar los 45 caracteres. 
+             El enlace no puede superar los 250 caracteres. 
             </div>
             
           </div>
@@ -145,11 +145,11 @@
             <input type="text" class="form-control" placeholder="URL de imágen 1" formControlName="url_image1" name="url_image1" id="url_image1"
             [ngClass]="{'is-invalid':url_image1?.errors && url_image1?.touched, 'is-valid':!url_image1?.errors && url_image1?.touched}">
           </div>
-          <div *ngIf="url_image1?.invalid && (url_image1?.dirty || url_image1?.touched)" class="text-danger"
+          <div *ngIf="url_image1?.invalid && (url_image1?.dirty || url_image1?.touched)" class="invalid-feedback"
           >
               
             <div *ngIf="url_image1?.errors?.['maxlength']">
-             La url no puede superar los 45 caracteres. 
+             La url no puede superar los 250 caracteres. 
             </div>
             
           </div>
@@ -158,10 +158,10 @@
             <input type="text" class="form-control" placeholder="URL de imágen 2" formControlName="url_image2" name="url_image2" id="url_image2"
             [ngClass]="{'is-invalid':url_image2?.errors && url_image2?.touched, 'is-valid':!url_image2?.errors && url_image2?.touched}">
           </div>
-          <div *ngIf="url_image2?.invalid && (url_image2?.dirty || url_image2?.touched)" class="text-danger">
+          <div *ngIf="url_image2?.invalid && (url_image2?.dirty || url_image2?.touched)" class="invalid-feedback">
               
             <div *ngIf="url_image2?.errors?.['maxlength']">
-             La url no puede superar los 45 caracteres. 
+             La url no puede superar los 250 caracteres. 
             </div>
             
           </div>
@@ -170,10 +170,10 @@
             <input type="text" class="form-control" placeholder="URL de imágen 3" formControlName="url_image3" name="url_image3" id="url_image3"
             [ngClass]="{'is-invalid':url_image3?.errors && url_image3?.touched, 'is-valid':!url_image3?.errors && url_image3?.touched}">
           </div>
-          <div *ngIf="url_image3?.invalid && (url_image3?.dirty || url_image3?.touched)" class="text-danger">
+          <div *ngIf="url_image3?.invalid && (url_image3?.dirty || url_image3?.touched)" class="invalid-feedback">
               
             <div *ngIf="url_image3?.errors?.['maxlength']">
-             La url no puede superar los 45 caracteres. 
+             La url no puede superar los 250 caracteres. 
             </div>
             
           </div>

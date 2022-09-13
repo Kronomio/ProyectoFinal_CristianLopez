@@ -28,20 +28,20 @@ export class PortadaComponent implements OnInit {
         {
           nombre:['', [Validators.required]],
           apellido:['', [Validators.required]],
-          fecha_nac:['01-01-1900'],
-          url_foto:[''],
-          url_fondo:[''],
-          telefono:[''],
-          acerca_de:[''],
-          link_facebook:[''],
-          link_instagram:[''],
-          link_linkedin:[''],
-          link_twitter:[''],
-          link_google:[''],
-          link_github:[''],
+          fecha_nac:['1900-01-01'],
+          url_foto:['', [Validators.maxLength(100)]],
+          url_fondo:['', [Validators.maxLength(100)]],
+          telefono:['', [Validators.maxLength(20)]],
+          acerca_de:['', [Validators.maxLength(255)]],
+          link_facebook:['', [Validators.maxLength(100)]],
+          link_instagram:['', [Validators.maxLength(100)]],
+          link_linkedin:['', [Validators.maxLength(100)]],
+          link_twitter:['', [Validators.maxLength(100)]],
+          link_google:['', [Validators.maxLength(100)]],
+          link_github:['', [Validators.maxLength(100)]],
           mail:['', [Validators.email]],
-          ciudad:[''],
-          pais:['']
+          ciudad:['', [Validators.maxLength(100)]],
+          pais:['', [Validators.maxLength(100)]]
         }
 
       );

@@ -53,6 +53,8 @@ export class NavbarComponent implements OnInit {
   abrirLogin() { this.modalSwitch = true; }
 
   onLogOut(): void {
+    this.isLogged = false;
+    this.nameUser = '';
     this.tokenService.logOut();
     window.location.reload();
    

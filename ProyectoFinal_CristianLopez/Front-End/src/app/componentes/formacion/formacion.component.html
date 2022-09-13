@@ -12,7 +12,7 @@
 <br>
 
 
-<div class="container animate__animated ">
+<div class="container animate__animated " id="contenedor_principal">
   <div class="row" id="items_formacion">
     <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let estudio of estudios">
       <div class="col">
@@ -45,7 +45,7 @@
             <div class="card-body">
               <h5 class="card-title">{{estudio.titulo}}</h5>
               <p class="card-text">{{estudio.descripcion}}</p>
-              <p class="card-text"><small class="text-muted">Año: {{estudio.fecha}}</small></p>
+              <p class="card-text"><small class="text-muted"><a href={{estudio.url_certificado}} *ngIf="estudio.url_certificado !=''"> Certificado</a> Año: {{estudio.fecha}}</small></p>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
               placeholder="Título" id="titulo" 
               [ngClass]="{'is-invalid':Titulo?.errors && Titulo?.touched, 'is-valid':!Titulo?.errors && Titulo?.touched}" required>
           </div>
-              <div *ngIf="Titulo?.invalid && (Titulo?.dirty || Titulo?.touched)" class="container text-danger">
+              <div *ngIf="Titulo?.invalid && (Titulo?.dirty || Titulo?.touched)" class="invalid-feedback">
                 <div *ngIf="Titulo?.errors?.['required']">
                   El título es requerido.
                 </div>
@@ -105,7 +105,7 @@
               <label for="descripcion">Descripción</label>
             </div>
           </div>
-            <div *ngIf="Descripcion?.invalid && (Descripcion?.dirty || Descripcion?.touched)" class=" container text-danger">
+            <div *ngIf="Descripcion?.invalid && (Descripcion?.dirty || Descripcion?.touched)" class=" invalid-feedback">
               
               <div *ngIf="Descripcion?.errors?.['maxlength']">
                 La descripción no puede superar los 250 caracteres. 
@@ -119,7 +119,7 @@
             <input type="text" class="form-control" formControlName="fecha" name="fecha" id="fecha" placeholder="Año"
             [ngClass]="{'is-invalid':Fecha?.errors && Fecha?.touched, 'is-valid':!Fecha?.errors && Fecha?.touched}">
           </div>
-          <div *ngIf="Fecha?.invalid && (Fecha?.dirty || Fecha?.touched)" class="text-danger">
+          <div *ngIf="Fecha?.invalid && (Fecha?.dirty || Fecha?.touched)" class="invalid-feedback">
               
             <div *ngIf="Fecha?.errors?.['maxlength'] || Fecha?.errors?.['minlength']">
               Ingrese un año válido. 
@@ -133,10 +133,10 @@
               name="url_imagen_estudio" id="url_imagen_estudio"
               [ngClass]="{'is-invalid':Url_imagen?.errors && Url_imagen?.touched, 'is-valid':!Url_imagen?.errors && Url_imagen?.touched}">
           </div>
-              <div *ngIf="Url_imagen?.invalid && (Url_imagen?.dirty || Url_imagen?.touched)" class="text-danger">
+              <div *ngIf="Url_imagen?.invalid && (Url_imagen?.dirty || Url_imagen?.touched)" class="invalid-feedback">
               
                 <div *ngIf="Url_imagen?.errors?.['maxlength']">
-                 La url no puede superar los 45 caracteres. 
+                 La url no puede superar los 250 caracteres. 
                 </div>
                 
               </div>
@@ -148,10 +148,10 @@
               name="url_certificado" id="url_imagen_certificado"
               [ngClass]="{'is-invalid':Url_certificado?.errors && Url_certificado?.touched, 'is-valid':!Url_certificado?.errors && Url_certificado?.touched}">
           </div>
-          <div *ngIf="Url_certificado?.invalid && (Url_certificado?.dirty || Url_certificado?.touched)" class="text-danger">
+          <div *ngIf="Url_certificado?.invalid && (Url_certificado?.dirty || Url_certificado?.touched)" class="invalid-feedback">
               
                 <div *ngIf="Url_certificado?.errors?.['maxlength']">
-                 La url no puede superar los 45 caracteres. 
+                 La url no puede superar los 250 caracteres. 
                 </div>
                 
               </div>

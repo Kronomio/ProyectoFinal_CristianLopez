@@ -31,8 +31,8 @@ export class FormacionComponent implements OnInit {
         titulo: ['', [Validators.required, Validators.maxLength(50)]],
         descripcion: ['', [Validators.maxLength(250)]],
         fecha: ['', [Validators.maxLength(4)]],
-        url_certificado: ['', [Validators.maxLength(50)]],
-        url_imagen_estudio: ['', [Validators.maxLength(50)]]
+        url_certificado: ['', [Validators.maxLength(250)]],
+        url_imagen_estudio: ['', [Validators.maxLength(250)]]
 
       }
     )

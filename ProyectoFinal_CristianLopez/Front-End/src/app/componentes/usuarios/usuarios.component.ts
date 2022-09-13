@@ -132,6 +132,7 @@ export class UsuariosComponent implements OnInit {
   {
     this.router.navigate(['home']);
   }
+  
   actualizarPermisos()
   {
     if($("#usuarioStandarCheck").prop('checked') )

@@ -31,10 +31,10 @@ export class ProyectosComponent implements OnInit {
       id: [],
       titulo: ['', [Validators.required, Validators.maxLength(45)]],
       descripcion: ['', [Validators.maxLength(250)]],
-      link: ['', [ Validators.maxLength(45)]],
-      url_image1: ['', [Validators.maxLength(45)]],
-      url_image2: ['', [Validators.maxLength(45)]],
-      url_image3: ['', [Validators.maxLength(45)]],
+      link: ['', [ Validators.maxLength(250)]],
+      url_image1: ['', [Validators.maxLength(250)]],
+      url_image2: ['', [Validators.maxLength(250)]],
+      url_image3: ['', [Validators.maxLength(250)]],
       fecha_realizacion: ['', [Validators.maxLength(4), Validators.minLength(4)]]
 
     });
