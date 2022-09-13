@@ -17,45 +17,44 @@ import * as $ from 'jquery';
 export class ChangePasswordComponent implements OnInit {
 
   formChangePassword: FormGroup;
-  user!:ChangePasswordUsuario;
-  constructor(private formBuilder: FormBuilder, 
+  user!: ChangePasswordUsuario;
+  constructor(private formBuilder: FormBuilder,
     private autenticationService: AutenticacionService,
-    private mensajeService:NotificacionesService,
+    private mensajeService: NotificacionesService,
     private tokenService: TokenService,
-    private router:Router) {  
+    private router: Router) {
     this.formChangePassword = this.formBuilder.group(
-    {
-      oldPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]],
-      newPassword2: ['', [Validators.required]]
-    
-    });
-  this.formChangePassword.get('newPassword2')?.setValidators(ValidadorPersonalizado.confirmacionContraseña(this.formChangePassword.get('newPassword')));
- 
-}
+      {
+        oldPassword: ['', [Validators.required]],
+        newPassword: ['', [Validators.required]],
+        newPassword2: ['', [Validators.required]]
+
+      });
+    this.formChangePassword.get('newPassword2')?.setValidators(ValidadorPersonalizado.confirmacionContraseña(this.formChangePassword.get('newPassword')));
+
+  }
 
   ngOnInit(): void {
-    
+
     $('#oldPassword').focus();
-    
+
   }
   get OldPassword() { return this.formChangePassword.get("oldPassword"); }
   get NewPassword() { return this.formChangePassword.get("newPassword"); }
   get NewPassword2() { return this.formChangePassword.get("newPassword2"); }
 
-  updatePassword(event:Event){
-    
-    this.user=new ChangePasswordUsuario(this.tokenService.getUsername(), this.OldPassword?.value, this.NewPassword?.value)
-    
+  updatePassword(event: Event) {
+
+    this.user = new ChangePasswordUsuario(this.tokenService.getUsername(), this.OldPassword?.value, this.NewPassword?.value)
+
     this.autenticationService.updatePassword(this.user).subscribe({
-      next:(data:any) =>{
+      next: (data: any) => {
         this.mensajeService.showSuccess("Se actualizó la contraseña correctamente");
-        
+
         $("#cancelar").click();
-        
-        
-      }, error:(err:HttpErrorResponse)=>{
-               
+
+      }, error: (err: HttpErrorResponse) => {
+
         this.mensajeService.showError("Contraseña Incorrecta");
       }
     })

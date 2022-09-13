@@ -10,29 +10,17 @@ import { TokenService } from 'src/app/services/token.service';
 })
 
 export class AcercaDeComponent implements OnInit {
- //public persona:Persona | undefined;
- public editPersona:Persona | undefined;
-@Input() persona?:Persona; 
+  //public persona:Persona | undefined;
+  public editPersona: Persona | undefined;
+  @Input() persona?: Persona;
 
-  constructor(public personaService: PersonaService, private tokenService:TokenService) { }
+  constructor(public personaService: PersonaService, private tokenService: TokenService) { }
 
   ngOnInit(): void {
-   
-  // this.verPersonas();
+
+
   }
 
-  // public verPersonas():void{
-  //   this.personaService.verPersonas().subscribe({
-  //     next: (response:Persona) => {
-  //       this.persona=response;
-      
-  //     },
-  //     error:(error:HttpErrorResponse)=>{
-      
-  //   }
-      
-  //   });
-    
-  // }
+
 
 }

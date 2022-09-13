@@ -1,57 +1,43 @@
-.h2{
-    font-family: 'Cabin', sans-serif;
-    color:var(--lineaColor);
+.h2 {
+  font-family: "Cabin", sans-serif;
+  color: var(--lineaColor);
 }
-#sobremi{
-    padding: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#sobremi {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#filasobremi{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#filasobremi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#fotoPerfil{
-    box-shadow: 5px 5px 5px grey;
-    width: 350px;
+#fotoPerfil {
+  box-shadow: 5px 5px 5px grey;
+  width: 350px;
 }
 
-.linea
-{
-    border-top: 1.5px solid var(--lineaColor);
-    height: 2px;
-    max-height: 15px;
-    width: 170px;
-    padding: -1px;
-    margin: -8px auto 0 auto;
-    
-
+.linea {
+  border-top: 1.5px solid var(--lineaColor);
+  height: 2px;
+  max-height: 15px;
+  width: 170px;
+  padding: -1px;
+  margin: -8px auto 0 auto;
 }
-#marco_foto{
-    text-align: center;
+#marco_foto {
+  text-align: center;
 }
 @media (max-width: 990px) {
-  
-   
-    #texto_acerca_de{
-        
-        text-align: center;
-        
-    }
-    
-    
+  #texto_acerca_de {
+    text-align: center;
+  }
 }
 
 @media (max-width: 570px) {
-   
-   
-
-    #texto_acerca_de{
-        text-align: center;
-        font-size:large ;
-    }
-    
-    
+  #texto_acerca_de {
+    text-align: center;
+    font-size: large;
+  }
 }
