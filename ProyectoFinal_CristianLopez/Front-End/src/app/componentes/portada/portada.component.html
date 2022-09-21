@@ -1,5 +1,5 @@
-<div class="container-fluid bg home"  style="background-image:url('{{persona?.url_fondo}}')" id="home">
-  
+<div class="container-fluid bg home" style="background-image:url('{{persona?.url_fondo}}')" id="home">
+
   <app-navbar [persona]="persona"></app-navbar>
   <div class="container">
     <div class="row">
@@ -16,32 +16,28 @@
         </p>
       </div>
       <div class="col-4 justify-content-end">
-        <img
-          id="logoCL"
-          src="/assets/LogoSinFondoBlanco.png"
-          class="img-fluid"
-          alt="Logo Personal de desarrollador"
-        />
+        <img id="logoCL" src="/assets/LogoSinFondoBlanco.png" class="img-fluid" alt="Logo Personal de desarrollador" />
       </div>
     </div>
   </div>
 </div>
 
 <!-- Button trigger modal -->
-<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end" >
+<div class="d-grid px-5 gap-2 d-md-flex justify-content-md-end">
   <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
     data-bs-target="#modificarDatosPersonales" *ngIf="hasAccess" (click)="cargarDatosPersonales(persona!)">
     Modificar información personal
   </button>
 
-  
+
 </div>
 
 
 <!-- Modal de edicion de Datos Personales-->
 
 
-<div class="modal fade modal-lg" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel">
+<div class="modal fade modal-lg" id="modificarDatosPersonales" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -50,99 +46,138 @@
       </div>
       <div class="modal-body">
         <!-- Formulario de edicion de persona -->
-        <form class="row g-3" [formGroup]="formDatosPersonales" (ngSubmit)="guardarPersona($event)" #formulario="ngForm" novalidate="">
+        <form class="row g-3 needs-validation" [formGroup]="formDatosPersonales" (ngSubmit)="guardarPersona($event)"
+          #formulario="ngForm" novalidate="">
+
+          <div class=" col-md-6 input-group has-validation">
+
+            <label for="nombre" class="input-group-text">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" formControlName="nombre"
+              [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched, 'is-valid':!Nombre?.errors && Nombre?.touched}"
+              required>
+            <div *ngIf="Nombre?.hasError('required')" class="invalid-feedback">El nombre es requerido
+            </div>
+            <label for="apellido" class="input-group-text">Apellido</label>
+            <input type="text" class="form-control" name="apellido" formControlName="apellido"
+              [ngClass]="{'is-invalid':Apellido?.errors && Apellido?.touched, 'is-valid':!Apellido?.errors && Apellido?.touched}"
+              required>
+            <div *ngIf="Apellido?.hasError('required')" class="invalid-feedback">El apellido es requerido
+            </div>
+          </div>
+
+
+          <div class="col-md-4 input-group has-validation">
+
+            <label for="fecha_nac" class="input-group-text">Fecha Nac.</label>
+            <input type="date" class="form-control" name="fecha_nac" formControlName="fecha_nac"
+              [ngClass]="{'is-invalid':Fecha_nac?.errors && Fecha_nac?.touched, 'is-valid':!Fecha_nac?.errors && Fecha_nac?.touched}">
+            <div *ngIf="Fecha_nac?.hasError('required')" class="invalid-feedback">El apellido es requerido
+            </div>
+          </div>
+
+          <div class="col-md-4 input-group has-validation">
+            <label for="ciudad" class="input-group-text">Ciudad</label>
+            <input type="text" class="form-control" name="ciudad" formControlName="ciudad"
+            [ngClass]="{'is-invalid':Ciudad?.errors && Ciudad?.touched, 'is-valid':!Ciudad?.errors && Ciudad?.touched}">
+            <div *ngIf="Ciudad?.hasError('required')" class="invalid-feedback">La ciudad es requerida.
+            </div>
+            <label for="pais" class="input-group-text">País</label>
+            <input type="text" class="form-control" name="pais" formControlName="pais"
+            [ngClass]="{'is-invalid':Pais?.errors && Pais?.touched, 'is-valid':!Pais?.errors && Pais?.touched}">
+            <div *ngIf="Pais?.hasError('required')" class="invalid-feedback">El país es requerido.
+            </div>
+          </div>
           
-          <div class=" col-md-6 input-group">
-
-            <label for="inputNombre" class="input-group-text">Nombre</label>
-            <input type="text" class="form-control"  name="nombre" id="nombre" formControlName="nombre"  required>
-         
-            <label for="inputApellido" class="input-group-text">Apellido</label>
-            <input type="text" class="form-control" name="apellido"  formControlName="apellido" required>
-          </div>
-
-          <div class="col-md-4 input-group">
-
-            <label for="inputFecha" class="input-group-text">Fecha Nac.</label>
-            <input type="date" class="form-control" name="fecha_nac"  formControlName="fecha_nac">
-          </div>
-          <div class="col-md-4 input-group">
-            <label for="inputApellido" class="input-group-text">Ciudad</label>
-            <input type="text" class="form-control" name="ciudad"  formControlName="ciudad"  >
-            <label for="inputApellido" class="input-group-text">País</label>
-            <input type="text" class="form-control" name="pais"  formControlName="pais">
-          </div>
+          
 
           <div class="col-12 input-group">
             <label for="inputEmail" class="input-group-text">Email Principal</label>
-            <input type="email" class="form-control" name="mail"  formControlName="mail">
+            <input type="email" class="form-control" name="mail" formControlName="mail"
+            [ngClass]="{'is-invalid':Mail?.errors && Mail?.touched, 'is-valid':!Mail?.errors && Mail?.touched}">
+            <div *ngIf="Mail?.hasError('required')" class="invalid-feedback">El email es requerido
+            </div>
+            <div *ngIf="Mail?.hasError('email')" class="invalid-feedback">Ingrese un email válido
+            </div>
           </div>
 
 
           <div class="col-5 input-group">
             <label for="inputFoto" class="input-group-text">Foto Perfil</label>
-            <input type="text" class="form-control" name="url_foto"  formControlName="url_foto">
+            <input type="text" class="form-control" name="url_foto" formControlName="url_foto">
             <img src="{{formDatosPersonales.value['url_foto']}}" class="img-thumbnail" width=300px alt="...">
           </div>
 
           <div class="col-5 input-group">
             <label for="inputFoto" class="input-group-text">Imágen de Fondo</label>
-            <input type="text" class="form-control" placeholder="URL imágen de Fondo" name="url_fondo"  formControlName="url_fondo">
+            <input type="text" class="form-control" placeholder="URL imágen de Fondo" name="url_fondo"
+              formControlName="url_fondo">
             <img src="{{formDatosPersonales.value['url_fondo']}}" class="img-thumbnail" width=300px alt="...">
           </div>
 
 
 
-          <div class="col-12 input-group"> 
+          <div class="col-12 input-group">
             <div class="form-floating">
-              <textarea class="form-control " placeholder="Ingrese su descripción"  name="acerca_de" formControlName="acerca_de" style="height: 200px"></textarea>
-              <label for="floatingTextarea input-group-text"  >Acerca de mi</label>
+              <textarea class="form-control " placeholder="Ingrese su descripción" name="acerca_de"
+                formControlName="acerca_de" style="height: 200px"></textarea>
+              <label for="floatingTextarea input-group-text">Acerca de mi</label>
             </div>
           </div>
           <!-- Redes Sociales -->
-         
-          <div class="col-10 input-group"> 
-             <span class="input-group-text" style="background-color: #0082ca" id="basic-addon1"><i class="fab fa-linkedin-in" style="color: white"></i></span>
-            <input type="text" class="form-control"  placeholder="LinkedIn" name="link_linkedin" formControlName="link_linkedin">
-          </div> 
-           
-          <div class="col-10 input-group"> 
-            <span class="input-group-text" style="background-color: #333333;" id="basic-addon1"><i class="fab fa-github" style="color: white"></i></span>
-           <input type="text" class="form-control"  placeholder="GitHub" name="link_github" formControlName="link_github">
-         </div> 
-
-         <div class="col-10 input-group"> 
-          <span class="input-group-text" style="background-color: #dd4b39;" id="basic-addon1"><i class="fab fa-google" style="color: white"></i></span>
-         <input type="text" class="form-control"  placeholder="Google" name="link_google" value="null" formControlName="link_google">
-       </div> 
 
           <div class="col-10 input-group">
-            <span class="input-group-text" style="background-color: #ac2bac" id="basic-addon1"><i class="fab fa-instagram" style="color: white"></i></span>
-            <input type="text" class="form-control"   placeholder="Instagram" name="link_instagram" formControlName="link_instagram">
+            <span class="input-group-text" style="background-color: #0082ca" id="basic-addon1"><i
+                class="fab fa-linkedin-in" style="color: white"></i></span>
+            <input type="text" class="form-control" placeholder="LinkedIn" name="link_linkedin"
+              formControlName="link_linkedin">
           </div>
 
           <div class="col-10 input-group">
-            <span class="input-group-text" style="background-color: #55acee;;" id="basic-addon1"><i class="fab fa-twitter" style="color: white"></i></span>      
-            <input type="text" class="form-control"   placeholder="Twitter" name="link_twitter" formControlName="link_twitter">
+            <span class="input-group-text" style="background-color: #333333;" id="basic-addon1"><i class="fab fa-github"
+                style="color: white"></i></span>
+            <input type="text" class="form-control" placeholder="GitHub" name="link_github"
+              formControlName="link_github">
           </div>
 
-          <div class="col-10 input-group"> 
-            <span class="input-group-text" style="background-color: #3b5998;" id="basic-addon1"><i class="fab fa-facebook-f" style="color: white"></i></span>
-           <input type="text" class="form-control"  placeholder="Facebook" name="link_facebook" formControlName="link_facebook">
-         </div> 
+          <div class="col-10 input-group">
+            <span class="input-group-text" style="background-color: #dd4b39;" id="basic-addon1"><i class="fab fa-google"
+                style="color: white"></i></span>
+            <input type="text" class="form-control" placeholder="Google" name="link_google" value="null"
+              formControlName="link_google">
+          </div>
+
+          <div class="col-10 input-group">
+            <span class="input-group-text" style="background-color: #ac2bac" id="basic-addon1"><i
+                class="fab fa-instagram" style="color: white"></i></span>
+            <input type="text" class="form-control" placeholder="Instagram" name="link_instagram"
+              formControlName="link_instagram">
+          </div>
+
+          <div class="col-10 input-group">
+            <span class="input-group-text" style="background-color: #55acee;;" id="basic-addon1"><i
+                class="fab fa-twitter" style="color: white"></i></span>
+            <input type="text" class="form-control" placeholder="Twitter" name="link_twitter"
+              formControlName="link_twitter">
+          </div>
+
+          <div class="col-10 input-group">
+            <span class="input-group-text" style="background-color: #3b5998;" id="basic-addon1"><i
+                class="fab fa-facebook-f" style="color: white"></i></span>
+            <input type="text" class="form-control" placeholder="Facebook" name="link_facebook"
+              formControlName="link_facebook">
+          </div>
 
 
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-          </div> 
-          </form>
+           
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  >Guardar</button>
+          
+          </div>
+        </form>
       </div>
-      
+
     </div>
   </div>
 </div>
-
-
-

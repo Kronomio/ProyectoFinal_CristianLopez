@@ -31,12 +31,12 @@ export class ExperienciaLaboralComponent implements OnInit {
     private mensajeService: NotificacionesService) {
     this.formExperienciaLaboral = this.formBuider.group({
       idExp: [],
-      titulo: ['', [Validators.required, Validators.maxLength(45)]],
+      titulo: ['', [Validators.required, Validators.maxLength(100)]],
       descripcion: ['', Validators.maxLength(250)],
-      nombre_empresa: ['', Validators.maxLength(45)],
+      nombre_empresa: ['', Validators.maxLength(100)],
       fecha_inicio: ['', [Validators.maxLength(4), Validators.minLength(4)]],
       fecha_fin: ['', [Validators.maxLength(4)]],
-      logo_empresa: ['', [Validators.maxLength(100)]]
+      logo_empresa: ['']
 
     })
   }
@@ -70,6 +70,7 @@ export class ExperienciaLaboralComponent implements OnInit {
     })
   }
   public abrirModal(modo: string, experiencia?: Experiencia): void {
+    this.formExperienciaLaboral.reset();
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.style.display = 'none';
