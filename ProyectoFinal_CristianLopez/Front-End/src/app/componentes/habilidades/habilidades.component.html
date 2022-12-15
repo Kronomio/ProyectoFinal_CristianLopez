@@ -33,7 +33,7 @@
           [animationDuration]="3000" [showImage]="true" [imageWidth]="80" [imageHeight]="80"
           [imageSrc]="habilidad!.url_imagen.toString()" [showBackground]="false"></circle-progress>
         <label class="h5 texto">{{habilidad?.nombre}} - <font SIZE=2>{{habilidad?.porcentaje}} %</font> </label>
-        
+
 
       </div>
     </div>
@@ -62,8 +62,8 @@
             <div class="input-group form-group">
               <input type="hidden" formControlName="idHab" name="idHab" id="idHab" class="form-control">
               <label for="nombre" class="input-group-text textoLabel">Nombre </label>
-              <input type="text" class="form-control"  name="nombre" placeholder="Nombre de la habilidad"
-                formControlName="nombre" id="nombreHabilidad" 
+              <input type="text" class="form-control" name="nombre" placeholder="Nombre de la habilidad"
+                formControlName="nombre" id="nombreHabilidad"
                 [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched , 'is-valid':!Nombre?.errors && Nombre?.touched }"
                 required>
 
@@ -118,11 +118,10 @@
             </div>
 
             <div class="modal-footer form-group">
-              <button type="button" class="btn btn-secondary"
-                data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="form.invalid"
-                disabled>Guardar</button>
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="form.valid">Guardar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                [disabled]="form.invalid">Guardar</button>
 
             </div>
           </form>

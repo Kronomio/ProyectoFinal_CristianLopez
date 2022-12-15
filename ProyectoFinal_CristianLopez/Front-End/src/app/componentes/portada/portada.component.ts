@@ -99,6 +99,11 @@ get link_instagram() { return this.formDatosPersonales.get('nombre')}
       });
 
     }
+    else
+    {
+      this.mensajeService.showError(`No fué posible actualizar la información. Revise los valores ingresados`);
+
+    }
 
   }
 

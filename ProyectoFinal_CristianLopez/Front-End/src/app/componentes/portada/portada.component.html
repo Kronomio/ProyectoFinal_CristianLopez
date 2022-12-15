@@ -131,48 +131,39 @@
             <input type="text" class="form-control" placeholder="LinkedIn" name="link_linkedin"
               formControlName="link_linkedin">
           </div>
-
           <div class="col-10 input-group">
             <span class="input-group-text" style="background-color: #333333;" id="basic-addon1"><i class="fab fa-github"
                 style="color: white"></i></span>
             <input type="text" class="form-control" placeholder="GitHub" name="link_github"
               formControlName="link_github">
           </div>
-
           <div class="col-10 input-group">
             <span class="input-group-text" style="background-color: #dd4b39;" id="basic-addon1"><i class="fab fa-google"
                 style="color: white"></i></span>
             <input type="text" class="form-control" placeholder="Google" name="link_google" value="null"
               formControlName="link_google">
           </div>
-
           <div class="col-10 input-group">
             <span class="input-group-text" style="background-color: #ac2bac" id="basic-addon1"><i
                 class="fab fa-instagram" style="color: white"></i></span>
             <input type="text" class="form-control" placeholder="Instagram" name="link_instagram"
               formControlName="link_instagram">
           </div>
-
           <div class="col-10 input-group">
             <span class="input-group-text" style="background-color: #55acee;;" id="basic-addon1"><i
                 class="fab fa-twitter" style="color: white"></i></span>
             <input type="text" class="form-control" placeholder="Twitter" name="link_twitter"
               formControlName="link_twitter">
           </div>
-
           <div class="col-10 input-group">
             <span class="input-group-text" style="background-color: #3b5998;" id="basic-addon1"><i
                 class="fab fa-facebook-f" style="color: white"></i></span>
             <input type="text" class="form-control" placeholder="Facebook" name="link_facebook"
               formControlName="link_facebook">
           </div>
-
-
-
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-           
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  >Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>     
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formDatosPersonales.invalid" >Guardar</button>
           
           </div>
         </form>

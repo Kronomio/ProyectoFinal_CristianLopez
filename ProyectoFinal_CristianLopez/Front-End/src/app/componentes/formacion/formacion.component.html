@@ -17,42 +17,40 @@
     <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let estudio of estudios">
       <div class="col">
 
-      <!--Agrego los botones de edición y borrar -->
+        <!--Agrego los botones de edición y borrar -->
 
-      <div class="col text-end" *ngIf="hasAccess">
-        <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addFormacionModal"
-          (click)="abrirModal('edit',estudio)">
-          <i class="fa-solid fa-pen"></i>
-        </a>
-        <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal" data-bs-target="#deleteFormacionModal"
-          (click)="abrirModal('delete',estudio)">
-          <i class="fa-solid fa-trash-can"></i>
-        </a>
-      </div>
+        <div class="col text-end" *ngIf="hasAccess">
+          <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#addFormacionModal"
+            (click)="abrirModal('edit',estudio)">
+            <i class="fa-solid fa-pen"></i>
+          </a>
+          <a type="button" class="btn btn-secondary btn-sm " data-bs-toggle="modal"
+            data-bs-target="#deleteFormacionModal" (click)="abrirModal('delete',estudio)">
+            <i class="fa-solid fa-trash-can"></i>
+          </a>
+        </div>
 
 
-      <div class="card bg-opacity-50 mb-3" id="tarjetaFormacion" data-aos="flip-left"
-      
-      data-aos-offset="150"
-      data-aos-duration="3000"
-        style="max-width:540px; min-height: 200px;">
-        <div class="row" id="items_formacion2">
-          <div class="col-md-4 columna_imagen" >
-            <img src={{estudio.url_imagen_estudio}} class="img-fluid rounded float-start align-middle" width=100px height="100px"
-              alt={{estudio.url_imagen_estudio}} id="imagenFormacion">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{estudio.titulo}}</h5>
-              <p class="card-text">{{estudio.descripcion}}</p>
-              <p class="card-text"><small class="text-muted"><a href={{estudio.url_certificado}} *ngIf="estudio.url_certificado !=''"> Certificado</a> Año: {{estudio.fecha}}</small></p>
+        <div class="card bg-opacity-50 mb-3" id="tarjetaFormacion" data-aos="flip-left" data-aos-offset="150"
+          data-aos-duration="3000" style="max-width:540px; min-height: 200px;">
+          <div class="row" id="items_formacion2">
+            <div class="col-md-4 columna_imagen">
+              <img src={{estudio.url_imagen_estudio}} class="img-fluid rounded float-start align-middle" width=100px
+                height="100px" alt={{estudio.url_imagen_estudio}} id="imagenFormacion">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{estudio.titulo}}</h5>
+                <p class="card-text">{{estudio.descripcion}}</p>
+                <p class="card-text"><small class="text-muted"><a href={{estudio.url_certificado}}
+                      *ngIf="estudio.url_certificado !=''"> Certificado</a> Año: {{estudio.fecha}}</small></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 
@@ -69,7 +67,7 @@
 
         </button>
       </div>
- 
+
       <div class="modal-body">
 
         <form class="row g-3 " [formGroup]="formFormacion" (ngSubmit)="saveFormacion($event)" novalidate="">
@@ -80,51 +78,52 @@
 
           <div class="input-group form-group">
             <label for="titulo" class="input-group-text textoLabel">Título </label>
-            <input type="text" class="form-control" formControlName="titulo" name="titulo"
-              placeholder="Título" id="titulo" 
-              [ngClass]="{'is-invalid':Titulo?.errors && Titulo?.touched, 'is-valid':!Titulo?.errors && Titulo?.touched}" required>
+            <input type="text" class="form-control" formControlName="titulo" name="titulo" placeholder="Título"
+              id="titulo"
+              [ngClass]="{'is-invalid':Titulo?.errors && Titulo?.touched, 'is-valid':!Titulo?.errors && Titulo?.touched}"
+              required>
           </div>
-              <div *ngIf="Titulo?.invalid && (Titulo?.dirty || Titulo?.touched)" class="invalid-feedback">
-                <div *ngIf="Titulo?.errors?.['required']">
-                  El título es requerido.
-                </div>
-                <div *ngIf="Titulo?.errors?.['maxlength']">
-                  El título no puede superar los 50 caracteres. 
-                </div>
-                
-              </div>
-            
-         
+          <div *ngIf="Titulo?.invalid && (Titulo?.dirty || Titulo?.touched)" class="invalid-feedback">
+            <div *ngIf="Titulo?.errors?.['required']">
+              El título es requerido.
+            </div>
+            <div *ngIf="Titulo?.errors?.['maxlength']">
+              El título no puede superar los 50 caracteres.
+            </div>
+
+          </div>
+
+
 
 
           <div class="input-group form-group">
             <div class="form-floating ">
               <textarea class="form-control" placeholder="Ingrese la descripción" formControlName="descripcion"
-                 name="descripcion" style="height: 100px"
-                 [ngClass]="{'is-invalid':Descripcion?.errors && Descripcion?.touched, 'is-valid':!Descripcion?.errors && Descripcion?.touched}"></textarea>
+                name="descripcion" style="height: 100px"
+                [ngClass]="{'is-invalid':Descripcion?.errors && Descripcion?.touched, 'is-valid':!Descripcion?.errors && Descripcion?.touched}"></textarea>
               <label for="descripcion">Descripción</label>
             </div>
           </div>
-            <div *ngIf="Descripcion?.invalid && (Descripcion?.dirty || Descripcion?.touched)" class=" invalid-feedback">
-              
-              <div *ngIf="Descripcion?.errors?.['maxlength']">
-                La descripción no puede superar los 250 caracteres. 
-              </div>
-              
+          <div *ngIf="Descripcion?.invalid && (Descripcion?.dirty || Descripcion?.touched)" class=" invalid-feedback">
+
+            <div *ngIf="Descripcion?.errors?.['maxlength']">
+              La descripción no puede superar los 250 caracteres.
             </div>
-          
+
+          </div>
+
 
           <div class="input-group form-group">
             <label for="fecha" class="input-group-text textoLabel">Año</label>
             <input type="text" class="form-control" formControlName="fecha" name="fecha" id="fecha" placeholder="Año"
-            [ngClass]="{'is-invalid':Fecha?.errors && Fecha?.touched, 'is-valid':!Fecha?.errors && Fecha?.touched}">
+              [ngClass]="{'is-invalid':Fecha?.errors && Fecha?.touched, 'is-valid':!Fecha?.errors && Fecha?.touched}">
           </div>
           <div *ngIf="Fecha?.invalid && (Fecha?.dirty || Fecha?.touched)" class="invalid-feedback">
-              
+
             <div *ngIf="Fecha?.errors?.['maxlength'] || Fecha?.errors?.['minlength']">
-              Ingrese un año válido. 
+              Ingrese un año válido.
             </div>
-            
+
           </div>
 
           <div class="input-group form-group">
@@ -133,14 +132,14 @@
               name="url_imagen_estudio" id="url_imagen_estudio"
               [ngClass]="{'is-invalid':Url_imagen?.errors && Url_imagen?.touched, 'is-valid':!Url_imagen?.errors && Url_imagen?.touched}">
           </div>
-              <div *ngIf="Url_imagen?.invalid && (Url_imagen?.dirty || Url_imagen?.touched)" class="invalid-feedback">
-              
-                <div *ngIf="Url_imagen?.errors?.['maxlength']">
-                 La url no puede superar los 250 caracteres. 
-                </div>
-                
-              </div>
-          
+          <div *ngIf="Url_imagen?.invalid && (Url_imagen?.dirty || Url_imagen?.touched)" class="invalid-feedback">
+
+            <div *ngIf="Url_imagen?.errors?.['maxlength']">
+              La url no puede superar los 250 caracteres.
+            </div>
+
+          </div>
+
 
           <div class="input-group form-group">
             <label for="url_certificado" class="input-group-text textoLabel">Imágen del certificado</label>
@@ -148,13 +147,14 @@
               name="url_certificado" id="url_imagen_certificado"
               [ngClass]="{'is-invalid':Url_certificado?.errors && Url_certificado?.touched, 'is-valid':!Url_certificado?.errors && Url_certificado?.touched}">
           </div>
-          <div *ngIf="Url_certificado?.invalid && (Url_certificado?.dirty || Url_certificado?.touched)" class="invalid-feedback">
-              
-                <div *ngIf="Url_certificado?.errors?.['maxlength']">
-                 La url no puede superar los 250 caracteres. 
-                </div>
-                
-              </div>
+          <div *ngIf="Url_certificado?.invalid && (Url_certificado?.dirty || Url_certificado?.touched)"
+            class="invalid-feedback">
+
+            <div *ngIf="Url_certificado?.errors?.['maxlength']">
+              La url no puede superar los 250 caracteres.
+            </div>
+
+          </div>
           <!--Vista Previa de la carga-->
           <div class="row" style="padding-top:15%">
 
@@ -178,12 +178,9 @@
             </div>
           </div>
           <div class="modal-footer form-group">
-            <button type="button"  class="btn btn-secondary"
-              data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" *ngIf="formFormacion.invalid"
-              disabled>Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
-              *ngIf="formFormacion.valid">Guardar</button>
+              [disabled]="formFormacion.invalid">Guardar</button>
           </div>
         </form>
       </div>

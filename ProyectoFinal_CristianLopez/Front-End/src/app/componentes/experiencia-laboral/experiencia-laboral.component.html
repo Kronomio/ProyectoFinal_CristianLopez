@@ -6,8 +6,6 @@
   </button>
   <br>
 </div>
-
-
 <p class="h2 text-center animate__animated animate__backInLeft">Mis Experiencias Laborales</p>
 <div class="linea animate__animated animate__backInRight"></div>
 <br>
@@ -17,7 +15,6 @@
     <div class="row" id="filaExperiencias">
       <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let experiencia of experiencias">
         <div class="col" data-aos="flip-down" data-aos-offset="150" data-aos-duration="3000">
-
           <!-- Añado los botones de edicion y borrado-->
           <div class="col text-end" *ngIf="hasAccess">
             <a type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
@@ -169,7 +166,8 @@
           <div class="modal-footer form-group">
             <button type="button" id="add-experiencia-form" class="btn btn-secondary"
               data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+              [disabled]="formExperienciaLaboral.invalid">Guardar</button>
           </div>
         </form>
       </div>
