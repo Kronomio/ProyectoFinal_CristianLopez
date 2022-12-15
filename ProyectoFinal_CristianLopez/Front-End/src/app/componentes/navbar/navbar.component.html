@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-opacity-25">
   <div class="container-fluid">
     <a class="navbar-brand align-text-top" href="#" id="logo_argentina_programa">
-      <img src="\assets\LogoArgentinaPrograma.png" width="30" height="24" class="d-inline-block align-text-top">
-      "Argentina Programa" #YoProgramo
+      <img src="favicon.ico" width="30" height="24" class="d-inline-block align-text-top">
+      Cristian López - Portfolio Web
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -13,7 +13,7 @@
       <ul class="navbar-nav">
 
         <!-- Mail -->
-        <li class="nav-item" *ngIf="persona?.mail!=''">
+        <li class="nav-item" *ngIf="persona?.mail!=' '">
           <a class="btn btn-primary m-1 btn-social" href="mailto:{{persona?.mail}}?" role="button" target="_blank"><i
               class="fa-regular fa-envelope" data-bs-toggle="mensaje" title={{persona?.mail}}></i></a>
         </li>
