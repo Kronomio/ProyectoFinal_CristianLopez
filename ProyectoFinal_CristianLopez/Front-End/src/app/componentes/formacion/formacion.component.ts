@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/model/estudio.model';
 import { FormacionService } from 'src/app/services/formacion.service';
 
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 @Component({
   selector: 'app-formacion',
@@ -17,12 +17,12 @@ export class FormacionComponent implements OnInit {
   hasAccess = false;
   authorities: string[] = [];
  
-  formFormacion: FormGroup;
+  formFormacion: UntypedFormGroup;
   modo: string = '';
 
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private formacionService: FormacionService,
     private mensajeService: NotificacionesService) {
     this.formFormacion = this.formBuilder.group(

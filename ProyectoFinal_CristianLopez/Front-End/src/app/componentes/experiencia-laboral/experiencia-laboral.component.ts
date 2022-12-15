@@ -4,7 +4,7 @@ import { Experiencia } from 'src/app/model/experiencia.model';
 
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
@@ -22,10 +22,10 @@ export class ExperienciaLaboralComponent implements OnInit {
 
   hasAccess = false;
   authorities: string[] = [];
-  formExperienciaLaboral: FormGroup;
+  formExperienciaLaboral: UntypedFormGroup;
   modo = '';
   constructor(
-    private formBuider: FormBuilder,
+    private formBuider: UntypedFormBuilder,
     private experienciaService: ExperienciaService,
 
     private mensajeService: NotificacionesService) {

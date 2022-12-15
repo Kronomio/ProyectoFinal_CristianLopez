@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { faPencilAlt, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Proyecto } from 'src/app/model/proyecto.model';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
@@ -17,13 +17,13 @@ export class ProyectosComponent implements OnInit {
  
   public borrarProyecto: Proyecto | undefined;
   modo: string = '';
-  formProyecto: FormGroup;
+  formProyecto: UntypedFormGroup;
   hasAccess = false;
   
   
   basuraIcono = faTrashCan;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private proyectoService: ProyectoService,
   
     private mensajeService: NotificacionesService) {

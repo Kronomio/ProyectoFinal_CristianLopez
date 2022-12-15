@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Usuario } from 'src/app/model/usuario.model';
@@ -13,10 +13,10 @@ import { ValidadorPersonalizado } from '../../utils/validador-personalizado'
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  formSignup: FormGroup;
+  formSignup: UntypedFormGroup;
   usuario?: Usuario;
   modo: string = 'add';
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private autenticationService: AutenticacionService,
     private router: Router,
     private mensajeService: NotificacionesService

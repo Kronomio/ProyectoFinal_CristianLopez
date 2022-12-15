@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona.model';
 import { PersonaService } from 'src/app/services/persona.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 import { DatePipe } from '@angular/common';
@@ -18,10 +18,10 @@ export class PortadaComponent implements OnInit {
 
   hasAccess = false;
   isLogged = false;
-  formDatosPersonales: FormGroup;
+  formDatosPersonales: UntypedFormGroup;
 
   pipe = new DatePipe('en-US');
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     public personaService: PersonaService,
     private mensajeService: NotificacionesService) {
     this.formDatosPersonales = this.formBuilder.group(

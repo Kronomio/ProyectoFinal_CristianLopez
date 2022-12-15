@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { AsyncValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AsyncValidator, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUsuario } from 'src/app/model/login-usuario';
 import { AutenticacionService } from 'src/app/services/autenticacion.service';
@@ -15,7 +15,7 @@ import { __asyncValues } from 'tslib';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
   isLogged = false;
   isUsuarioNoEncontrado = false;
   loginUsuario!: LoginUsuario;
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: UntypedFormBuilder, 
     private autenticacionService: AutenticacionService, 
     private router: Router, 
     private tokenService: TokenService, 

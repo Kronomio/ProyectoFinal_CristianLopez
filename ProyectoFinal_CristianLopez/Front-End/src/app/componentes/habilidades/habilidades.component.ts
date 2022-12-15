@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Habilidad } from 'src/app/model/habilidad.model';
 import { HabilidadesService } from 'src/app/services/habilidades.service';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
@@ -18,12 +18,12 @@ export class HabilidadesComponent implements OnInit {
   public habilidades: Habilidad[] = [];
   public borrarHabilidad: Habilidad | undefined;
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   modo: string = '';
  
   hasAccess = false;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private habilidadService: HabilidadesService,
     private mensajeService: NotificacionesService) {
     this.form = this.formBuilder.group(

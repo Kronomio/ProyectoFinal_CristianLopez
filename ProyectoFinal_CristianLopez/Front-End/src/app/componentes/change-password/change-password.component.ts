@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ChangePasswordUsuario } from 'src/app/model/change-password';
 import { Router } from '@angular/router';
 import { AutenticacionService } from 'src/app/services/autenticacion.service';
@@ -16,9 +16,9 @@ import * as $ from 'jquery';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  formChangePassword: FormGroup;
+  formChangePassword: UntypedFormGroup;
   user!: ChangePasswordUsuario;
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private autenticationService: AutenticacionService,
     private mensajeService: NotificacionesService,
     private tokenService: TokenService,
